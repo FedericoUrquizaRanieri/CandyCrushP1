@@ -25,9 +25,9 @@ public class Juego {
     /**
      * @return
      */
-    public Tablero iniciarNivel(int m,int t) {
+    public Tablero iniciarNivel(int m,int t, int d) {
         //cambiar con el generador
-        return new Tablero(m,t);
+        return new Tablero(m,t,d);
     }
     /**
      * @return
