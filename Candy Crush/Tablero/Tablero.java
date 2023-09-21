@@ -13,13 +13,13 @@ public class Tablero {
     private int movimientos;
 
     //Constructor
-    public Tablero(int m,int t) {
+    public Tablero(int movimientos,int tiempo, int dimension) {
         posX=0;
         posY=0;
-        grilla=new Entidad[6][6];
+        grilla=new Entidad[dimension][dimension];
         vidas=3;
-        movimientos=m;
-        tiempo=t;
+        this.movimientos=movimientos;
+        this.tiempo=tiempo;
     }
     //Metodos
     /**
