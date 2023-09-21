@@ -18,7 +18,8 @@ public class Juego {
     public Juego() {
         int mov=GeneradorDeNivel.parseFile();
         int t=GeneradorDeNivel.parseFile();
-        tablero=iniciarNivel(mov,t);
+        int d=GeneradorDeNivel.parseFile();
+        tablero=iniciarNivel(mov,t,d);
         miGUI=crearGUI();
     }
     //Metodos

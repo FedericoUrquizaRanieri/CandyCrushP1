@@ -1,3 +1,4 @@
+package Entidad;
 public enum TipoCaramelo{
         ROJO_RALLADOH,
         ROJO_RALLADOV,
