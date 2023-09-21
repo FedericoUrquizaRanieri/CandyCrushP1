@@ -16,9 +16,8 @@ public class Juego {
 
     //Constructor
     public Juego() {
-        GeneradorDeNivel g=new GeneradorDeNivel();
-        int mov=g.parseFile();
-        int t=g.parseFile();
+        int mov=GeneradorDeNivel.parseFile();
+        int t=GeneradorDeNivel.parseFile();
         tablero=iniciarNivel(mov,t);
         miGUI=crearGUI();
     }

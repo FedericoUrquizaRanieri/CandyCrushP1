@@ -51,12 +51,24 @@ public class Tablero {
      * @return
      */
     public void doSwap() {
+        //hacer cambio primero
+        movimientos--;
+        if(movimientos==0)
+            vidas--;
+        if(vidas==0){
+
+        }
+        //volver a lvl1
     }
 
     /**
      * @return
      */
     public void movePos(int x, int y) {
+        if(posX+x>=0 || posX+x<=grilla.length)
+            posX=posX+x;
+        if(posY+y>=0 || posY+y<=grilla.length)
+            posY=posY+y;
     }
     /**
      * @return

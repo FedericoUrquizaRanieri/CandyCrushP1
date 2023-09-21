@@ -17,7 +17,7 @@ public class GUI {
         grilla=new EntidadGrafica[k][k];
     }
     //Metodos
-    public void intercambiar(JLabel j){
+    public void intercambiar(JLabel l){
 
     }
 }
