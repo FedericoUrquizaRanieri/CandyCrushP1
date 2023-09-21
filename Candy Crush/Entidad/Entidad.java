@@ -1,29 +1,38 @@
 package Entidad;
 
-import java.util.*;
-
-import javax.swing.JLabel;
-
 /**
  * 
  */
 public abstract class Entidad {
-
-    /**
-     * Default constructor
-     */
+    //Atributos
+    private enum TipoCaramelo{
+        ROJO_RALLADOH,
+        ROJO_RALLADOV,
+        ROJO_BOMBITA,
+        VERDE_RALLADOH,
+        VERDE_RALLADOV,
+        VERDE_BOMBITA,
+        AZUL_RALLADOH,
+        AZUL_RALLADOV,
+        AZUL_BOMBITA,
+        AMARILL_RALLADOH,
+        AMARILLO_RALLADOV,
+        AMARILLO_BOMBITA,
+        VIOLETA_RALLADOH,
+        VIOLETA_RALLADOV,
+        VIOLETA_BOMBITA,
+        NARANJA_RALLADOH,
+        NARANJA_RALLADOV,
+        NARANJA_BOMBITA,
+    }
+    //constructor
     public Entidad() {
     }
-
-    /**
-     * 
-     */
-    protected JLabel imagen;
-
+    //Metodos
     /**
      * @return
      */
     public void Inmolarse() {
+        
     }
-
 }

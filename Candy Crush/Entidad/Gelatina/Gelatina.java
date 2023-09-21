@@ -1,24 +1,22 @@
 package Entidad.Gelatina;
 
-import java.util.*;
 
 import Entidad.Entidad;
 import Entidad.Caramelo.Caramelo;
 
-/**
- * 
- */
 public class Gelatina extends Entidad {
-
-    /**
-     * Default constructor
-     */
-    public Gelatina() {
-    }
-
-    /**
-     * 
-     */
+    //Atributos
     private Caramelo caramelo;
-
+    //Constructor
+    public Gelatina() {
+        caramelo=new Caramelo();
+    }
+    //Metodos
+    /**
+     * @return
+     */
+    public void Inmolarse() {
+        //kys
+        caramelo.Inmolarse();
+    }
 }

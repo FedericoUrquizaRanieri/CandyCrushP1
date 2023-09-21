@@ -1,6 +1,5 @@
 package Entidad.Glaseado;
 
-import java.util.*;
 
 import Entidad.Entidad;
 
@@ -8,11 +7,14 @@ import Entidad.Entidad;
  * 
  */
 public class Glaseado extends Entidad {
-
-    /**
-     * Default constructor
-     */
+    //Atributos
+    //Constructor
     public Glaseado() {
     }
-
+    //Metodos
+    /**
+     * @return
+     */
+    public void Inmolarse() {
+    }
 }

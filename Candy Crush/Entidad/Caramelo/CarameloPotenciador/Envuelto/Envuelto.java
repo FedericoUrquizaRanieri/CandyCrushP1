@@ -1,24 +1,17 @@
 package Entidad.Caramelo.CarameloPotenciador.Envuelto;
 
-import java.util.*;
 
-import Entidad.Caramelo.CarameloPotenciador.CarameloPotenciador;
+import Entidad.Caramelo.Caramelo;
 
-/**
- * 
- */
-public class Envuelto extends CarameloPotenciador {
-
-    /**
-     * Default constructor
-     */
+public class Envuelto extends Caramelo {
+    //Atributos
+    //Constructor
     public Envuelto() {
     }
-
-    @Override
-    public void activarPotenciador() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activarPotenciador'");
+    //Metodos
+    /**
+     * @return
+     */
+    public void Inmolarse() {
     }
-
 }

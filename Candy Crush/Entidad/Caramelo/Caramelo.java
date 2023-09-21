@@ -1,6 +1,5 @@
 package Entidad.Caramelo;
 
-import java.util.*;
 
 import Entidad.Entidad;
 
@@ -8,18 +7,15 @@ import Entidad.Entidad;
  * 
  */
 public class Caramelo extends Entidad {
-
-    /**
-     * Default constructor
-     */
+    //Atributos
+    //Constructor
     public Caramelo() {
         
     }
-
+    //Metodos
     /**
-     * 
+     * @return
      */
-    protected int identificador;
-    
-
+    public void Inmolarse() {
+    }
 }

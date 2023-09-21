@@ -1,55 +1,31 @@
 package Tablero;
 
-import java.util.*;
-
 import Entidad.Entidad;
 
-/**
- * 
- */
 public class Tablero {
 
-    /**
-     * Default constructor
-     */
-    public Tablero() {
-        posicionX=0;
-        posicionY=0;
+    //Atributos
+    private int posX;
+    private int tiempo;
+    private int posY;
+    private Entidad[][] grilla;
+    private int vidas;
+    private int movimientos;
+
+    //Constructor
+    public Tablero(int m,int t) {
+        posX=0;
+        posY=0;
         grilla=new Entidad[6][6];
         vidas=3;
-        //agregar tiempo y movimientos que nos olvidamos
+        movimientos=m;
+        tiempo=t;
     }
-
-    /**
-     * 
-     */
-    private int posicionX;
-
-    /**
-     * 
-     */
-    private int tiempo;
-
-    /**
-     * 
-     */
-    private int posicionY;
-
-    /**
-     * 
-     */
-    private Entidad[][] grilla;
-
-    /**
-     * 
-     */
-    private int vidas;
-
+    //Metodos
     /**
      * @return
      */
     public void llenarGrillaEspeciales() {
-        // TODO implement here
     }
 
     /**
@@ -57,35 +33,41 @@ public class Tablero {
      * @return
      */
     public void crearGrilla( int n) {
-        // TODO implement here
     }
 
     /**
      * @return
      */
     public void generarCaramelos() {
-        // TODO implement here
     }
 
     /**
      * @return
      */
     public void checkSwap() {
-        // TODO implement here
     }
 
     /**
      * @return
      */
     public void doSwap() {
-        // TODO implement here
     }
 
     /**
      * @return
      */
-    public void cambiarPos() {
-        // TODO implement here
+    public void movePos(int x, int y) {
     }
+    /**
+     * @return
+     */
+    public void emptyT(){
 
+    }
+       /**
+     * @return
+     */
+    public int getTam(){
+        return grilla.length;
+    }
 }

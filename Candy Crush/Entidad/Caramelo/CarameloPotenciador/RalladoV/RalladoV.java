@@ -1,24 +1,19 @@
 package Entidad.Caramelo.CarameloPotenciador.RalladoV;
 
-import java.util.*;
-
-import Entidad.Caramelo.CarameloPotenciador.CarameloPotenciador;
+import Entidad.Caramelo.Caramelo;
 
 /**
  * 
  */
-public class RalladoV extends CarameloPotenciador {
-
-    /**
-     * Default constructor
-     */
+public class RalladoV extends Caramelo {
+    //Atributos
+    //Constructor
     public RalladoV() {
     }
-
-    @Override
-    public void activarPotenciador() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'activarPotenciador'");
+    //Metodos
+    /**
+     * @return
+     */
+    public void Inmolarse() {
     }
-
 }
