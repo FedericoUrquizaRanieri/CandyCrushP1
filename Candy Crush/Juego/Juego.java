@@ -1,5 +1,9 @@
 package Juego;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 
 import GUI.GUI;
 import Juego.GeneradorDeNivel.GeneradorDeNivel;
@@ -15,11 +19,15 @@ public class Juego {
     private Tablero tablero;
 
     //Constructor
-    public Juego() {
-        int mov=GeneradorDeNivel.parseFile();
-        int t=GeneradorDeNivel.parseFile();
-        int d=GeneradorDeNivel.parseFile();
-        tablero=iniciarNivel(mov,t,d);
+    public Juego() throws IOException {
+        URL path = Juego.class.getResource("Nivel1.txt");
+        File f = new File(path.getFile());
+        FileReader fr= new FileReader(f);
+        char[] data=GeneradorDeNivel.parseFile(fr);
+        int m=data[12]*10+data[13];
+        int t=data[21];
+        int d=data[29];
+        tablero=iniciarNivel(m,t,d);
         miGUI=crearGUI();
     }
     //Metodos
