@@ -1,15 +1,8 @@
 Movimientos:20
-Tiempo:4
+Tiempo:2
 Tamaño:9
 Gelatina:
-4-3
-4-5
 3-3
-3-4
-3-5
-5-3
-5-4
-5-5
 Bloqueador:
 6-1
 2-7

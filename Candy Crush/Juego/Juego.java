@@ -29,6 +29,7 @@ public class Juego {
         int d=data[29];
         tablero=iniciarNivel(m,t,d);
         miGUI=crearGUI();
+        tablero.llenarGrillaEspeciales(data[40], data[42]);
     }
     //Metodos
     /**
@@ -50,6 +51,5 @@ public class Juego {
     public Tablero getTablero() {
         return tablero;
     }
-
 
 }
