@@ -26,6 +26,7 @@ public class Tablero {
      * @return
      */
     public void llenarGrillaEspeciales() {
+
     }
 
     /**
