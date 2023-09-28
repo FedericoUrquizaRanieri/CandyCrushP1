@@ -12,7 +12,7 @@ public abstract class Entidad {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
         
     }
 }

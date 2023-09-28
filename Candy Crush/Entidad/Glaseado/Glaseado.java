@@ -15,6 +15,6 @@ public class Glaseado extends Entidad {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
     }
 }

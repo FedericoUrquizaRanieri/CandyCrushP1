@@ -14,6 +14,6 @@ public class RalladoV extends Caramelo {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
     }
 }

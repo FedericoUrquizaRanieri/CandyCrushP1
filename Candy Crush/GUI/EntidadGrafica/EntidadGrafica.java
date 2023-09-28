@@ -12,6 +12,6 @@ public class EntidadGrafica extends JLabel{
     /**
      * @return
      */
-    public void inmolarse() {
+    public void destruirse() {
     }
 }

@@ -16,6 +16,6 @@ public class Caramelo extends Entidad {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
     }
 }

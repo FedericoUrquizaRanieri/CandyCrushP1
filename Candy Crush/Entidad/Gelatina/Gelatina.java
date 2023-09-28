@@ -15,8 +15,14 @@ public class Gelatina extends Entidad {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
         //kys
-        caramelo.Inmolarse();
+        caramelo.destruirse();
+    }
+    /**
+     * @return
+     */
+    public Caramelo cambiarCaramelo(Caramelo c) {
+        return null;
     }
 }

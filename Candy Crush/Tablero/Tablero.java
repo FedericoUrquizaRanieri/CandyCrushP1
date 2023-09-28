@@ -15,12 +15,16 @@ public class Tablero {
     private Entidad[][] grilla;
     private int vidas;
     private int movimientos;
+    private int objetivoCaramelo;
+    private int objetivoGla;
+    private int objetivoGelatina;
+    private int objetivoEnvuelto;
 
     //Constructor
     public Tablero(int movimientos,int tiempo, int dimension) {
         posX=0;
         posY=0;
-        grilla=new Entidad[dimension][dimension];
+        crearGrilla(dimension);
         vidas=3;
         this.movimientos=movimientos;
         this.tiempo=tiempo;
@@ -39,9 +43,15 @@ public class Tablero {
     /**
      * @return
      */
-    public void llenarGrillaEspeciales(int x,int y) {
+    public void llenarGlaseado() {
+        //cambiar esto YA
+    }
+    //Metodos
+    /**
+     * @return
+     */
+    public void llenarGelatina(int x,int y) {
         grilla[x][y]=new Gelatina();
-        //capaz es mejor idea hacer metodos separedos
     }
 
     /**
@@ -49,6 +59,7 @@ public class Tablero {
      * @return
      */
     public void crearGrilla( int n) {
+        grilla=new Entidad[n][n];
     }
 
     /**
@@ -89,7 +100,7 @@ public class Tablero {
     /**
      * @return
      */
-    public void emptyT(){
+    public void reset(){
 
     }
        /**

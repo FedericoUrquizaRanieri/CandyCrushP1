@@ -1,6 +1,7 @@
 package Juego;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -20,24 +21,19 @@ public class Juego {
 
     //Constructor
     public Juego() throws IOException {
-        URL path = Juego.class.getResource("Nivel1.txt");
-        File f = new File(path.getFile());
-        FileReader fr= new FileReader(f);
-        char[] data=GeneradorDeNivel.parseFile(fr);
-        int m=data[12]*10+data[13];
-        int t=data[21];
-        int d=data[29];
-        tablero=iniciarNivel(m,t,d);
+        tablero=iniciarNivel("Nivel1.txt");
         miGUI=crearGUI();
-        tablero.llenarGrillaEspeciales(data[40], data[42]);
     }
     //Metodos
     /**
      * @return
+     * @throws IOException
      */
-    public Tablero iniciarNivel(int m,int t, int d) {
-        //cambiar con el generador
-        return new Tablero(m,t,d);
+    public Tablero iniciarNivel(String archivo) throws IOException {
+        URL path = Juego.class.getResource(archivo);
+        File f = new File(path.getFile());
+        FileReader fr= new FileReader(f);
+        return GeneradorDeNivel.parseFile(fr);
     }
     /**
      * @return
@@ -51,5 +47,11 @@ public class Juego {
     public Tablero getTablero() {
         return tablero;
     }
-
+    public void pasarNivel(){
+        tablero.reset();
+    }
+    public void hacerCambio(int x,int y,int z){
+    }
+    public void actualizarGUI(){
+    }
 }
