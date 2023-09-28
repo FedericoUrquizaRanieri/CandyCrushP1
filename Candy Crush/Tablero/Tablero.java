@@ -1,6 +1,10 @@
 package Tablero;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Entidad.Entidad;
+import Entidad.Gelatina.Gelatina;
 
 public class Tablero {
 
@@ -11,22 +15,43 @@ public class Tablero {
     private Entidad[][] grilla;
     private int vidas;
     private int movimientos;
+    private int objetivoCaramelo;
+    private int objetivoGla;
+    private int objetivoGelatina;
+    private int objetivoEnvuelto;
 
     //Constructor
     public Tablero(int movimientos,int tiempo, int dimension) {
         posX=0;
         posY=0;
-        grilla=new Entidad[dimension][dimension];
+        crearGrilla(dimension);
         vidas=3;
         this.movimientos=movimientos;
         this.tiempo=tiempo;
+        //no se que hago con el tiempo ayuda(milagro creo que lo arregle)
+        class rt extends TimerTask{
+            public void run(){
+                vidas=0;
+                //volver a lvl1?
+            }
+        }
+        Timer t=new Timer();
+        TimerTask terminar= new rt();
+        t.schedule(terminar,tiempo*1000*60);
     }
     //Metodos
     /**
      * @return
      */
-    public void llenarGrillaEspeciales() {
-
+    public void llenarGlaseado() {
+        //cambiar esto YA
+    }
+    //Metodos
+    /**
+     * @return
+     */
+    public void llenarGelatina(int x,int y) {
+        grilla[x][y]=new Gelatina();
     }
 
     /**
@@ -34,6 +59,7 @@ public class Tablero {
      * @return
      */
     public void crearGrilla( int n) {
+        grilla=new Entidad[n][n];
     }
 
     /**
@@ -74,7 +100,7 @@ public class Tablero {
     /**
      * @return
      */
-    public void emptyT(){
+    public void reset(){
 
     }
        /**

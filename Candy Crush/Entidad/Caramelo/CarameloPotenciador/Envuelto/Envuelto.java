@@ -12,6 +12,6 @@ public class Envuelto extends Caramelo {
     /**
      * @return
      */
-    public void Inmolarse() {
+    public void destruirse() {
     }
 }
