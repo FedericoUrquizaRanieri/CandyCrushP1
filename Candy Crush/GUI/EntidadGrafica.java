@@ -1,4 +1,4 @@
-package GUI.EntidadGrafica;
+package GUI;
 
 import javax.swing.JLabel;
 

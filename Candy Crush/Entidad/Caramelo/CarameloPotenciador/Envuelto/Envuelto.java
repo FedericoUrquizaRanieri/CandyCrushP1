@@ -1,17 +1,14 @@
 package Entidad.Caramelo.CarameloPotenciador.Envuelto;
 
-
 import Entidad.Caramelo.Caramelo;
+import GUI.EntidadGrafica;
 
-public class Envuelto extends Caramelo {
-    //Atributos
-    //Constructor
-    public Envuelto() {
+public class Envuelto extends Caramelo{
+    public Envuelto(int n){
+        super(n);
+        eg=new EntidadGrafica();
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
+    public void destruirse(){
+        
     }
 }

@@ -1,19 +1,14 @@
 package Entidad.Caramelo.CarameloPotenciador.RalladoV;
 
 import Entidad.Caramelo.Caramelo;
+import GUI.EntidadGrafica;
 
-/**
- * 
- */
-public class RalladoV extends Caramelo {
-    //Atributos
-    //Constructor
-    public RalladoV() {
+public class RalladoV extends Caramelo{
+    public RalladoV(int n){
+        super(n);
+        eg=new EntidadGrafica();
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
+    public void destruirse(){
+
     }
 }

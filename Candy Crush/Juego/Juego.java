@@ -1,57 +1,52 @@
 package Juego;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.awt.EventQueue;
 import java.io.IOException;
-import java.net.URL;
 
 import GUI.GUI;
 import Juego.GeneradorDeNivel.GeneradorDeNivel;
+import Nivel.Nivel;
 import Tablero.Tablero;
-
-/**
- * 
- */
-public class Juego {
-
+public class Juego{
     //Atributos
-    private GUI miGUI;
-    private Tablero tablero;
+    protected GUI miGUI;
+    protected Tablero miTablero;
+    protected Nivel miNivel;
 
     //Constructor
-    public Juego() throws IOException {
-        tablero=iniciarNivel("Nivel1.txt");
-        miGUI=crearGUI();
+    public Juego() throws IOException{  //esta exception me tiene que me quiero matar, hay que corregirla
+        miTablero = new Tablero(this);
+        miGUI = new GUI(this);
+        miNivel = new Nivel(this);
+        //Asociar entidades
+        regenerar(1);
     }
+
     //Metodos
-    /**
-     * @return
-     * @throws IOException
-     */
-    public Tablero iniciarNivel(String archivo) throws IOException {
-        URL path = Juego.class.getResource(archivo);
-        File f = new File(path.getFile());
-        FileReader fr= new FileReader(f);
-        return GeneradorDeNivel.parseFile(fr);
+    public void regenerar(int i) throws IOException{
+        generarNivel(i);
+        generarTablero(i);
     }
-    /**
-     * @return
-     */
-    public GUI crearGUI() {
-        return new GUI(this);
+    private void generarNivel(int i) throws IOException{
+        GeneradorDeNivel.generarNivel(i,miNivel);
     }
-    /**
-     * @return
-     */
-    public Tablero getTablero() {
-        return tablero;
+    private void generarTablero(int i) throws IOException{
+        GeneradorDeNivel.generarTablero(i, miTablero);
     }
-    public void pasarNivel(){
-        tablero.reset();
+    public boolean moverCursor(int x,int y){
+        return miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
     }
-    public void hacerCambio(int x,int y,int z){
+    public void swap(){
+
     }
-    public void actualizarGUI(){
-    }
+    public static void main(String [] args) {
+		EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                	new Juego();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+	}
 }

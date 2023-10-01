@@ -1,21 +1,13 @@
 package Entidad.Caramelo;
 
-
 import Entidad.Entidad;
+import GUI.EntidadGrafica;
 
-/**
- * 
- */
-public class Caramelo extends Entidad {
-    //Atributos
-    //Constructor
-    public Caramelo() {
-        
+public class Caramelo extends Entidad{
+    public Caramelo(int n){
+        //hacer case para enlazar el color del enum
+        eg=new EntidadGrafica();
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
+    public void destruirse(){
     }
 }

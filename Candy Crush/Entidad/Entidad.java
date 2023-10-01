@@ -1,18 +1,10 @@
 package Entidad;
 
-/**
- * 
- */
+import GUI.EntidadGrafica;
+
 public abstract class Entidad {
-    
-    //constructor
-    public Entidad() {
-    }
+    //Atributos
+    protected EntidadGrafica eg;
     //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
-        
-    }
+    public void destruirse(){}
 }

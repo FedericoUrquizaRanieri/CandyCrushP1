@@ -1,20 +1,14 @@
 package Entidad.Glaseado;
 
-
 import Entidad.Entidad;
+import GUI.EntidadGrafica;
 
-/**
- * 
- */
-public class Glaseado extends Entidad {
-    //Atributos
-    //Constructor
-    public Glaseado() {
+public class Glaseado extends Entidad{
+    public Glaseado(){
+        //coincidir con el enum
+        eg=new EntidadGrafica();
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
+    public void destruirse(){
+        
     }
 }

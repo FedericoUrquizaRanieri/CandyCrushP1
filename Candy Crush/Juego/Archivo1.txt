@@ -1,0 +1,16 @@
+Movimientos:20
+Tiempo:2
+Tamaño:9
+Gelatina:
+3-3
+Merengue:
+4
+Objetivos:
+Verdes:00
+Amarillos:00
+Violeta:00
+Naranjas:00
+Rojos:00
+Azules:15
+Merengues:00
+GelatinaEnvuelto:00

@@ -1,17 +1,14 @@
 package Entidad.Caramelo.CarameloPotenciador.RalladoH;
 
-
 import Entidad.Caramelo.Caramelo;
+import GUI.EntidadGrafica;
 
-public class RalladoH extends Caramelo {
-    //Atributos
-    //Constructor
-    public RalladoH() {
+public class RalladoH extends Caramelo{
+    public RalladoH(int n){
+        super(n);
+        eg=new EntidadGrafica();
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void destruirse() {
+    public void destruirse(){
+        
     }
 }

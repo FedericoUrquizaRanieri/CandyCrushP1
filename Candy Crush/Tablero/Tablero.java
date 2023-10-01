@@ -1,112 +1,101 @@
 package Tablero;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import Entidad.Entidad;
+import Entidad.Caramelo.Caramelo;
 import Entidad.Gelatina.Gelatina;
+import Entidad.Glaseado.Glaseado;
+import Juego.Juego;
 
-public class Tablero {
-
+public class Tablero{
+    
     //Atributos
-    private int posX;
-    private int tiempo;
-    private int posY;
-    private Entidad[][] grilla;
-    private int vidas;
-    private int movimientos;
-    private int objetivoCaramelo;
-    private int objetivoGla;
-    private int objetivoGelatina;
-    private int objetivoEnvuelto;
+    protected int posJugadorX;
+    protected int posJugadorY;
+    protected Entidad grilla[][]=new Entidad[10][10];
+    protected Juego miJuego;
+    protected int dimension;
 
     //Constructor
-    public Tablero(int movimientos,int tiempo, int dimension) {
-        posX=0;
-        posY=0;
-        crearGrilla(dimension);
-        vidas=3;
-        this.movimientos=movimientos;
-        this.tiempo=tiempo;
-        //no se que hago con el tiempo ayuda(milagro creo que lo arregle)
-        class rt extends TimerTask{
-            public void run(){
-                vidas=0;
-                //volver a lvl1?
-            }
+    public Tablero(Juego j){
+        miJuego=j;
+        posJugadorX=0;
+        posJugadorY=0;
+    }
+
+    //Metodos
+    public void setDimension(int n){
+        dimension = n;
+    }
+
+    public int getDimension(){
+        return dimension;
+    }
+
+    public boolean setPosJugadorX(int n){
+        if(posJugadorY+n>=0 && posJugadorY+n<dimension){
+            posJugadorX = posJugadorX+n;
+            return true;
         }
-        Timer t=new Timer();
-        TimerTask terminar= new rt();
-        t.schedule(terminar,tiempo*1000*60);
+        return false;
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void llenarGlaseado() {
-        //cambiar esto YA
+
+    public boolean setPosJugadorY(int n){
+        if(posJugadorY+n>=0 && posJugadorY+n<dimension){
+            posJugadorY = posJugadorY+n;
+            return true;
+        }
+        return false;
     }
-    //Metodos
-    /**
-     * @return
-     */
-    public void llenarGelatina(int x,int y) {
+
+    public int getPosJugadorX(int n){
+        return posJugadorX;
+    }
+
+    public int getPosJugadorY(int n){
+        return posJugadorY;
+    }
+
+    public Entidad getEntidad(int f, int c){
+        return grilla[f][c];
+
+    }
+    public void setCaramelos(){
+        int aux;
+        for(int i=0;i<9;i++)
+            for(int j=0;j<9;j++)
+                if(grilla[i][j]==null){
+                    aux=(int)(Math.random() * ((6 - 1) + 1)) + 1;
+                    grilla[i][j]=new Caramelo(aux);
+                }
+    }
+    public void setGelatina(int x,int y){
+        //llega un punto y llenar los que estan cerca como dijimos
         grilla[x][y]=new Gelatina();
-    }
-
-    /**
-     * @param int n 
-     * @return
-     */
-    public void crearGrilla( int n) {
-        grilla=new Entidad[n][n];
-    }
-
-    /**
-     * @return
-     */
-    public void generarCaramelos() {
-    }
-
-    /**
-     * @return
-     */
-    public void checkSwap() {
-    }
-
-    /**
-     * @return
-     */
-    public void doSwap() {
-        //hacer cambio primero
-        movimientos--;
-        if(movimientos==0)
-            vidas--;
-        if(vidas==0){
-
+        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
+        int xn=x;
+        int yn=y;
+        for(int i=0;i<cant;i++){
+            //revisar este truncado de cavernicola que se me ocurrio
+            xn = xn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
+            yn = yn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
+            if(grilla[xn][yn]==null){
+                grilla[xn][yn]=new Gelatina();
+            }
+            else
+                i--;
         }
-        //volver a lvl1
     }
-
-    /**
-     * @return
-     */
-    public void movePos(int x, int y) {
-        if(posX+x>=0 || posX+x<=grilla.length)
-            posX=posX+x;
-        if(posY+y>=0 || posY+y<=grilla.length)
-            posY=posY+y;
+    public void setGlaseado(int n){
+        //revisar despues, estoy llenando aleatoriamente una cantidad x
+        int cont=n;
+        for(int i=0;i<cont;i++){
+            int x=(int)Math.random()*10;
+            int y=(int)Math.random()*10;
+            if(grilla[x][y]==null)
+                grilla[x][y]=new Glaseado();
+            else
+                i--;
+        }
     }
-    /**
-     * @return
-     */
-    public void reset(){
-
-    }
-       /**
-     * @return
-     */
-    public int getTam(){
-        return grilla.length;
-    }
+    //agregar metodos de intercambios de ale
 }
