@@ -17,7 +17,11 @@ public class EntidadGrafica extends JLabel{
         setBounds(x, y, labelWidth, labelHeight);
         setOpaque(false);
     }
+<<<<<<< HEAD
 
+=======
+    //Metodos
+>>>>>>> entidades
     public void destruirse() {
     }
 }
