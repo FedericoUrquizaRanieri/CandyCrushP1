@@ -9,9 +9,6 @@ public class EntidadGrafica extends JLabel{
     public EntidadGrafica() {
     }
     //Metodos
-    /**
-     * @return
-     */
     public void destruirse() {
     }
 }

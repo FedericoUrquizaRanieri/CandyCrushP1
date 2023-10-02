@@ -30,6 +30,9 @@ public class Tablero{
     public int getDimension(){
         return dimension;
     }
+    public Entidad[][] getGrilla(){
+        return grilla;
+    }
 
     public boolean setPosJugadorX(int n){
         if(posJugadorY+n>=0 && posJugadorY+n<dimension){

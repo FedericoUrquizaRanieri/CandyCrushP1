@@ -6,5 +6,7 @@ public abstract class Entidad {
     //Atributos
     protected EntidadGrafica eg;
     //Metodos
-    public void destruirse(){}
+    public void destruirse(){
+        
+    }
 }
