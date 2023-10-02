@@ -43,47 +43,61 @@ public class GUI extends JFrame{
 
         getContentPane().add(labelInfo, BorderLayout.NORTH);
         getContentPane().add(panel, BorderLayout.CENTER);
-        generarCaramelos();
+        //generarCaramelos();
         pack();
         getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
         setVisible(true);
-    }
 
-    public void generarCaramelos() {
-        int x = labelSpacing;
-        int y = labelSpacing;
-
-        for(int i = 0; i < dimension; i++){
-            for(int j = 0; j < dimension; j++) {
-                int random = (int) (Math.random() * 6);
-                EntidadGrafica eg = null;
-                if(random == 1) {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.AZUL);
-                } else if(random == 2) {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.AMARILLO);
-                } else if(random == 3) {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.ROJO);
-                } else if(random == 4) {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.NARANJA);
-                } else if(random == 5) {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.VERDE);
-                } else {
-                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.ROSA);
-                }
-
-                panel.add(eg);
-
-                AnimadorCaida animadorCaida = new AnimadorCaida(eg, x, y, 1);
-                animadorCaida.start();
-
-                x += labelWidth + labelSpacing;
-            }
-
-            x = labelSpacing;
-            y += labelHeight + labelSpacing;
-        }
         AnimadorCaida animadorCaida = new AnimadorCaida(jugador, labelSpacing,labelSpacing, 1);
         animadorCaida.start();
+    }
+
+//    public void generarCaramelos() {
+//        int x = labelSpacing;
+//        int y = labelSpacing;
+//
+//        for(int i = 0; i < dimension; i++){
+//            for(int j = 0; j < dimension; j++) {
+//                int random = (int) (Math.random() * 6);
+//                EntidadGrafica eg = null;
+//                if(random == 1) {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.AZUL);
+//                } else if(random == 2) {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.AMARILLO);
+//                } else if(random == 3) {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.ROJO);
+//                } else if(random == 4) {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.NARANJA);
+//                } else if(random == 5) {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.VERDE);
+//                } else {
+//                    eg = new EntidadGrafica(x, -100, labelWidth, labelHeight, Entidad.Color.ROSA);
+//                }
+//
+//                panel.add(eg);
+//
+//                AnimadorCaida animadorCaida = new AnimadorCaida(eg, x, y, 1);
+//                animadorCaida.start();
+//
+//                x += labelWidth + labelSpacing;
+//            }
+//
+//            x = labelSpacing;
+//            y += labelHeight + labelSpacing;
+//        }
+//        AnimadorCaida animadorCaida = new AnimadorCaida(jugador, labelSpacing,labelSpacing, 1);
+//        animadorCaida.start();
+//    }
+
+    public void insertarEntidadGrafica(EntidadGrafica eg) {
+        if(eg != null) {
+            int posEG_X = eg.getX();
+            int posEG_Y = eg.getY();
+            eg.setLocation(posEG_X, -100);
+            panel.add(eg);
+            AnimadorCaida animadorCaida = new AnimadorCaida(eg, posEG_X, posEG_Y, 1);
+            animadorCaida.start();
+        }
     }
 
     public static void main(String[] args) {

@@ -6,6 +6,10 @@ import GUI.GUI;
 import Juego.GeneradorDeNivel.GeneradorDeNivel;
 import Nivel.Nivel;
 import Tablero.Tablero;
+import Entidad.Entidad;
+import GUI.EntidadGrafica;
+import Entidad.Caramelo.Caramelo;
+
 public class Juego{
     //Atributos
     protected GUI miGUI;
@@ -14,20 +18,17 @@ public class Juego{
 
     //Constructor
     public Juego() throws IOException{  //esta exception me tiene que me quiero matar, hay que corregirla
-        miTablero = new Tablero(this);
-        System.out.println("TABLERO");
-        miGUI = new GUI(this);
-        System.out.println("GUI");
         miNivel = new Nivel(this);
-        System.out.println("NIVEL");
+        miTablero = new Tablero(this);
+        miGUI = new GUI(this);
         //Asociar entidades
         regenerar(1);
+        asociar_entidades_logicas_graficas();
     }
 
     //Metodos
     public void regenerar(int i) throws IOException{
         generarNivel(i);
-        System.out.println("nivel generacion");
         generarTablero(i);
     }
     private void generarNivel(int i) throws IOException{
@@ -39,8 +40,32 @@ public class Juego{
     public boolean moverCursor(int x,int y){
         return miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
     }
-    public void swap(){
+    public void swap(int x, int y){
 
+    }
+
+    public void crushCandy() {
+        miTablero.crushCandy();
+        for(int i=0;i< miTablero.getDimension();i++) {
+            for (int j = 0; j < miTablero.getDimension(); j++) {
+                if(miTablero.getEntidad(i,j) == null) {
+                    System.out.print("NULO - ");
+                } else System.out.print(miTablero.getEntidad(i,j).getColor() + " - ");
+            }
+            System.out.println('\n');
+        }
+    }
+    private void asociar_entidades_logicas_graficas() {
+        Entidad e;
+        EntidadGrafica eg;
+
+        for (int f=0; f<miTablero.getDimension(); f++) {
+            for (int c=0; c<miTablero.getDimension(); c++) {
+                e = miTablero.getEntidad(f,c);
+                eg = new EntidadGrafica(f,c,e.getColor());
+                miGUI.insertarEntidadGrafica(eg);
+            }
+        }
     }
     public static void main(String [] args) {
 		EventQueue.invokeLater(new Runnable() {

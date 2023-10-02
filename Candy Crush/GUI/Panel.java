@@ -1,7 +1,7 @@
 package GUI;
 
 import GUI.Threads.AnimadorIntercambio;
-
+import Juego.Juego;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class Panel extends JPanel {
     protected JLabel jugador;
-    protected Juego.Juego juego;
+    protected Juego juego;
     protected int labelWidth;
     protected int labelHeight;
     protected int labelSpacing;
@@ -18,7 +18,7 @@ public class Panel extends JPanel {
     private int posX;
     private int posY;
 
-    public Panel(Juego.Juego juego, JLabel jugador, int labelWidth, int labelHeight, int labelSpacing, int dimension) {
+    public Panel(Juego juego, JLabel jugador, int labelWidth, int labelHeight, int labelSpacing, int dimension) {
         this.jugador = jugador;
         this.juego = juego;
         this.labelWidth = labelWidth;
@@ -39,11 +39,9 @@ public class Panel extends JPanel {
                     case KeyEvent.VK_LEFT, KeyEvent.VK_A -> {
                         int swapX = jugador.getX() - labelSpacing - labelWidth;
                         int swapY = jugador.getY();
-                        //boolean swapValido = juego.moverCursor(-1, 0);
                         if(toSwap && posX - 1 >= 0) { // Swap
                             trySwap(swapX, swapY);
                             toSwap = revertSwapState(toSwap);
-                            //if(swapValido) trySwap(swapX, swapY);
                         } else if (posX - 1 >= 0) { // Mover Cursor
                             posX--;
                             jugador.setLocation(swapX, swapY);
@@ -88,6 +86,9 @@ public class Panel extends JPanel {
                     }
                     case KeyEvent.VK_SPACE -> {
                         toSwap = revertSwapState(toSwap);
+                    }
+                    case KeyEvent.VK_ENTER -> {
+                        juego.crushCandy();
                     }
                 }
             }

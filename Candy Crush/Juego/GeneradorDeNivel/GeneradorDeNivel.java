@@ -21,9 +21,9 @@ public class GeneradorDeNivel {
         char[] data=new char[1000];
         fr.read(data,0,1000);
         //arranco a llenar el tablero
-        t.setDimension(data[32]);
+        //t.setDimension(data[32]);
         //t.setGelatina(data[44],data[46]);
-        t.setGlaseado(data[58]);
+        //t.setGlaseado(data[58]);
         t.setCaramelos();
         fr.close();
     }

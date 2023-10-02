@@ -2,7 +2,9 @@ package Tablero;
 
 import Entidad.Entidad;
 import Entidad.Caramelo.Caramelo;
+import Entidad.Color;
 import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
+import GUI.Threads.AnimadorCaida;
 import Entidad.Gelatina.Gelatina;
 import Entidad.Glaseado.Glaseado;
 import Juego.Juego;
@@ -15,11 +17,13 @@ public class Tablero{
     protected Entidad grilla[][];
     protected Juego miJuego;
     protected int dimension;
+    private final Color[] colores = {Color.AZUL, Color.AMARILLO, Color.ROJO, Color.NARANJA, Color.ROSA, Color.VERDE};
 
     //Constructor
     public Tablero(Juego j){
         miJuego=j;
-        grilla = new Entidad[10][10];
+        dimension = 10;
+        grilla = new Entidad[dimension][dimension];
         posJugadorX=0;
         posJugadorY=0;
     }
@@ -61,20 +65,26 @@ public class Tablero{
     }
 
     public Entidad getEntidad(int f, int c){
+        Entidad toReturn = null;
         if(f >= 0 && f<dimension && c >= 0 && c < dimension){
-            return grilla[f][c];
+            toReturn = grilla[f][c];
         }
-        return null;
-
+        return toReturn;
     }
     public void setCaramelos(){
         int aux;
-        for(int i=0;i<9;i++)
-            for(int j=0;j<9;j++)
-                if(grilla[i][j]==null){
-                    aux=(int)(Math.random() * ((6 - 1) + 1)) + 1;
-                    grilla[i][j]=new Caramelo(aux, i, j);
+        for(int i=0;i<dimension;i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (grilla[i][j] == null) {
+                    aux = (int) (Math.random() * 6);
+                    grilla[i][j] = new Caramelo(i, j, colores[aux]);
+                    System.out.print(((Caramelo) grilla[i][j]).getColor() + " - ");
+//                    AnimadorCaida animadorCaida = new AnimadorCaida(grilla[i][j].getEntidadGrafica(), x, y, 1);
+//                    animadorCaida.start();
                 }
+            }
+            System.out.println('\n');
+        }
     }
     public void setGelatina(int x,int y){
         //llega un punto y llenar los que estan cerca como dijimos
@@ -106,71 +116,71 @@ public class Tablero{
         }
     }
     //agregar metodos de intercambios de ale
-    void chequeoGeneral3(){
+    public void chequeoGeneral3(){
         for(int f=0; f<getDimension();f++){
-                for(int c=0; c<getDimension() -2;c++){
-//                    Entidad caramelo1 = grilla[f][c];
-//                    Entidad caramelo2 = grilla[f][c+1];
-//                    Entidad caramelo3 = grilla[f][c+2];
-                    Caramelo caramelo1 = (Caramelo) grilla[f][c];
-                    Caramelo caramelo2 = (Caramelo) grilla[f][c+1];
-                    Caramelo caramelo3 = (Caramelo) grilla[f][c+2];
+                for(int c=0; c<getDimension() -3;c++){
+                    Entidad caramelo1 = grilla[f][c];
+                    Entidad caramelo2 = grilla[f][c+1];
+                    Entidad caramelo3 = grilla[f][c+2];
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                        caramelo1.destruirse(); //RETORNA UNA LISTA Y DESPUES 
-                        caramelo2.destruirse();
-                        caramelo3.destruirse();
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
                     }
                 }
         }
 
         for(int c=0; c<getDimension();c++){
-            for(int f=0; f<getDimension()-2;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f][c+1];
-//                Entidad caramelo3 = grilla[f][c+2];
-                Caramelo caramelo1 = (Caramelo) grilla[f][c];
-                Caramelo caramelo2 = (Caramelo) grilla[f][c+1];
-                Caramelo caramelo3 = (Caramelo) grilla[f][c+2];
+            for(int f=0; f<getDimension()-3;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f][c+1];
+                Entidad caramelo3 = grilla[f][c+2];
                 if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse();
-                    caramelo2.destruirse();
-                    caramelo3.destruirse(); 
+                    caramelo1.destruirse(this);
+                    caramelo2.destruirse(this);
+                    caramelo3.destruirse(this);
                 }
            }
         }
     }
 
-//    void chequeoGeneral4(){
-//        for(int f=0; f<getDimension();f++){
-//                for(int c=0; c<getDimension() -3;c++){
-//                    Entidad caramelo1 = grilla[f][c];
-//                    Entidad caramelo2 = grilla[f][c+1];
-//                    Entidad caramelo3 = grilla[f][c+2];
-//                    Entidad caramelo4 = grilla[f][c+3];
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                        caramelo1.destruirse();
-//                        caramelo2.destruirse();
-//                        caramelo3.destruirse();
-//                        caramelo4.destruirse();
-//                    }
-//                }
-//        }
-//
-//        for(int c=0; c<getDimension();c++){
-//           for(int f=0; f<getDimension()-3;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f][c+1];
-//                Entidad caramelo3 = grilla[f][c+2];
-//                Entidad caramelo4 = grilla[f][c+3];
-//                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                    caramelo1.destruirse();
-//                    caramelo2.destruirse();
-//                    caramelo3.destruirse();
-//                    caramelo4.destruirse();
-//                }
-//           }
-//        }
-//    }
+    public void crushCandy(){
+        //chequeoGeneral3();
+        //chequeoGeneral4();
+        //chequeoGeneral5();
+    }
+
+    public void chequeoGeneral4(){
+        for(int f=0; f<getDimension();f++){
+                for(int c=0; c<getDimension() -3;c++){
+                    Entidad caramelo1 = grilla[f][c];
+                    Entidad caramelo2 = grilla[f][c+1];
+                    Entidad caramelo3 = grilla[f][c+2];
+                    Entidad caramelo4 = grilla[f][c+3];
+                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
+                        caramelo4.destruirse(this);
+                    }
+                }
+        }
+
+        for(int c=0; c<getDimension();c++){
+           for(int f=0; f<getDimension()-3;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f][c+1];
+                Entidad caramelo3 = grilla[f][c+2];
+                Entidad caramelo4 = grilla[f][c+3];
+                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                    caramelo1.destruirse(this);
+                    caramelo2.destruirse(this);
+                    caramelo3.destruirse(this);
+                    caramelo4.destruirse(this);
+                }
+           }
+        }
+    }
 //
 //    void chequeoGeneral5(){
 //        for(int f=0; f<getDimension(); f++){

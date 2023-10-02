@@ -12,7 +12,7 @@ public class Gelatina extends Entidad{
     
     //Constructor
     public Gelatina(){
-        caramelo = new Caramelo((int)(Math.random() * ((6 - 1) + 1)) + 1, posf, posc);
+        caramelo = null;
         //coincidir con el enum
         //eg=new EntidadGrafica();
     }

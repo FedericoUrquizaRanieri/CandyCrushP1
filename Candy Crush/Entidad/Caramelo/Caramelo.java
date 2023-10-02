@@ -13,10 +13,11 @@ public class Caramelo extends Entidad{
 
     protected Color color;
 
-    public Caramelo(int n, int f, int c){
+    public Caramelo(int f, int c, Color color){
         //hacer case para enlazar el color del enum
         posf = f;
         posc = c;
+        this.color = color;
         //eg=new EntidadGrafica();
     }
     public void destruirse(Tablero t){
