@@ -122,11 +122,13 @@ public class Tablero{
                     Entidad caramelo1 = grilla[f][c];
                     Entidad caramelo2 = grilla[f][c+1];
                     Entidad caramelo3 = grilla[f][c+2];
-                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
+                    if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
                         caramelo1.destruirse(this);
                         caramelo2.destruirse(this);
                         caramelo3.destruirse(this);
-                    }
+                        }
+                    }   
                 }
         }
 
@@ -135,18 +137,20 @@ public class Tablero{
                 Entidad caramelo1 = grilla[f][c];
                 Entidad caramelo2 = grilla[f][c+1];
                 Entidad caramelo3 = grilla[f][c+2];
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                }
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
+                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
+                    }
+                }   
            }
         }
     }
 
     public void crushCandy(){
-        //chequeoGeneral3();
-        //chequeoGeneral4();
+        chequeoGeneral3();
+        chequeoGeneral4();
         //chequeoGeneral5();
     }
 
@@ -157,13 +161,15 @@ public class Tablero{
                     Entidad caramelo2 = grilla[f][c+1];
                     Entidad caramelo3 = grilla[f][c+2];
                     Entidad caramelo4 = grilla[f][c+3];
-                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-                        caramelo1.destruirse(this);
-                        caramelo2.destruirse(this);
-                        caramelo3.destruirse(this);
-                        caramelo4.destruirse(this);
-                    }
+                    if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                        }
                 }
+            }
         }
 
         for(int c=0; c<getDimension();c++){
@@ -172,14 +178,16 @@ public class Tablero{
                 Entidad caramelo2 = grilla[f][c+1];
                 Entidad caramelo3 = grilla[f][c+2];
                 Entidad caramelo4 = grilla[f][c+3];
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    caramelo4.destruirse(this);
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
+                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
+                        caramelo4.destruirse(this);
+                    }
                 }
            }
-        }
+        }  
     }
 //
 //    void chequeoGeneral5(){
