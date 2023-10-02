@@ -31,7 +31,7 @@ public class GUI extends JFrame{
         jugador.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED,8));
         jugador.setBounds(0,-100, labelWidth, labelHeight);
 
-        panel = new Panel(jugador, labelWidth, labelHeight, labelSpacing, dimension);
+        panel = new Panel(juego, jugador, labelWidth, labelHeight, labelSpacing, dimension);
         panel.add(jugador);
 
         int panelWidth = (int) panel.getPreferredSize().getWidth();
@@ -46,6 +46,7 @@ public class GUI extends JFrame{
         generarCaramelos();
         pack();
         getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
+        setVisible(true);
     }
 
     public void generarCaramelos() {

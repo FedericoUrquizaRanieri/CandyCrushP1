@@ -15,8 +15,11 @@ public class Juego{
     //Constructor
     public Juego() throws IOException{  //esta exception me tiene que me quiero matar, hay que corregirla
         miTablero = new Tablero(this);
+        System.out.println("TABLERO");
         miGUI = new GUI(this);
+        System.out.println("GUI");
         miNivel = new Nivel(this);
+        System.out.println("NIVEL");
         //Asociar entidades
         regenerar(1);
     }
@@ -24,6 +27,7 @@ public class Juego{
     //Metodos
     public void regenerar(int i) throws IOException{
         generarNivel(i);
+        System.out.println("nivel generacion");
         generarTablero(i);
     }
     private void generarNivel(int i) throws IOException{

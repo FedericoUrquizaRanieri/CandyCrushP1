@@ -16,13 +16,13 @@ public class GeneradorDeNivel {
     //leer los archivos anda pero tengan en cuenta el salto de linea
     public static void generarTablero(int nivel, Tablero t) throws IOException {
         URL path = Juego.class.getResource(archivos[nivel-1]);
-        File f = new File(path.getFile());
+        File f = new File("Candy Crush/Juego/Archivo1.txt");
         FileReader fr= new FileReader(f);
         char[] data=new char[1000];
         fr.read(data,0,1000);
         //arranco a llenar el tablero
         t.setDimension(data[32]);
-        t.setGelatina(data[44],data[46]);
+        //t.setGelatina(data[44],data[46]);
         t.setGlaseado(data[58]);
         t.setCaramelos();
         fr.close();
@@ -30,7 +30,7 @@ public class GeneradorDeNivel {
     //REVISAR ESTA EXCEPTION URGENTE
     public static void generarNivel(int nivel,Nivel n) throws IOException{
         URL path = Juego.class.getResource(archivos[nivel-1]);
-        File f = new File(path.getFile());
+        File f = new File("Candy Crush/Juego/Archivo1.txt");
         FileReader fr= new FileReader(f);
         char[] data=new char[1000];
         fr.read(data,0,1000);

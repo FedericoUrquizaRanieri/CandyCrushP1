@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 public class Panel extends JPanel {
     protected JLabel jugador;
+    protected Juego.Juego juego;
     protected int labelWidth;
     protected int labelHeight;
     protected int labelSpacing;
@@ -17,14 +18,15 @@ public class Panel extends JPanel {
     private int posX;
     private int posY;
 
-    public Panel(JLabel jugador, int labelWidth, int labelHeight, int labelSpacing, int dimension) {
+    public Panel(Juego.Juego juego, JLabel jugador, int labelWidth, int labelHeight, int labelSpacing, int dimension) {
         this.jugador = jugador;
+        this.juego = juego;
         this.labelWidth = labelWidth;
         this.labelHeight = labelHeight;
         this.labelSpacing = labelSpacing;
         this.dimension = dimension;
-        posX = 0;
-        posY = 0;
+        posX = 0; // Ubiacion del jugador en el tablero
+        posY = 0; // Ubiacion del jugador en el tablero
 
         setLayout(null);
         setPreferredSize(new Dimension(dimension * labelWidth + (dimension + 1) * labelSpacing, dimension * labelHeight + (dimension + 1) * labelSpacing));
@@ -37,10 +39,12 @@ public class Panel extends JPanel {
                     case KeyEvent.VK_LEFT, KeyEvent.VK_A -> {
                         int swapX = jugador.getX() - labelSpacing - labelWidth;
                         int swapY = jugador.getY();
-                        if(toSwap && posX - 1 >= 0) {
+                        //boolean swapValido = juego.moverCursor(-1, 0);
+                        if(toSwap && posX - 1 >= 0) { // Swap
                             trySwap(swapX, swapY);
                             toSwap = revertSwapState(toSwap);
-                        } else if (posX - 1 >= 0) {
+                            //if(swapValido) trySwap(swapX, swapY);
+                        } else if (posX - 1 >= 0) { // Mover Cursor
                             posX--;
                             jugador.setLocation(swapX, swapY);
                         }
@@ -88,6 +92,7 @@ public class Panel extends JPanel {
                 }
             }
         });
+        setVisible(true);
     }
 
     public boolean revertSwapState(boolean toSwap) {
