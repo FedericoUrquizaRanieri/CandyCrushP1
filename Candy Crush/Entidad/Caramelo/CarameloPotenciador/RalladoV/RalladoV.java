@@ -12,6 +12,7 @@ public class RalladoV extends Caramelo{
 
     //Constructor
     public RalladoV(int n, int f, int c){
+        //hacer case para enlazar el color del enum
         super(n, f, c);
         eg=new EntidadGrafica();
     }

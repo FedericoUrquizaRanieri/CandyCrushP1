@@ -59,7 +59,10 @@ public class Tablero{
     }
 
     public Entidad getEntidad(int f, int c){
-        return grilla[f][c];
+        if(f >= 0 && f<dimension && c >= 0 && c < dimension){
+            return grilla[f][c];
+        }
+        return null;
 
     }
     public void setCaramelos(){
@@ -68,7 +71,7 @@ public class Tablero{
             for(int j=0;j<9;j++)
                 if(grilla[i][j]==null){
                     aux=(int)(Math.random() * ((6 - 1) + 1)) + 1;
-                    grilla[i][j]=new Caramelo(aux);
+                    grilla[i][j]=new Caramelo(aux, i, j);
                 }
     }
     public void setGelatina(int x,int y){
@@ -95,7 +98,7 @@ public class Tablero{
             int x=(int)Math.random()*10;
             int y=(int)Math.random()*10;
             if(grilla[x][y]==null)
-                grilla[x][y]=new Glaseado();
+                grilla[x][y]=new Glaseado(n, x, y);
             else
                 i--;
         }
