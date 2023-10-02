@@ -6,9 +6,9 @@ import Tablero.Tablero;
 
 public class Caramelo extends Entidad{
     //Atributos
-    private EntidadGrafica eg;
-    private int posf;
-    private int posc;
+    protected EntidadGrafica eg;
+    protected int posf;
+    protected int posc;
 
     public Caramelo(int n, int f, int c){
         //hacer case para enlazar el color del enum

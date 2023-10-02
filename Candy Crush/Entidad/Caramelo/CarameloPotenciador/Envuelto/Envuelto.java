@@ -5,10 +5,6 @@ import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
 public class Envuelto extends Caramelo{
-    //Atributos
-    private EntidadGrafica eg;
-    private int posf;
-    private int posc;
 
     public Envuelto(int n, int f, int c){
         //hacer case para enlazar el color del enum

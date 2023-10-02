@@ -5,10 +5,6 @@ import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
 public class RalladoV extends Caramelo{
-    //Atributos
-    private EntidadGrafica eg;
-    private int posf;
-    private int posc; 
 
     //Constructor
     public RalladoV(int n, int f, int c){
