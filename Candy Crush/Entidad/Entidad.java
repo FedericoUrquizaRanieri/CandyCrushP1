@@ -13,6 +13,10 @@ public abstract class Entidad {
         
     }
 
+    public void setEntidadGrafica(EntidadGrafica eg){
+        this.eg = eg;
+    }
+
     public EntidadGrafica getEntidadGrafica() {
         return eg;
     }

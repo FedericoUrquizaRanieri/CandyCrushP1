@@ -117,8 +117,8 @@ public class Tablero{
     }
     //agregar metodos de intercambios de ale
     public void chequeoGeneral3(){
-        for(int f=0; f<getDimension();f++){
-                for(int c=0; c<getDimension() -3;c++){
+        for(int f=0; f < getDimension();f++){
+                for(int c=0; c < getDimension() - 2;c++){
                     Entidad caramelo1 = grilla[f][c];
                     Entidad caramelo2 = grilla[f][c+1];
                     Entidad caramelo3 = grilla[f][c+2];
@@ -133,10 +133,10 @@ public class Tablero{
         }
 
         for(int c=0; c<getDimension();c++){
-            for(int f=0; f<getDimension()-3;f++){
+            for(int f=0; f<getDimension()-2;f++){
                 Entidad caramelo1 = grilla[f][c];
-                Entidad caramelo2 = grilla[f][c+1];
-                Entidad caramelo3 = grilla[f][c+2];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
                 if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
                         caramelo1.destruirse(this);
@@ -175,9 +175,9 @@ public class Tablero{
         for(int c=0; c<getDimension();c++){
            for(int f=0; f<getDimension()-3;f++){
                 Entidad caramelo1 = grilla[f][c];
-                Entidad caramelo2 = grilla[f][c+1];
-                Entidad caramelo3 = grilla[f][c+2];
-                Entidad caramelo4 = grilla[f][c+3];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
+                Entidad caramelo4 = grilla[f+3][c];
                 if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
                         caramelo1.destruirse(this);

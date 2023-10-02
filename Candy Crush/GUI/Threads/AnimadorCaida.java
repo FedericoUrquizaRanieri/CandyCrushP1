@@ -24,7 +24,7 @@ public class AnimadorCaida extends Thread{
         boolean stopY = posY == toY;
 
         try {
-            sleep(Duration.ofSeconds(4));
+            sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

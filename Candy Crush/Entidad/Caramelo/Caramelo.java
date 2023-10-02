@@ -20,7 +20,13 @@ public class Caramelo extends Entidad{
         this.color = color;
         //eg=new EntidadGrafica();
     }
+
+    public void setEntidadGrafica(EntidadGrafica eg){
+        this.eg = eg;
+    }
+
     public void destruirse(Tablero t){
+        eg.setLocation(eg.getX(), -100);
         t.getGrilla()[posf][posc] = null;
     }
 

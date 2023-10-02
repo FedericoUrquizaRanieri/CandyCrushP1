@@ -63,6 +63,7 @@ public class Juego{
             for (int c=0; c<miTablero.getDimension(); c++) {
                 e = miTablero.getEntidad(f,c);
                 eg = new EntidadGrafica(f,c,e.getColor());
+                e.setEntidadGrafica(eg);
                 miGUI.insertarEntidadGrafica(eg);
             }
         }
