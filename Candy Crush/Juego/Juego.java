@@ -40,8 +40,8 @@ public class Juego{
     public boolean moverCursor(int x,int y){
         return miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
     }
-    public void swap(int x, int y){
-
+    public boolean haySwapValido(int x, int y){
+        return true;
     }
 
     public void crushCandy() {
