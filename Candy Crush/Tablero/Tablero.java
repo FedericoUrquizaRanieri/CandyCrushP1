@@ -5,6 +5,7 @@ import Entidad.Caramelo.Caramelo;
 import Entidad.Color;
 import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
 import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
+import GUI.EntidadGrafica;
 import GUI.Threads.AnimadorCaida;
 import Entidad.Gelatina.Gelatina;
 import Entidad.Glaseado.Glaseado;
@@ -42,27 +43,56 @@ public class Tablero{
     }
 
     public boolean setPosJugadorX(int n){
-        if(posJugadorY+n>=0 && posJugadorY+n<dimension){
-            posJugadorX = posJugadorX+n;
+        if(n >= 0 && n < dimension) {
+            posJugadorX = n;
             return true;
         }
         return false;
     }
 
     public boolean setPosJugadorY(int n){
-        if(posJugadorY+n>=0 && posJugadorY+n<dimension){
-            posJugadorY = posJugadorY+n;
+        if(n >= 0 && n < dimension) {
+            posJugadorY = n;
             return true;
         }
         return false;
     }
 
-    public int getPosJugadorX(int n){
+    public int getPosJugadorX(){
         return posJugadorX;
     }
 
-    public int getPosJugadorY(int n){
+    public int getPosJugadorY(){
         return posJugadorY;
+    }
+
+    public boolean swap(int x, int y) {
+        Entidad e1 = grilla[x][y];
+        Entidad e2 = grilla[posJugadorX][posJugadorY];
+        System.out.println("Swap : " + x + " - " + y);
+        System.out.println("Pos Jugador : " + posJugadorX + " - " + posJugadorY);
+        grilla[x][y] = e2;
+        grilla[posJugadorX][posJugadorY] = e1;
+
+        return false;
+    }
+
+    public boolean ordenarColumnas() {
+        boolean cambios = false;
+        for(int j = 0; j < dimension; j++) {
+            int idx = dimension - 1;
+            for(int i = dimension - 1; j >= 0; i--) {
+                if(grilla[i][j] != null) {
+                    grilla[idx][j] = grilla[i][j];
+                    idx--;
+                }
+            }
+            for (int i = idx; i >= 0; i--) {
+                grilla[i][j] = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
+                cambios = true;
+            }
+        }
+        return cambios;
     }
 
     public Entidad getEntidad(int f, int c){
@@ -80,8 +110,6 @@ public class Tablero{
                     aux = (int) (Math.random() * 6);
                     grilla[i][j] = new Caramelo(i, j, colores[aux]);
                     System.out.print(((Caramelo) grilla[i][j]).getColor() + " - ");
-//                    AnimadorCaida animadorCaida = new AnimadorCaida(grilla[i][j].getEntidadGrafica(), x, y, 1);
-//                    animadorCaida.start();
                 }
             }
             System.out.println('\n');

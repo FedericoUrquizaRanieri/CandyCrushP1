@@ -91,12 +91,12 @@ public class GUI extends JFrame{
 
     public void insertarEntidadGrafica(EntidadGrafica eg) {
         if(eg != null) {
-            int posEG_X = eg.getX();
-            int posEG_Y = eg.getY();
-            eg.setLocation(posEG_X, -100);
+            int eg_X = eg.getX();
+            int eg_Y = eg.getY();
+            eg.setLocation(eg_X, eg_Y); // Para la animacion poner donde va eg_Y el valor -50
             panel.add(eg);
-            AnimadorCaida animadorCaida = new AnimadorCaida(eg, posEG_X, posEG_Y, 1);
-            animadorCaida.start();
+//            AnimadorCaida animadorCaida = new AnimadorCaida(eg, eg_X, eg_Y, 1);
+//            animadorCaida.start();
         }
     }
 

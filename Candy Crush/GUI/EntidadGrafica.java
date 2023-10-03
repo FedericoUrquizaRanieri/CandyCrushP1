@@ -18,7 +18,6 @@ public class EntidadGrafica extends JLabel{
         Image new_img = img.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(new_img));
         setBounds(y * (labelSpacing + labelWidth) + labelSpacing, x * (labelSpacing + labelHeight) + labelSpacing, labelWidth, labelHeight);
-        System.out.println(getX() + " - " + getY());
         setOpaque(false);
     }
 

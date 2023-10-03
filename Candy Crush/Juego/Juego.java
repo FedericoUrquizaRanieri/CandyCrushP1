@@ -21,7 +21,6 @@ public class Juego{
         miNivel = new Nivel(this);
         miTablero = new Tablero(this);
         miGUI = new GUI(this);
-        //Asociar entidades
         regenerar(1);
         asociar_entidades_logicas_graficas();
     }
@@ -38,14 +37,18 @@ public class Juego{
         GeneradorDeNivel.generarTablero(i, miTablero);
     }
     public boolean moverCursor(int x,int y){
-        return miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
+        boolean toReturn = miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
+        System.out.println("Jugador Tablero: " + miTablero.getPosJugadorX() + " - " + miTablero.getPosJugadorY());
+        return toReturn;
     }
-    public void swap(int x, int y){
 
+    public void swap(int x, int y){
+        boolean swap = miTablero.swap(x,y);
+        //crushCandy();
     }
 
     public void crushCandy() {
-        miTablero.crushCandy();
+        // miTablero.crushCandy();
         for(int i=0;i< miTablero.getDimension();i++) {
             for (int j = 0; j < miTablero.getDimension(); j++) {
                 if(miTablero.getEntidad(i,j) == null) {
@@ -54,6 +57,7 @@ public class Juego{
             }
             System.out.println('\n');
         }
+        System.out.println("-------------------------------------");
     }
     private void asociar_entidades_logicas_graficas() {
         Entidad e;
@@ -68,6 +72,9 @@ public class Juego{
             }
         }
     }
+
+
+
     public static void main(String [] args) {
 		EventQueue.invokeLater(new Runnable() {
             public void run() {
