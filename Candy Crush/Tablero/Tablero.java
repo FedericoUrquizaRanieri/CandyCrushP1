@@ -178,9 +178,9 @@ public class Tablero{
     }
 
     public void crushCandy(){
-        chequeoGeneral3();
+        chequeoGeneral5();
         chequeoGeneral4();
-        //chequeoGeneral5();
+        chequeoGeneral3();   
     }
 
     public void chequeoGeneral4(){

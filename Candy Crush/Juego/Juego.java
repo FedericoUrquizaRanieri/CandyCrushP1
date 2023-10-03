@@ -42,9 +42,12 @@ public class Juego{
         return toReturn;
     }
 
-    public void swap(int x, int y){
-        boolean swap = miTablero.swap(x,y);
+    public void swap(int x, int y) {
+        boolean swap = miTablero.swap(x, y);
         //crushCandy();
+    }
+    public boolean haySwapValido(int x, int y){
+        return true;
     }
 
     public void crushCandy() {
