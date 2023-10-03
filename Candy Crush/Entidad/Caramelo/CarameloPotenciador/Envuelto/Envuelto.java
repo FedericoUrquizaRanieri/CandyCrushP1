@@ -12,6 +12,7 @@ public class Envuelto extends Caramelo{
         super(f, c, color);
         //eg=new EntidadGrafica();
     }
+    
     public void destruirse(Tablero t){
         t.getEntidad(posf-1, posc-1).destruirse(t);
         t.getEntidad(posf-1, posc).destruirse(t);

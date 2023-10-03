@@ -3,6 +3,7 @@ package Tablero;
 import Entidad.Entidad;
 import Entidad.Caramelo.Caramelo;
 import Entidad.Color;
+import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
 import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
 import GUI.Threads.AnimadorCaida;
 import Entidad.Gelatina.Gelatina;
@@ -189,82 +190,86 @@ public class Tablero{
            }
         }  
     }
-//
-//    void chequeoGeneral5(){
-//        for(int f=0; f<getDimension(); f++){
-//                for(int c=0; c< getDimension()-4;c++){
-//                    Entidad caramelo1 = grilla[f][c];
-//                    Entidad caramelo2 = grilla[f][c+1];
-//                    Entidad caramelo3 = grilla[f][c+2];
-//                    Entidad caramelo4 = grilla[f][c+3];
-//                    Entidad caramelo5 = grilla[f][c+4];
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                        caramelo1.destruirse();
-//                        caramelo2.destruirse();
-//                        caramelo3.destruirse();
-//                        caramelo4.destruirse();
-//                        caramelo5.destruirse();
-//                    }
-//                }
-//        }
-//
-//        for(int c=0; c<getDimension();c++){
-//           for(int f=0; f<getDimension()-3;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f][c+1];
-//                Entidad caramelo3 = grilla[f][c+2];
-//                Entidad caramelo4 = grilla[f][c+3];
-//                Entidad caramelo5 = grilla[f][c+4];
-//                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                    caramelo1.destruirse();
-//                    caramelo2.destruirse();
-//                    caramelo3.destruirse();
-//                    caramelo4.destruirse();
-//                    caramelo5.destruirse();
-//                }
-//           }
-//        }
-//    }
-//
-//    void MovimientoValido4(int fila, int columna){
-//	    if((fila >= 0 && columna >= 1) && (fila < getDimension() && columna < getDimension()-2)){ //chequeo todos los dos a la derecha HORIZONTAL
-//	        if(grilla[fila][columna].getColor() == grilla[fila][columna-1].getColor() && grilla[fila][columna-1].getColor() == grilla[fila][columna+1].getColor() && grilla[fila][columna+1].getColor() == grilla[fila][columna+2].getColor()){
-//	            grilla[fila][columna] = new RalladoH(grilla[fila][columna].getColor(), fila,  columna);
-//	            grilla[fila][columna-1].destruirse();
-//	            grilla[fila][columna+1].destruirse();
-//	            grilla[fila][columna+2].destruirse();
-//	        }
-//	    }
-//
-//	    if((fila >= 0 && columna >= 2) && (fila < getDimension() && columna < getDimension()-1)){ //chequeo todos los dos a la izquierda HORIZONTAL
-//		    if(grilla[fila][columna].getColor() == grilla[fila][columna-1].getColor() && grilla[fila][columna-1].getColor() == grilla[fila][columna-2].getColor() && grilla[fila][columna-2].getColor() == grilla[fila][columna+1].getColor()){
-//		        grilla[fila][columna] = new RalladoH(grilla[fila][columna].getColor(), fila,  columna);
-//	      	    grilla[fila][columna-1].destruirse();
-//	            grilla[fila][columna+1].destruirse();
-//	            grilla[fila][columna-2].destruirse();
-//	        }
-//	    }
-//
-//        if((fila >= 2 && columna >= 0) && (fila < getDimension()-1 && columna < getDimension())){
-//            if(grilla[fila][columna].getColor() == grilla[fila+1][columna].getColor() && grilla[fila+1][columna].getColor() == grilla[fila-1][columna].getColor() && grilla[fila-1][columna].getColor() == grilla[fila-2][columna].getColor()){
-//                grilla[fila][columna] = new RalladoV(grilla[fila][columna].getColor(), fila,  columna);
-//                grilla[fila+1][columna].destruirse();
-//                grilla[fila-1][columna].destruirse();
-//                grilla[fila-2][columna].destruirse();
-//            }
-//        }
-//
-//        if((fila >= 1 && columna >= 0) && (fila < getDimension()-2 && columna < getDimension())){
-//            if(grilla[fila][columna].getColor() == grilla[fila+1][columna].getColor() && grilla[fila+1][columna].getColor() == grilla[fila-1][columna].getColor() && grilla[fila-1][columna].getColor() == grilla[fila+2][columna].getColor()){
-//                grilla[fila][columna] = new RalladoV(grilla[fila][columna].getColor(), fila,  columna);
-//                grilla[fila+1][columna].destruirse();
-//                grilla[fila-1][columna].destruirse();
-//                grilla[fila+2][columna].destruirse();
-//            }
-//        }
-//    }
-//
-//    void Bombita(){
+
+    void chequeoGeneral5(){
+        for(int f=0; f<getDimension(); f++){
+                for(int c=0; c< getDimension()-4;c++){
+                    Entidad caramelo1 = grilla[f][c];
+                    Entidad caramelo2 = grilla[f][c+1];
+                    Entidad caramelo3 = grilla[f][c+2];
+                    Entidad caramelo4 = grilla[f][c+3];
+                    Entidad caramelo5 = grilla[f][c+4];
+                    if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                            caramelo5.destruirse(this);
+                    }
+                }
+            }
+        }
+
+        for(int c=0; c<getDimension();c++){
+           for(int f=0; f<getDimension()-4;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
+                Entidad caramelo4 = grilla[f+3][c];
+                Entidad caramelo5 = grilla[f+4][c];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
+                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
+                        caramelo4.destruirse(this);
+                        caramelo5.destruirse(this);
+                    }
+                }
+            }
+        }
+    }
+
+    void MovimientoValido4(int fila, int columna){
+	    if((fila >= 0 && columna >= 1) && (fila < getDimension() && columna < getDimension()-2)){ //chequeo todos los dos a la derecha HORIZONTAL
+	        if(grilla[fila][columna].getColor() == grilla[fila][columna-1].getColor() && grilla[fila][columna-1].getColor() == grilla[fila][columna+1].getColor() && grilla[fila][columna+1].getColor() == grilla[fila][columna+2].getColor()){
+	            grilla[fila][columna] = new RalladoH(fila,  columna, grilla[fila][columna].getColor());
+	            grilla[fila][columna-1].destruirse(this);
+	            grilla[fila][columna+1].destruirse(this);
+	            grilla[fila][columna+2].destruirse(this);
+	        }
+	    }
+
+	    if((fila >= 0 && columna >= 2) && (fila < getDimension() && columna < getDimension()-1)){ //chequeo todos los dos a la izquierda HORIZONTAL
+		    if(grilla[fila][columna].getColor() == grilla[fila][columna-1].getColor() && grilla[fila][columna-1].getColor() == grilla[fila][columna-2].getColor() && grilla[fila][columna-2].getColor() == grilla[fila][columna+1].getColor()){
+		        grilla[fila][columna] = new RalladoH(fila,  columna, grilla[fila][columna].getColor());
+	      	    grilla[fila][columna-1].destruirse(this);
+	            grilla[fila][columna+1].destruirse(this);
+	            grilla[fila][columna-2].destruirse(this);
+	        }
+	    }
+
+        if((fila >= 2 && columna >= 0) && (fila < getDimension()-1 && columna < getDimension())){
+           if(grilla[fila][columna].getColor() == grilla[fila+1][columna].getColor() && grilla[fila+1][columna].getColor() == grilla[fila-1][columna].getColor() && grilla[fila-1][columna].getColor() == grilla[fila-2][columna].getColor()){
+                grilla[fila][columna] = new RalladoV(fila,  columna, grilla[fila][columna].getColor());
+                grilla[fila+1][columna].destruirse(this);
+                grilla[fila-1][columna].destruirse(this);
+                grilla[fila-2][columna].destruirse(this);
+            }
+        }
+
+        if((fila >= 1 && columna >= 0) && (fila < getDimension()-2 && columna < getDimension())){
+            if(grilla[fila][columna].getColor() == grilla[fila+1][columna].getColor() && grilla[fila+1][columna].getColor() == grilla[fila-1][columna].getColor() && grilla[fila-1][columna].getColor() == grilla[fila+2][columna].getColor()){
+                grilla[fila][columna] = new RalladoV(fila, columna, grilla[fila][columna].getColor());
+                grilla[fila+1][columna].destruirse(this);
+                grilla[fila-1][columna].destruirse(this);
+                grilla[fila+2][columna].destruirse(this);
+            }
+        }
+    }
+
+//    void Envuelto(){
 //        for(int c = 0; c < getDimension()-2 ; c++){
 //            for(int f = 0; f < getDimension()-2; f++){
 //                Entidad caramelo1 = grilla[f][c];
