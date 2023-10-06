@@ -109,7 +109,7 @@ public class Tablero{
                 if (grilla[i][j] == null) {
                     aux = (int) (Math.random() * 6);
                     grilla[i][j] = new Caramelo(i, j, colores[aux]);
-                    System.out.print(((Caramelo) grilla[i][j]).getColor() + " - ");
+                    System.out.print((grilla[i][j]).getColor() + " - ");
                 }
             }
             System.out.println('\n');
