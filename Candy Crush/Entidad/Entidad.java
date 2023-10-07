@@ -1,7 +1,12 @@
 package Entidad;
 
-import GUI.EntidadGrafica;
+import Entidad.Caramelo.Caramelo;
+import Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto;
+import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
+import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
+import Entidad.Glaseado.Glaseado.Glaseado;
 import Entidad.Color;
+import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
 public abstract class Entidad {
@@ -10,13 +15,10 @@ public abstract class Entidad {
     protected Color color;
     protected int fila;
     protected int columna;
-    protected String path_img;
 
-    protected Entidad(int fila, int columna, Color color, String path_img) {
+    protected Entidad(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
-        this.color = color;
-        this.path_img = path_img;
     }
     //Metodos
     public void destruirse(Tablero t){
@@ -38,4 +40,44 @@ public abstract class Entidad {
         this.columna = columna;
         //eg.animarMovimiento();
     }
+
+    // Puede Recibir
+
+    public boolean puedeRecibir(Caramelo caramelo) {
+        return true;
+    }
+    public boolean puedeRecibir(Glaseado glaseado) {
+        return false;
+    }
+    public boolean puedeRecibir(Envuelto envuelto) {
+        return true;
+    }
+    public boolean puedeRecibir(RalladoV ralladoV) {
+        return true;
+    }
+    public boolean puedeRecibir(RalladoH ralladoH) {
+        return true;
+    }
+
+    // Matchea Con
+
+    public boolean match_con(Caramelo caramelo) {
+        return false;
+    }
+    public boolean match_con(RalladoV ralladoV) {
+        return false;
+    }
+    public boolean match_con(RalladoH ralladoH) {
+        return false;
+    }
+    public boolean match_con(Envuelto envuelto) {
+        return false;
+    }
+    public boolean match_con(Glaseado glaseado) {
+        return false;
+    }
+
+    // Destruirse
+
+
 }

@@ -8,7 +8,6 @@ import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Entidad;
 import GUI.EntidadGrafica;
-import Entidad.Caramelo.Caramelo;
 
 public class Juego{
     //Atributos
@@ -38,7 +37,6 @@ public class Juego{
     }
     public boolean moverCursor(int x,int y){
         boolean toReturn = miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
-        System.out.println("Jugador Tablero: " + miTablero.getPosJugadorX() + " - " + miTablero.getPosJugadorY());
         return toReturn;
     }
 
@@ -54,9 +52,9 @@ public class Juego{
         // miTablero.crushCandy();
         for(int i=0;i< miTablero.getDimension();i++) {
             for (int j = 0; j < miTablero.getDimension(); j++) {
-                if(miTablero.getEntidad(i,j) == null) {
+                if(miTablero.getEntidad(i,j).getColor() == null) {
                     System.out.print("NULO - ");
-                } else System.out.print(miTablero.getEntidad(i,j).getColor() + " - ");
+                } else System.out.print(miTablero.getEntidad(i,j).getColor().toString().substring(0,3) + " - ");
             }
             System.out.println('\n');
         }

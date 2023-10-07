@@ -23,6 +23,7 @@ public class GeneradorDeNivel {
         //arranco a llenar el tablero
         //t.setDimension(data[32]);
         //t.setGelatina(data[44],data[46]);
+        //t.setGlaseado(10);
         //t.setGlaseado(data[58]);
         t.setCaramelos();
         fr.close();

@@ -17,11 +17,21 @@ public class RalladoV extends Caramelo{
     //Metodos
     public void destruirse(Tablero t){
         for(int i=0; i<t.getDimension(); i++){
-            if(i != posf && t.getEntidad(i, posc) != null){
-                t.getEntidad(i, posc).destruirse(t);
+            if(i != fila && t.getEntidad(i, columna) != null){
+                t.getEntidad(i, columna).destruirse(t);
             }
         }
-        t.getGrilla()[posf][posc] = null;
+        t.getGrilla()[fila][columna] = null;
         //eg.metodo para notificar a la gui del cambio
+    }
+
+    public boolean match_con(RalladoV ralladoV) {
+        return true;
+    }
+    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH ralladoH) {
+        return true;
+    }
+    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto envuelto) {
+        return true;
     }
 } 

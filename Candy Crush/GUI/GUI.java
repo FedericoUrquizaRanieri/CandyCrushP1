@@ -4,8 +4,6 @@ import javax.swing.*;
 
 import GUI.Threads.AnimadorCaida;
 import Juego.Juego;
-import GUI.Panel;
-import GUI.EntidadGrafica;
 
 import java.awt.*;
 

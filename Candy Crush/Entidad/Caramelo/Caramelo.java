@@ -7,18 +7,11 @@ import Entidad.Color;
 
 public class Caramelo extends Entidad{
     //Atributos
-    protected EntidadGrafica eg;
-    protected int posf;
-    protected int posc;
-
-    protected Color color;
 
     public Caramelo(int f, int c, Color color){
         //hacer case para enlazar el color del enum
-        posf = f;
-        posc = c;
+        super(f,c);
         this.color = color;
-        //eg=new EntidadGrafica();
     }
 
     public void setEntidadGrafica(EntidadGrafica eg){
@@ -27,7 +20,7 @@ public class Caramelo extends Entidad{
 
     public void destruirse(Tablero t){
         eg.setLocation(eg.getX(), -100);
-        t.getGrilla()[posf][posc] = null;
+        t.getGrilla()[fila][columna] = null;
     }
 
     public Color getColor() {

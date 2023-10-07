@@ -1,20 +1,31 @@
-package Entidad.Glaseado;
+package Entidad.Glaseado.Glaseado;
 
 import Entidad.Entidad;
 import GUI.EntidadGrafica;
+import Entidad.Glaseado.Glaseado.Glaseado;
+import Entidad.Caramelo.Caramelo;
+import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
+import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
+import Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto;
 
 public class Glaseado extends Entidad{
-    //Atributos
-    private EntidadGrafica eg;
-    private int posf;
-    private int posc;
-
-    public Glaseado(int n, int f, int c){
-        posf = f;
-        posc = c;
-        //eg = new EntidadGrafica();
+    public Glaseado(int f, int c){
+        super(f,c);
     }
     public void destruirse(){
         
+    }
+
+    public boolean puedeRecibir(Caramelo caramelo) {
+        return false;
+    }
+    public boolean puedeRecibir(Envuelto envuelto) {
+        return false;
+    }
+    public boolean puedeRecibir(RalladoV ralladoV) {
+        return false;
+    }
+    public boolean puedeRecibir(RalladoH ralladoH) {
+        return false;
     }
 }

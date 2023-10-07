@@ -2,6 +2,7 @@ package Entidad.Gelatina;
 
 import Entidad.Entidad;
 import Entidad.Caramelo.Caramelo;
+import Entidad.Color;
 import GUI.EntidadGrafica;
 
 public class Gelatina extends Entidad{
@@ -11,8 +12,9 @@ public class Gelatina extends Entidad{
     private Caramelo caramelo;
     
     //Constructor
-    public Gelatina(){
-        caramelo = null;
+    public Gelatina(int f, int c, Color color){
+        super(f,c);
+        caramelo = new Caramelo(f,c, color);
         //coincidir con el enum
         //eg=new EntidadGrafica();
     }

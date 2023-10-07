@@ -5,10 +5,8 @@ import Entidad.Caramelo.Caramelo;
 import Entidad.Color;
 import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
 import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
-import GUI.EntidadGrafica;
-import GUI.Threads.AnimadorCaida;
 import Entidad.Gelatina.Gelatina;
-import Entidad.Glaseado.Glaseado;
+import Entidad.Glaseado.Glaseado.Glaseado;
 import Juego.Juego;
 
 public class Tablero{
@@ -69,19 +67,16 @@ public class Tablero{
     public boolean swap(int x, int y) {
         Entidad e1 = grilla[x][y];
         Entidad e2 = grilla[posJugadorX][posJugadorY];
-        System.out.println("Swap : " + x + " - " + y);
-        System.out.println("Pos Jugador : " + posJugadorX + " - " + posJugadorY);
         grilla[x][y] = e2;
         grilla[posJugadorX][posJugadorY] = e1;
-
-        return false;
+        return true;
     }
 
     public boolean ordenarColumnas() {
         boolean cambios = false;
         for(int j = 0; j < dimension; j++) {
             int idx = dimension - 1;
-            for(int i = dimension - 1; j >= 0; i--) {
+            for(int i = dimension - 1; i >= 0; i--) {
                 if(grilla[i][j] != null) {
                     grilla[idx][j] = grilla[i][j];
                     idx--;
@@ -115,35 +110,35 @@ public class Tablero{
             System.out.println('\n');
         }
     }
-    public void setGelatina(int x,int y){
-        //llega un punto y llenar los que estan cerca como dijimos
-        grilla[x][y]=new Gelatina();
-        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
-        int xn=x;
-        int yn=y;
-        for(int i=0;i<cant;i++){
-            //revisar este truncado de cavernicola que se me ocurrio
-            xn = xn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
-            yn = yn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
-            if(grilla[xn][yn]==null){
-                grilla[xn][yn]=new Gelatina();
-            }
-            else
-                i--;
-        }
-    }
-    public void setGlaseado(int n){
-        //revisar despues, estoy llenando aleatoriamente una cantidad x
-        int cont=n;
-        for(int i=0;i<cont;i++){
-            int x=(int)Math.random()*10;
-            int y=(int)Math.random()*10;
-            if(grilla[x][y]==null)
-                grilla[x][y]=new Glaseado(n, x, y);
-            else
-                i--;
-        }
-    }
+//    public void setGelatina(int x,int y){
+//        //llega un punto y llenar los que estan cerca como dijimos
+//        grilla[x][y]=new Gelatina();
+//        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
+//        int xn=x;
+//        int yn=y;
+//        for(int i=0;i<cant;i++){
+//            //revisar este truncado de cavernicola que se me ocurrio
+//            xn = xn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
+//            yn = yn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
+//            if(grilla[xn][yn]==null){
+//                grilla[xn][yn]=new Gelatina();
+//            }
+//            else
+//                i--;
+//        }
+//    }
+//    public void setGlaseado(int n){
+//        //revisar despues, estoy llenando aleatoriamente una cantidad x
+//        int cont=n;
+//        for(int i=0;i<cont;i++){
+//            int x=(int)Math.random()*10;
+//            int y=(int)Math.random()*10;
+//            if(grilla[x][y]==null)
+//                grilla[x][y]=new Glaseado(n, x, y);
+//            else
+//                i--;
+//        }
+//    }
     //agregar metodos de intercambios de ale
     public void chequeoGeneral3(){
         for(int f=0; f < getDimension();f++){
@@ -315,4 +310,38 @@ public class Tablero{
 //            }
 //        }
 //    }
+    public void setGelatina(int x,int y){
+        //llega un punto y llenar los que estan cerca como dijimos
+        grilla[x][y]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
+        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
+        int xn=x;
+        int yn=y;
+        while(cant!=0){
+            int temp = (Math.random() <= 0.5) ? 1 : -1;
+            int tempx = (Math.random() <= 0.5) ? 1 : -1;
+            int tempY = (Math.random() <= 0.5) ? 1 : -1;
+            if(temp==1){
+                xn = xn + tempx;
+            }
+            else{
+                yn = yn + tempY;
+            }
+            if(grilla[xn][yn]==null){
+                grilla[xn][yn]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
+                cant--;
+            }
+        }
+    }
+    public void setGlaseado(int n){
+        //estoy llenando aleatoriamente una cantidad x
+        int cont=n;
+        while(cont!=0){
+            int x=(int)(Math.random() * ((9 - 0) + 1)) + 0;
+            int y=(int)(Math.random() * ((9 - 0) + 1)) + 0;
+            if(grilla[x][y]==null){
+                grilla[x][y]=new Glaseado(x,y);
+                cont--;
+            }
+        }
+    }
 }
