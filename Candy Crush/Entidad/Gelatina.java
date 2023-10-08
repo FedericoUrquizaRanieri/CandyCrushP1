@@ -1,9 +1,4 @@
-package Entidad.Gelatina;
-
-import Entidad.Entidad;
-import Entidad.Caramelo.Caramelo;
-import Entidad.Color;
-import GUI.EntidadGrafica;
+package Entidad;
 
 public class Gelatina extends Entidad{
     //Atributos

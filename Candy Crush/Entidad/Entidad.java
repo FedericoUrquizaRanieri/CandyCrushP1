@@ -1,11 +1,5 @@
 package Entidad;
 
-import Entidad.Caramelo.Caramelo;
-import Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto;
-import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
-import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
-import Entidad.Glaseado.Glaseado.Glaseado;
-import Entidad.Color;
 import GUI.EntidadGrafica;
 import Tablero.Tablero;
 

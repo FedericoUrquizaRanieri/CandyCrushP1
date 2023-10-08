@@ -1,12 +1,4 @@
-package Entidad.Glaseado.Glaseado;
-
-import Entidad.Entidad;
-import GUI.EntidadGrafica;
-import Entidad.Glaseado.Glaseado.Glaseado;
-import Entidad.Caramelo.Caramelo;
-import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
-import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
-import Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto;
+package Entidad;
 
 public class Glaseado extends Entidad{
     public Glaseado(int f, int c){

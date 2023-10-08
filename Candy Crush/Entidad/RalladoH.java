@@ -1,8 +1,5 @@
-package Entidad.Caramelo.CarameloPotenciador.RalladoH;
+package Entidad;
 
-import Entidad.Caramelo.Caramelo;
-import Entidad.Color;
-import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
 public class RalladoH extends Caramelo{
@@ -25,13 +22,13 @@ public class RalladoH extends Caramelo{
         //eg.metodo para notificar a la gui del cambio
     }
 
-    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV ralladoV) {
+    public boolean match_con(RalladoV ralladoV) {
         return true;
     }
     public boolean match_con(RalladoH ralladoH) {
         return true;
     }
-    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.Envuelto.Envuelto envuelto) {
+    public boolean match_con(Envuelto envuelto) {
         return true;
     }
 }

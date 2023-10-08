@@ -1,4 +1,4 @@
-package Entidad.Caramelo;
+package Entidad;
 
 import Entidad.Entidad;
 import GUI.EntidadGrafica;

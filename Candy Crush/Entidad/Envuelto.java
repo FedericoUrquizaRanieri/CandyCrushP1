@@ -1,7 +1,5 @@
-package Entidad.Caramelo.CarameloPotenciador.Envuelto;
+package Entidad;
 
-import Entidad.Caramelo.Caramelo;
-import Entidad.Color;
 import Tablero.Tablero;
 
 public class Envuelto extends Caramelo{
@@ -30,10 +28,10 @@ public class Envuelto extends Caramelo{
         //eg.metodo para notificar a la gui del cambio
     }
 
-    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV ralladoV) {
+    public boolean match_con(RalladoV ralladoV) {
         return true;
     }
-    public boolean match_con(Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH ralladoH) {
+    public boolean match_con(RalladoH ralladoH) {
         return true;
     }
     public boolean match_con(Envuelto envuelto) {

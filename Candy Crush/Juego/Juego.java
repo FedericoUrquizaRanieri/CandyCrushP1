@@ -3,7 +3,6 @@ import java.awt.EventQueue;
 import java.io.IOException;
 
 import GUI.GUI;
-import Juego.GeneradorDeNivel.GeneradorDeNivel;
 import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Entidad;

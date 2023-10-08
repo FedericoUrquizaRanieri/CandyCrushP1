@@ -1,12 +1,6 @@
 package Tablero;
 
-import Entidad.Entidad;
-import Entidad.Caramelo.Caramelo;
-import Entidad.Color;
-import Entidad.Caramelo.CarameloPotenciador.RalladoH.RalladoH;
-import Entidad.Caramelo.CarameloPotenciador.RalladoV.RalladoV;
-import Entidad.Gelatina.Gelatina;
-import Entidad.Glaseado.Glaseado.Glaseado;
+import Entidad.*;
 import Juego.Juego;
 
 public class Tablero{
