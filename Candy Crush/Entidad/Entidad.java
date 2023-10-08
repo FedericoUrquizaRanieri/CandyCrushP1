@@ -3,7 +3,7 @@ package Entidad;
 import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
-public abstract class Entidad {
+public abstract class Entidad implements Intercambiable{
     //Atributos
     protected EntidadGrafica eg;
     protected Color color;
@@ -33,24 +33,6 @@ public abstract class Entidad {
         this.fila = fila;
         this.columna = columna;
         //eg.animarMovimiento();
-    }
-
-    // Puede Recibir
-
-    public boolean puedeRecibir(Caramelo caramelo) {
-        return true;
-    }
-    public boolean puedeRecibir(Glaseado glaseado) {
-        return false;
-    }
-    public boolean puedeRecibir(Envuelto envuelto) {
-        return true;
-    }
-    public boolean puedeRecibir(RalladoV ralladoV) {
-        return true;
-    }
-    public boolean puedeRecibir(RalladoH ralladoH) {
-        return true;
     }
 
     // Matchea Con

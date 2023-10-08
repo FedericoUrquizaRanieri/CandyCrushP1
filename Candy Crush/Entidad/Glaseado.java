@@ -8,16 +8,22 @@ public class Glaseado extends Entidad{
         
     }
 
-    public boolean puedeRecibir(Caramelo caramelo) {
+    public boolean es_posible_intercambiar(Entidad e) {
+        return false;
+    };
+    public boolean puede_recibir(Caramelo c) {
         return false;
     }
-    public boolean puedeRecibir(Envuelto envuelto) {
+    public boolean puede_recibir(Glaseado g) {
         return false;
     }
-    public boolean puedeRecibir(RalladoV ralladoV) {
+    public boolean puede_recibir(Envuelto p) {
         return false;
     }
-    public boolean puedeRecibir(RalladoH ralladoH) {
+    public boolean puede_recibir(RalladoH rh) {
+        return false;
+    }
+    public boolean puede_recibir(RalladoV rv) {
         return false;
     }
 }

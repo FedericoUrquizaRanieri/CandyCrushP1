@@ -21,6 +21,24 @@ public class Gelatina extends Entidad{
         return caramelo;
     }
     public void destruirse(){
-        
+
+    }
+    public boolean es_posible_intercambiar(Entidad e) {
+        return e.puede_recibir(this.getCaramelo());
+    };
+    public boolean puede_recibir(Caramelo c) {
+        return true;
+    }
+    public boolean puede_recibir(Glaseado g) {
+        return false;
+    }
+    public boolean puede_recibir(Envuelto p) {
+        return true;
+    }
+    public boolean puede_recibir(RalladoH rh) {
+        return true;
+    }
+    public boolean puede_recibir(RalladoV rv) {
+        return true;
     }
 }

@@ -28,13 +28,7 @@ public class Envuelto extends Caramelo{
         //eg.metodo para notificar a la gui del cambio
     }
 
-    public boolean match_con(RalladoV ralladoV) {
-        return true;
-    }
-    public boolean match_con(RalladoH ralladoH) {
-        return true;
-    }
-    public boolean match_con(Envuelto envuelto) {
-        return true;
+    public boolean es_posible_intercambiar(Entidad e) {
+        return e.puede_recibir(this);
     }
 }
