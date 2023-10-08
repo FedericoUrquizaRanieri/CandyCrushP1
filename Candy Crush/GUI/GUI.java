@@ -43,7 +43,7 @@ public class GUI extends JFrame{
         getContentPane().add(panel, BorderLayout.CENTER);
         //generarCaramelos();
         pack();
-        getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
+        getContentPane().add(new JLabel(new ImageIcon("Imagenes/fondo.png")));
         setVisible(true);
 
         AnimadorCaida animadorCaida = new AnimadorCaida(jugador, labelSpacing,labelSpacing, 1);

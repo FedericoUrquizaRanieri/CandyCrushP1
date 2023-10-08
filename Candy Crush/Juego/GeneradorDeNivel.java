@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
-import Juego.Juego;
 import Nivel.Nivel;
 import Tablero.Tablero;
 
@@ -15,22 +14,27 @@ public class GeneradorDeNivel {
     //Metodos
     //leer los archivos anda pero tengan en cuenta el salto de linea
     public static void generarTablero(int nivel, Tablero t) throws IOException {
-        URL path = Juego.class.getResource(archivos[nivel-1]);
+        /*URL path = Juego.class.getResource(archivos[nivel-1]);
         File f = new File("Candy Crush/Juego/Archivo1.txt");
         FileReader fr= new FileReader(f);
         char[] data=new char[1000];
-        fr.read(data,0,1000);
+        fr.read(data,0,1000);*/
         //arranco a llenar el tablero
-        //t.setDimension(data[32]);
         //t.setGelatina(data[44],data[46]);
-        //t.setGlaseado(10);
         //t.setGlaseado(data[58]);
+    }
+    public static void generarGelatina(int nivel, Tablero t){
+        t.setGelatina(5,5);
+    }
+    public static void generarMerengue(int nivel, Tablero t){
+        t.setGlaseado(10);
+    }
+    public static void generarCaramelos(Tablero t){
         t.setCaramelos();
-        fr.close();
     }
     //REVISAR ESTA EXCEPTION URGENTE
     public static void generarNivel(int nivel,Nivel n) throws IOException{
-        URL path = Juego.class.getResource(archivos[nivel-1]);
+        /*URL path = Juego.class.getResource(archivos[nivel-1]);
         File f = new File("Candy Crush/Juego/Archivo1.txt");
         FileReader fr= new FileReader(f);
         char[] data=new char[1000];
@@ -61,5 +65,6 @@ public class GeneradorDeNivel {
         if(data[133]*10+data[134]!=0)
             n.setObjetivoCaramelo(data[133]*10+data[134],6);
         fr.close();
+        */
     }
 }

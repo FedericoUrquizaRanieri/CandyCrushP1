@@ -8,6 +8,7 @@ public class RalladoV extends Caramelo{
     public RalladoV(int f, int c, Color color){
         //hacer case para enlazar el color del enum
         super(f, c, color);
+        imagePath="Imagenes/Rallados/RalladosV/"+ color.toString().toUpperCase()+".png";
         //eg=new EntidadGrafica();
     }
 

@@ -1,16 +1,14 @@
 package Entidad;
 
-import Entidad.Entidad;
 import GUI.EntidadGrafica;
 import Tablero.Tablero;
-import Entidad.Color;
 
 public class Caramelo extends Entidad{
     //Atributos
 
     public Caramelo(int f, int c, Color color){
         //hacer case para enlazar el color del enum
-        super(f,c);
+        super(f,c,"Imagenes/Caramelos/"+ color.toString().toLowerCase()+".png");
         this.color = color;
     }
 

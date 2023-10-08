@@ -7,6 +7,7 @@ public class Envuelto extends Caramelo{
     public Envuelto(int f, int c, Color color){
         //hacer case para enlazar el color del enum
         super(f, c, color);
+        imagePath="Imagenes/Envueltos/"+ color.toString().toUpperCase()+".png";
         //eg=new EntidadGrafica();
     }
 

@@ -9,10 +9,12 @@ public abstract class Entidad implements Intercambiable{
     protected Color color;
     protected int fila;
     protected int columna;
+    protected String imagePath;
 
-    protected Entidad(int fila, int columna) {
+    protected Entidad(int fila, int columna,String i) {
         this.fila = fila;
         this.columna = columna;
+        imagePath=i;
     }
     //Metodos
     public void destruirse(Tablero t){
@@ -34,23 +36,8 @@ public abstract class Entidad implements Intercambiable{
         this.columna = columna;
         //eg.animarMovimiento();
     }
-
-    // Matchea Con
-
-    public boolean match_con(Caramelo caramelo) {
-        return false;
-    }
-    public boolean match_con(RalladoV ralladoV) {
-        return false;
-    }
-    public boolean match_con(RalladoH ralladoH) {
-        return false;
-    }
-    public boolean match_con(Envuelto envuelto) {
-        return false;
-    }
-    public boolean match_con(Glaseado glaseado) {
-        return false;
+    public String getImage(){
+        return imagePath;
     }
 
     // Destruirse

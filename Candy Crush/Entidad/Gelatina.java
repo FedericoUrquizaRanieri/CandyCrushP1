@@ -2,13 +2,11 @@ package Entidad;
 
 public class Gelatina extends Entidad{
     //Atributos
-    private int posf;
-    private int posc;
     private Caramelo caramelo;
     
     //Constructor
     public Gelatina(int f, int c, Color color){
-        super(f,c);
+        super(f,c,"Imagenes/Extras/Gelatina.png");
         caramelo = new Caramelo(f,c, color);
         //coincidir con el enum
         //eg=new EntidadGrafica();

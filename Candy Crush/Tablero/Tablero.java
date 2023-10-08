@@ -104,37 +104,135 @@ public class Tablero{
             System.out.println('\n');
         }
     }
-//    public void setGelatina(int x,int y){
-//        //llega un punto y llenar los que estan cerca como dijimos
-//        grilla[x][y]=new Gelatina();
-//        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
-//        int xn=x;
-//        int yn=y;
-//        for(int i=0;i<cant;i++){
-//            //revisar este truncado de cavernicola que se me ocurrio
-//            xn = xn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
-//            yn = yn + (int)(Math.random() * ((1 - -1) + 1)) + -1;
-//            if(grilla[xn][yn]==null){
-//                grilla[xn][yn]=new Gelatina();
-//            }
-//            else
-//                i--;
-//        }
-//    }
-//    public void setGlaseado(int n){
-//        //revisar despues, estoy llenando aleatoriamente una cantidad x
-//        int cont=n;
-//        for(int i=0;i<cont;i++){
-//            int x=(int)Math.random()*10;
-//            int y=(int)Math.random()*10;
-//            if(grilla[x][y]==null)
-//                grilla[x][y]=new Glaseado(n, x, y);
-//            else
-//                i--;
-//        }
-//    }
     //agregar metodos de intercambios de ale
+
     public void chequeoGeneral3(){
+        for(int f=0; f < getDimension();f++){
+                for(int c=0; c < getDimension() - 2;c++){
+                    Entidad caramelo1 = grilla[f][c];
+                    Entidad caramelo2 = grilla[f][c+1];
+                    Entidad caramelo3 = grilla[f][c+2];
+                    if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
+                        if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3)){
+                            if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
+                                caramelo1.destruirse(this);
+                                caramelo2.destruirse(this);
+                                caramelo3.destruirse(this);
+                            }
+                        }
+                    }   
+                }
+        }
+
+        for(int c=0; c<getDimension();c++){
+            for(int f=0; f<getDimension()-2;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
+                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3)){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
+                        caramelo1.destruirse(this);
+                        caramelo2.destruirse(this);
+                        caramelo3.destruirse(this);
+                        }
+                    } 
+                }  
+            }
+        }
+    }
+
+    public void crushCandy(){
+        chequeoGeneral5();
+        chequeoGeneral4();
+        chequeoGeneral3();   
+    }
+
+    public void chequeoGeneral4(){
+        for(int f=0; f<getDimension();f++){
+            for(int c=0; c<getDimension() -3;c++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f][c+1];
+                Entidad caramelo3 = grilla[f][c+2];
+                Entidad caramelo4 = grilla[f][c+3];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
+                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int c=0; c<getDimension();c++){
+           for(int f=0; f<getDimension()-3;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
+                Entidad caramelo4 = grilla[f+3][c];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
+                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                        }
+                    }
+                }
+            }  
+        }
+    }
+
+    void chequeoGeneral5(){
+        for(int f=0; f<getDimension(); f++){
+            for(int c=0; c< getDimension()-4;c++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f][c+1];
+                Entidad caramelo3 = grilla[f][c+2];
+                Entidad caramelo4 = grilla[f][c+3];
+                Entidad caramelo5 = grilla[f][c+4];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
+                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                            caramelo5.destruirse(this);
+                        }
+                    }
+                }
+            }
+        }
+
+        for(int c=0; c<getDimension();c++){
+           for(int f=0; f<getDimension()-4;f++){
+                Entidad caramelo1 = grilla[f][c];
+                Entidad caramelo2 = grilla[f+1][c];
+                Entidad caramelo3 = grilla[f+2][c];
+                Entidad caramelo4 = grilla[f+3][c];
+                Entidad caramelo5 = grilla[f+4][c];
+                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
+                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
+                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
+                            caramelo1.destruirse(this);
+                            caramelo2.destruirse(this);
+                            caramelo3.destruirse(this);
+                            caramelo4.destruirse(this);
+                            caramelo5.destruirse(this);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*public void chequeoGeneral3(){
         for(int f=0; f < getDimension();f++){
                 for(int c=0; c < getDimension() - 2;c++){
                     Entidad caramelo1 = grilla[f][c];
@@ -304,6 +402,7 @@ public class Tablero{
 //            }
 //        }
 //    }
+    */
     public void setGelatina(int x,int y){
         //llega un punto y llenar los que estan cerca como dijimos
         grilla[x][y]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);

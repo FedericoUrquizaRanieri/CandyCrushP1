@@ -6,6 +6,7 @@ import GUI.GUI;
 import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Entidad;
+import Entidad.Gelatina;
 import GUI.EntidadGrafica;
 
 public class Juego{
@@ -20,19 +21,17 @@ public class Juego{
         miTablero = new Tablero(this);
         miGUI = new GUI(this);
         regenerar(1);
-        asociar_entidades_logicas_graficas();
     }
 
     //Metodos
     public void regenerar(int i) throws IOException{
-        generarNivel(i);
-        generarTablero(i);
-    }
-    private void generarNivel(int i) throws IOException{
         GeneradorDeNivel.generarNivel(i,miNivel);
-    }
-    private void generarTablero(int i) throws IOException{
         GeneradorDeNivel.generarTablero(i, miTablero);
+        GeneradorDeNivel.generarGelatina(i, miTablero);
+        asociar_gelatinas_graficas();
+        GeneradorDeNivel.generarMerengue(i, miTablero);
+        GeneradorDeNivel.generarCaramelos(miTablero);
+        asociar_entidades_logicas_graficas();
     }
     public boolean moverCursor(int x,int y){
         boolean toReturn = miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
@@ -59,6 +58,7 @@ public class Juego{
         }
         System.out.println("-------------------------------------");
     }
+
     private void asociar_entidades_logicas_graficas() {
         Entidad e;
         EntidadGrafica eg;
@@ -66,14 +66,27 @@ public class Juego{
         for (int f=0; f<miTablero.getDimension(); f++) {
             for (int c=0; c<miTablero.getDimension(); c++) {
                 e = miTablero.getEntidad(f,c);
-                eg = new EntidadGrafica(f,c,e.getColor());
+                eg = new EntidadGrafica(f,c,e);
                 e.setEntidadGrafica(eg);
                 miGUI.insertarEntidadGrafica(eg);
             }
         }
     }
-
-
+    //revisar
+    private void asociar_gelatinas_graficas(){
+        Gelatina e;
+        EntidadGrafica eg;
+        for (int f=0; f<miTablero.getDimension(); f++) {
+            for (int c=0; c<miTablero.getDimension(); c++) {
+                if(miTablero.getEntidad(f,c)!=null){
+                    e =(Gelatina) miTablero.getEntidad(f,c);
+                    eg = new EntidadGrafica(f,c,e.getCaramelo());
+                    e.setEntidadGrafica(eg);
+                    miGUI.insertarEntidadGrafica(eg);
+                }
+            }
+        }
+    }
 
     public static void main(String [] args) {
 		EventQueue.invokeLater(new Runnable() {

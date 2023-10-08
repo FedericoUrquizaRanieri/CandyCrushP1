@@ -35,7 +35,7 @@ public class Panel extends JPanel {
             boolean toSwap = false;
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_LEFT, KeyEvent.VK_A -> {
+                    case KeyEvent.VK_LEFT:{
                         int swapX = jugador.getX() - labelSpacing - labelWidth;
                         int swapY = jugador.getY();
                         if(toSwap && posY - 1 >= 0) {
@@ -49,7 +49,21 @@ public class Panel extends JPanel {
                         }
                         break;
                     }
-                    case KeyEvent.VK_RIGHT, KeyEvent.VK_D -> {
+                    case KeyEvent.VK_A:{
+                        int swapX = jugador.getX() - labelSpacing - labelWidth;
+                        int swapY = jugador.getY();
+                        if(toSwap && posY - 1 >= 0) {
+                            trySwap(swapX, swapY);
+                            juego.swap(posX, posY - 1);
+                            toSwap = revertSwapState(toSwap);
+                        } else if (posY - 1 >= 0) { // Mover Cursor
+                            posY--;
+                            juego.moverCursor(posX, posY);
+                            jugador.setLocation(swapX, swapY);
+                        }
+                        break;
+                    }
+                    case KeyEvent.VK_RIGHT:{
                         int swapX = jugador.getX() + labelSpacing + labelWidth;
                         int swapY = jugador.getY();
                         if(toSwap && posY + 1 < dimension) {
@@ -63,7 +77,21 @@ public class Panel extends JPanel {
                         }
                         break;
                     }
-                    case KeyEvent.VK_UP, KeyEvent.VK_W -> {
+                    case KeyEvent.VK_D:{
+                        int swapX = jugador.getX() + labelSpacing + labelWidth;
+                        int swapY = jugador.getY();
+                        if(toSwap && posY + 1 < dimension) {
+                            trySwap(swapX, swapY);
+                            juego.swap(posX, posY + 1);
+                            toSwap = revertSwapState(toSwap);
+                        } else if (posY + 1 < dimension) {
+                            posY++;
+                            juego.moverCursor(posX, posY);
+                            jugador.setLocation(swapX, swapY);
+                        }
+                        break;
+                    }
+                    case KeyEvent.VK_UP:{
                         int swapX = jugador.getX();
                         int swapY = jugador.getY() - labelSpacing - labelHeight;
                         if(toSwap && posX - 1 >= 0) {
@@ -77,7 +105,21 @@ public class Panel extends JPanel {
                         }
                         break;
                     }
-                    case KeyEvent.VK_DOWN, KeyEvent.VK_S -> {
+                    case KeyEvent.VK_W:{
+                        int swapX = jugador.getX();
+                        int swapY = jugador.getY() - labelSpacing - labelHeight;
+                        if(toSwap && posX - 1 >= 0) {
+                            trySwap(swapX, swapY);
+                            juego.swap(posX - 1, posY);
+                            toSwap = revertSwapState(toSwap);
+                        } else if (posX - 1 >= 0) {
+                            posX--;
+                            juego.moverCursor(posX, posY);
+                            jugador.setLocation(swapX, swapY);
+                        }
+                        break;
+                    }
+                    case KeyEvent.VK_DOWN:{
                         int swapX = jugador.getX();
                         int swapY = jugador.getY() + labelSpacing + labelHeight;
                         if(toSwap && posX + 1 < dimension){
@@ -91,10 +133,24 @@ public class Panel extends JPanel {
                         }
                         break;
                     }
-                    case KeyEvent.VK_SPACE -> {
+                    case KeyEvent.VK_S:{
+                        int swapX = jugador.getX();
+                        int swapY = jugador.getY() + labelSpacing + labelHeight;
+                        if(toSwap && posX + 1 < dimension){
+                            trySwap(swapX, swapY);
+                            juego.swap(posX + 1, posY);
+                            toSwap = revertSwapState(toSwap);
+                        } else if (posX + 1 < dimension) {
+                            posX++;
+                            juego.moverCursor(posX, posY);
+                            jugador.setLocation(swapX, swapY);
+                        }
+                        break;
+                    }
+                    case KeyEvent.VK_SPACE:{
                         toSwap = revertSwapState(toSwap);
                     }
-                    case KeyEvent.VK_ENTER -> {
+                    case KeyEvent.VK_ENTER:{
                         juego.crushCandy();
                     }
                 }
