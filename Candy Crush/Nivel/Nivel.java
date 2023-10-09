@@ -18,7 +18,7 @@ public class Nivel{
     protected int objetivoGlaseado;
     protected int objetivoGelOEnv;
 
-    class contadorTiempo {
+    /*class contadorTiempo {
         Timer t;
         //cambiar el 2 por el tiempo del archivo
         public contadorTiempo() {
@@ -39,7 +39,7 @@ public class Nivel{
                 }
             }
         }
-    }
+    }*/
     
     //Constructor
     public Nivel(Juego j){
@@ -58,7 +58,7 @@ public class Nivel{
     }
     public void setTiempo(int t){
         tiempo=t;
-        new contadorTiempo();
+        //new contadorTiempo();
     }
     public void setMov(int m){
         movimientos=m;

@@ -485,10 +485,12 @@ public class Tablero{
             int tempx = (Math.random() <= 0.5) ? 1 : -1;
             int tempY = (Math.random() <= 0.5) ? 1 : -1;
             if(temp==1){
-                xn = xn + tempx;
+                if(xn+temp>=0 && xn+tempx<10)
+                    xn = xn + tempx;
             }
             else{
-                yn = yn + tempY;
+                if(yn+tempY>=0 && yn+tempY<10)
+                    yn = yn + tempY;
             }
             if(grilla[xn][yn]==null){
                 grilla[xn][yn]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);

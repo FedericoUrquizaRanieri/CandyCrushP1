@@ -1,6 +1,6 @@
 Movimientos:20
 Tiempo:2
-Tamaño:9
+Tamano:9
 Gelatina:
 3-3
 Merengue:

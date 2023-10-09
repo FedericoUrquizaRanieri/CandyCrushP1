@@ -24,11 +24,10 @@ public class Juego{
 
     //Metodos
     public void regenerar(int i){
-        //GeneradorDeNivel.generarNivel(i,miNivel);
-        GeneradorDeNivel.generarTablero(i, miTablero);
-        //GeneradorDeNivel.generarGelatina(i, miTablero);
-        //asociar_gelatinas_graficas();
-        //GeneradorDeNivel.generarMerengue(i, miTablero);
+        GeneradorDeNivel.generarNivel(i,miNivel);
+        GeneradorDeNivel.generarGelatina(i, miTablero);
+        asociar_gelatinas_graficas();
+        GeneradorDeNivel.generarMerengue(i, miTablero);
         GeneradorDeNivel.generarCaramelos(miTablero);
         asociar_entidades_logicas_graficas();
     }
