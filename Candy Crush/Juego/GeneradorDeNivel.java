@@ -1,6 +1,7 @@
 package Juego;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -13,15 +14,17 @@ public class GeneradorDeNivel {
     private static String archivos[]=new String[]{"Archivo1.txt","Archivo2.txt","Archivo3.txt","Archivo4.txt","Archivo5.txt"};
     //Metodos
     //leer los archivos anda pero tengan en cuenta el salto de linea
-    public static void generarTablero(int nivel, Tablero t) throws IOException {
-        /*URL path = Juego.class.getResource(archivos[nivel-1]);
+    public static void generarTablero(int nivel, Tablero t) {
+        URL path = Juego.class.getResource(archivos[nivel-1]);
         File f = new File("Candy Crush/Juego/Archivo1.txt");
-        FileReader fr= new FileReader(f);
+        FileReader fr;
+        try {
+            fr = new FileReader(f);
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         char[] data=new char[1000];
-        fr.read(data,0,1000);*/
-        //arranco a llenar el tablero
-        //t.setGelatina(data[44],data[46]);
-        //t.setGlaseado(data[58]);
     }
     public static void generarGelatina(int nivel, Tablero t){
         t.setGelatina(5,5);

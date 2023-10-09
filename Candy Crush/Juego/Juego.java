@@ -1,6 +1,5 @@
 package Juego;
 import java.awt.EventQueue;
-import java.io.IOException;
 
 import GUI.GUI;
 import Nivel.Nivel;
@@ -16,7 +15,7 @@ public class Juego{
     protected Nivel miNivel;
 
     //Constructor
-    public Juego() throws IOException{  //esta exception me tiene que me quiero matar, hay que corregirla
+    public Juego(){
         miNivel = new Nivel(this);
         miTablero = new Tablero(this);
         miGUI = new GUI(this);
@@ -24,12 +23,12 @@ public class Juego{
     }
 
     //Metodos
-    public void regenerar(int i) throws IOException{
-        GeneradorDeNivel.generarNivel(i,miNivel);
+    public void regenerar(int i){
+        //GeneradorDeNivel.generarNivel(i,miNivel);
         GeneradorDeNivel.generarTablero(i, miTablero);
-        GeneradorDeNivel.generarGelatina(i, miTablero);
-        asociar_gelatinas_graficas();
-        GeneradorDeNivel.generarMerengue(i, miTablero);
+        //GeneradorDeNivel.generarGelatina(i, miTablero);
+        //asociar_gelatinas_graficas();
+        //GeneradorDeNivel.generarMerengue(i, miTablero);
         GeneradorDeNivel.generarCaramelos(miTablero);
         asociar_entidades_logicas_graficas();
     }
@@ -48,7 +47,7 @@ public class Juego{
 
     public void crushCandy() {
         // miTablero.crushCandy();
-        for(int i=0;i< miTablero.getDimension();i++) {
+        /*for(int i=0;i< miTablero.getDimension();i++) {
             for (int j = 0; j < miTablero.getDimension(); j++) {
                 if(miTablero.getEntidad(i,j).getColor() == null) {
                     System.out.print("NULO - ");
@@ -56,7 +55,7 @@ public class Juego{
             }
             System.out.println('\n');
         }
-        System.out.println("-------------------------------------");
+        System.out.println("-------------------------------------");*/
     }
 
     private void asociar_entidades_logicas_graficas() {
