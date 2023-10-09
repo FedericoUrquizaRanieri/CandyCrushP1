@@ -1,17 +1,27 @@
 package GUI;
 
-import javax.swing.JLabel;
+import Entidad.Entidad;
+import Entidad.Color;
 
+import javax.swing.*;
+import java.awt.*;
 
 public class EntidadGrafica extends JLabel{
-    //Atributos
-    //Constructor
-    public EntidadGrafica() {
+    private Entidad entidad;
+    private final int labelWidth = 60;
+    private final int labelSpacing = 5;
+    private final int labelHeight = 60;
+
+    public EntidadGrafica(int x, int y,Entidad e) {
+        entidad=e;
+        ImageIcon ico = new ImageIcon(entidad.getImage());
+        Image img = ico.getImage();
+        Image new_img = img.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
+        setIcon(new ImageIcon(new_img));
+        setBounds(y * (labelSpacing + labelWidth) + labelSpacing, x * (labelSpacing + labelHeight) + labelSpacing, labelWidth, labelHeight);
+        setOpaque(false);
     }
-    //Metodos
-    /**
-     * @return
-     */
+
     public void destruirse() {
     }
 }

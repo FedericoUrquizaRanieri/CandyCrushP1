@@ -3,7 +3,7 @@ package Entidad;
 public enum Color {
         VERDE,
         AMARILLO,
-        VIOLETA,
+        ROSA,
         NARANJA,
         ROJO,
         AZUL,
