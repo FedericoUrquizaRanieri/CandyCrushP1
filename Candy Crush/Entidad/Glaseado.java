@@ -2,7 +2,7 @@ package Entidad;
 
 public class Glaseado extends Entidad{
     public Glaseado(int f, int c){
-        super(f,c,"Imagenes/Extras/Merengue.png");
+        super(f,c,"Candy Crush/Imagenes/Extras/Merengue.png");
     }
     public void destruirse(){
         
