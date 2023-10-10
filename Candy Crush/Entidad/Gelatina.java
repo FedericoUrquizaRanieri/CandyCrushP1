@@ -1,5 +1,7 @@
 package Entidad;
 
+import Tablero.Tablero;
+
 public class Gelatina extends Entidad{
     //Atributos
     private Caramelo caramelo;
@@ -18,7 +20,9 @@ public class Gelatina extends Entidad{
     public Caramelo getCaramelo(){
         return caramelo;
     }
-    public void destruirse(){
+    public void destruirse(Tablero t){
+        caramelo.destruirse(t);
+        eg.setBackground(null);
 
     }
     public boolean es_posible_intercambiar(Entidad e) {

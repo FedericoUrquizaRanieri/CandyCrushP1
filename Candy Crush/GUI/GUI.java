@@ -28,13 +28,14 @@ public class GUI extends JFrame{
         panel.add(jugador);
 
         JLabel labelInfo = new JLabel();
-        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth(), Utils.labelHeight));
-        labelInfo.setOpaque(false);
+        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+        labelInfo.setOpaque(true);
+        labelInfo.setBackground(Color.BLACK);
 
-        getContentPane().add(labelInfo, BorderLayout.NORTH);
+        getContentPane().add(labelInfo, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
         pack();
-        getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
+        getContentPane().add(new JLabel(new ImageIcon("Imagenes/fondo.png")));
         setVisible(true);
     }
 

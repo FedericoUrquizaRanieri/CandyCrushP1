@@ -2,9 +2,6 @@ package GUI.Threads;
 
 import GUI.EntidadGrafica;
 
-import javax.swing.*;
-import java.time.Duration;
-
 public class AnimadorCaida extends Thread implements Animador{
     protected EntidadGrafica entidadGrafica;
     protected int toX;

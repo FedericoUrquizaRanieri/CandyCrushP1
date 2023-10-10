@@ -149,7 +149,8 @@ public class Tablero{
     }
     //agregar metodos de intercambios de ale
 
-    public void chequeoGeneral3(){
+    private boolean chequeoGeneral3(){
+        boolean retorno=false;
         for(int f=0; f < getDimension();f++){
                 for(int c=0; c < getDimension() - 2;c++){
                     Entidad caramelo1 = grilla[f][c];
@@ -161,6 +162,7 @@ public class Tablero{
                                 caramelo1.destruirse(this);
                                 caramelo2.destruirse(this);
                                 caramelo3.destruirse(this);
+                                retorno=true;
                             }
                         }
                     }   
@@ -178,20 +180,25 @@ public class Tablero{
                         caramelo1.destruirse(this);
                         caramelo2.destruirse(this);
                         caramelo3.destruirse(this);
+                        retorno=true;
                         }
                     } 
                 }  
             }
         }
+        return retorno;
     }
 
     public void crushCandy(){
-        chequeoGeneral5();
-        chequeoGeneral4();
-        chequeoGeneral3();   
+        boolean terminar=true;
+        do{
+            terminar=chequeoGeneral5() | chequeoGeneral4() | chequeoGeneral3();
+            ordenarColumnas();
+        }while(terminar);
     }
 
-    public void chequeoGeneral4(){
+    private boolean chequeoGeneral4(){
+        boolean retorno=false;
         for(int f=0; f<getDimension();f++){
             for(int c=0; c<getDimension() -3;c++){
                 Entidad caramelo1 = grilla[f][c];
@@ -205,6 +212,7 @@ public class Tablero{
                             caramelo2.destruirse(this);
                             caramelo3.destruirse(this);
                             caramelo4.destruirse(this);
+                            retorno=true;
                         }
                     }
                 }
@@ -224,14 +232,17 @@ public class Tablero{
                             caramelo2.destruirse(this);
                             caramelo3.destruirse(this);
                             caramelo4.destruirse(this);
+                            retorno=true;
                         }
                     }
                 }
             }  
         }
+        return retorno;
     }
 
-    void chequeoGeneral5(){
+    private boolean chequeoGeneral5(){
+        boolean retorno=false;
         for(int f=0; f<getDimension(); f++){
             for(int c=0; c< getDimension()-4;c++){
                 Entidad caramelo1 = grilla[f][c];
@@ -247,6 +258,7 @@ public class Tablero{
                             caramelo3.destruirse(this);
                             caramelo4.destruirse(this);
                             caramelo5.destruirse(this);
+                            retorno=true;
                         }
                     }
                 }
@@ -268,11 +280,13 @@ public class Tablero{
                             caramelo3.destruirse(this);
                             caramelo4.destruirse(this);
                             caramelo5.destruirse(this);
+                            retorno=true;
                         }
                     }
                 }
             }
         }
+        return retorno;
     }
 
     boolean MovimientoValido4(int fila, int columna){

@@ -8,7 +8,7 @@ public class Caramelo extends Entidad{
 
     public Caramelo(int f, int c, Color color){
         //hacer case para enlazar el color del enum
-        super(f,c,"Candy Crush/Imagenes/Caramelos/"+ color.toString().toLowerCase()+".png");
+        super(f,c,"Imagenes/Caramelos/"+ color.toString().toLowerCase()+".png");
         this.color = color;
     }
 
@@ -17,7 +17,7 @@ public class Caramelo extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        eg.destruirse();
+        //eg.destruirse();
         t.getGrilla()[fila][columna] = null;
     }
 

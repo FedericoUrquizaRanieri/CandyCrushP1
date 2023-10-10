@@ -25,11 +25,12 @@ public class Juego{
     //Metodos
     public void regenerar(int i){
         GeneradorDeNivel.generarNivel(i,miNivel);
-        GeneradorDeNivel.generarGelatina(i, miTablero);
-        asociar_gelatinas_graficas();
+        //GeneradorDeNivel.generarGelatina(i, miTablero);
+        //asociar_gelatinas_graficas();
         GeneradorDeNivel.generarMerengue(i, miTablero);
         GeneradorDeNivel.generarCaramelos(miTablero);
         // To Do funcion para dejar al tablero sin ningun match
+        miTablero.crushCandy();
         asociar_entidades_logicas_graficas();
     }
     public boolean moverCursor(int x,int y){
@@ -79,7 +80,6 @@ public class Juego{
             }
         }
     }
-    //revisar
     private void asociar_gelatinas_graficas(){
         Gelatina e;
         EntidadGrafica eg;

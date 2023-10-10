@@ -38,7 +38,7 @@ public abstract class Entidad implements Intercambiable{
     public void cambiarPosicion(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
-        eg.notificarCambioPosicion(columna * (labelSpacing + labelWidth) + labelSpacing, fila * (labelSpacing + labelHeight) + labelSpacing);
+        //eg.notificarCambioPosicion(columna * (labelSpacing + labelWidth) + labelSpacing, fila * (labelSpacing + labelHeight) + labelSpacing);
     }
     public String getImage(){
         return imagePath;
