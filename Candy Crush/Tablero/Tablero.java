@@ -1,7 +1,9 @@
 package Tablero;
 
 import Entidad.*;
+import GUI.EntidadGrafica;
 import Juego.Juego;
+import utils.Utils;
 
 public class Tablero{
     
@@ -16,7 +18,7 @@ public class Tablero{
     //Constructor
     public Tablero(Juego j){
         miJuego=j;
-        dimension = 10;
+        dimension = Utils.dimension;
         grilla = new Entidad[dimension][dimension];
         posJugadorX=0;
         posJugadorY=0;
@@ -61,21 +63,23 @@ public class Tablero{
     public boolean swap(int x, int y) {
         Entidad e1 = grilla[x][y];
         Entidad e2 = grilla[posJugadorX][posJugadorY];
-        grilla[x][y] = e2;
-        grilla[posJugadorX][posJugadorY] = e1;
-        e1.cambiarPosicion(posJugadorX, posJugadorY);
-        e2.cambiarPosicion(x,y);
+        if(e2.es_posible_intercambiar(e1)) {
+            grilla[x][y] = e2;
+            grilla[posJugadorX][posJugadorY] = e1;
+            e1.cambiarPosicion(posJugadorX, posJugadorY);
+            e2.cambiarPosicion(x,y);
+        }
         if(!chequeoMovimiento(x,y) & !chequeoMovimiento(posJugadorX, posJugadorY)) {
             e2.cambiarPosicion(posJugadorX, posJugadorY);
             e1.cambiarPosicion(x,y);
             grilla[x][y] = e1;
             grilla[posJugadorX][posJugadorY] = e2;
             ordenarColumnas();
-            mostrarGrilla();
+            //mostrarGrilla();
             return false;
         }
         ordenarColumnas();
-        mostrarGrilla();
+        //mostrarGrilla();
         return true;
         
         
@@ -84,6 +88,7 @@ public class Tablero{
     public void mostrarGrilla() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
+                //System.out.println(getEntidad(i,j).getClass().toString().substring(getEntidad(i,j).getClass().toString().lastIndexOf(".")+1));
                 if(getEntidad(i,j) != null)
                     System.out.print(getEntidad(i,j).getColor().toString().substring(0,3).toUpperCase() + " - ");
                 else
@@ -104,12 +109,18 @@ public class Tablero{
             int idx = dimension - 1;
             for(int i = dimension - 1; i >= 0; i--) {
                 if(grilla[i][j] != null) {
+                    grilla[i][j].cambiarPosicion(idx,j);
                     grilla[idx][j] = grilla[i][j];
                     idx--;
                 }
             }
             for (int i = idx; i >= 0; i--) {
-                grilla[i][j] = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
+                Entidad e = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
+                grilla[i][j] = e;
+                EntidadGrafica eg = new EntidadGrafica(i, -5, e, miJuego.getMiGUI().getPanel());
+                e.setEntidadGrafica(eg);
+                miJuego.asociar_entidad_grafica(eg);
+                e.cambiarPosicion(i,j);
                 cambios = true;
             }
         }
@@ -292,7 +303,8 @@ public class Tablero{
             if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
                 if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-                        caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        caramelo1.destruirse(this);
                         caramelo2.destruirse(this);
                         caramelo3.destruirse(this);
                         caramelo4.destruirse(this);
@@ -309,7 +321,8 @@ public class Tablero{
             if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
                 if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-                        caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        caramelo1.destruirse(this);
                         caramelo2.destruirse(this);
                         caramelo3.destruirse(this);
                         caramelo4.destruirse(this);
@@ -326,7 +339,8 @@ public class Tablero{
             if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
                 if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
                     if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-                        caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
+                        caramelo1.destruirse(this);
                         caramelo2.destruirse(this);
                         caramelo3.destruirse(this);
                         caramelo4.destruirse(this);

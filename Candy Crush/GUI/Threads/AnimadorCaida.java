@@ -1,24 +1,27 @@
 package GUI.Threads;
 
+import GUI.EntidadGrafica;
+
 import javax.swing.*;
 import java.time.Duration;
 
-public class AnimadorCaida extends Thread{
-    protected JLabel jLabel;
+public class AnimadorCaida extends Thread implements Animador{
+    protected EntidadGrafica entidadGrafica;
     protected int toX;
     protected int toY;
     protected int delay;
+    private ManejadorAnimaciones manager;
 
-    public AnimadorCaida(JLabel jLabel, int toX, int toY, int delay) {
-        this.jLabel = jLabel;
+    public AnimadorCaida(ManejadorAnimaciones manager, int toX, int toY, EntidadGrafica entidadGrafica) {
+        this.entidadGrafica = entidadGrafica;
         this.toX = toX;
         this.toY = toY;
-        this.delay = delay;
+        this.manager = manager;
     }
 
     public void run() {
-        int posX = jLabel.getX();
-        int posY = jLabel.getY();
+        int posX = entidadGrafica.getX();
+        int posY = entidadGrafica.getY();
 
         boolean stopX = posX == toX;
         boolean stopY = posY == toY;
@@ -32,7 +35,7 @@ public class AnimadorCaida extends Thread{
         while(!stopX || !stopY) {
             if(!stopX) posX += posX > toX ? -1 : 1;
             if(!stopY) posY += posY > toY ? -1 : 1;
-            jLabel.setLocation(posX, posY);
+            entidadGrafica.setLocation(posX, posY);
             stopX = posX == toX;
             stopY = posY == toY;
             try {
@@ -41,6 +44,15 @@ public class AnimadorCaida extends Thread{
                 e.printStackTrace();
             }
         }
-        jLabel = null;
+        manager.terminoAnimacion(this);
+        entidadGrafica = null;
+    }
+
+    public EntidadGrafica getEntidadGrafica() {
+        return entidadGrafica;
+    }
+
+    public void comenzarAnimacion() {
+        this.start();
     }
 }

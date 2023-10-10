@@ -11,6 +11,10 @@ public abstract class Entidad implements Intercambiable{
     protected int columna;
     protected String imagePath;
 
+    private final int labelWidth = 60;
+    private final int labelSpacing = 5;
+    private final int labelHeight = 60;
+
     protected Entidad(int fila, int columna,String i) {
         this.fila = fila;
         this.columna = columna;
@@ -34,7 +38,7 @@ public abstract class Entidad implements Intercambiable{
     public void cambiarPosicion(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
-        //eg.animarMovimiento();
+        eg.notificarCambioPosicion(columna * (labelSpacing + labelWidth) + labelSpacing, fila * (labelSpacing + labelHeight) + labelSpacing);
     }
     public String getImage(){
         return imagePath;

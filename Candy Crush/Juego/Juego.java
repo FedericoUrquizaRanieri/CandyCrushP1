@@ -29,6 +29,7 @@ public class Juego{
         asociar_gelatinas_graficas();
         GeneradorDeNivel.generarMerengue(i, miTablero);
         GeneradorDeNivel.generarCaramelos(miTablero);
+        // To Do funcion para dejar al tablero sin ningun match
         asociar_entidades_logicas_graficas();
     }
     public boolean moverCursor(int x,int y){
@@ -57,6 +58,14 @@ public class Juego{
         System.out.println("-------------------------------------");*/
     }
 
+    public GUI getMiGUI() {
+        return miGUI;
+    }
+
+    public void asociar_entidad_grafica(EntidadGrafica entidadGrafica) {
+        miGUI.insertarEntidadGrafica(entidadGrafica);
+    }
+
     private void asociar_entidades_logicas_graficas() {
         Entidad e;
         EntidadGrafica eg;
@@ -64,7 +73,7 @@ public class Juego{
         for (int f=0; f<miTablero.getDimension(); f++) {
             for (int c=0; c<miTablero.getDimension(); c++) {
                 e = miTablero.getEntidad(f,c);
-                eg = new EntidadGrafica(f,c,e);
+                eg = new EntidadGrafica(f, c, e, miGUI.getPanel());
                 e.setEntidadGrafica(eg);
                 miGUI.insertarEntidadGrafica(eg);
             }
@@ -77,8 +86,8 @@ public class Juego{
         for (int f=0; f<miTablero.getDimension(); f++) {
             for (int c=0; c<miTablero.getDimension(); c++) {
                 if(miTablero.getEntidad(f,c)!=null){
-                    e =(Gelatina) miTablero.getEntidad(f,c);
-                    eg = new EntidadGrafica(f,c,e.getCaramelo());
+                    e =(Gelatina) miTablero.getEntidad(f, c);
+                    eg = new EntidadGrafica(f, c, e.getCaramelo(), miGUI.getPanel());
                     e.setEntidadGrafica(eg);
                     miGUI.insertarEntidadGrafica(eg);
                 }
