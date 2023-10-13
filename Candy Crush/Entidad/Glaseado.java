@@ -1,10 +1,12 @@
 package Entidad;
 
+import Tablero.Tablero;
+
 public class Glaseado extends Entidad{
     public Glaseado(int f, int c){
         super(f,c,"Imagenes/Extras/Merengue.png");
     }
-    public void destruirse(){
+    public void destruirse(Tablero t){
         
     }
 

@@ -16,7 +16,6 @@ public class AnimadorCambioEstado implements Animador {
     public AnimadorCambioEstado(ManejadorAnimaciones manager, EntidadGrafica entidadGrafica) {
         this.manager = manager;
         this.entidadGrafica = entidadGrafica;
-
         path_img = entidadGrafica.getEntidad().getImage();
     }
 

@@ -12,4 +12,10 @@ public class Utils {
     public static int panelHeight() {
         return dimension * labelHeight + (dimension + 1) * labelSpacing;
     }
+    public static int labelPositionX(int x) {
+        return x * (labelSpacing + labelWidth) + labelSpacing;
+    }
+    public static int labelPositionY(int y) {
+        return y * (labelSpacing + labelHeight) + labelSpacing;
+    }
 }

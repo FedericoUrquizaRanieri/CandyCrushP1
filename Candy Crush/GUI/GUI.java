@@ -35,18 +35,13 @@ public class GUI extends JFrame{
         getContentPane().add(labelInfo, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
         pack();
-        getContentPane().add(new JLabel(new ImageIcon("Imagenes/fondo.png")));
+        getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
         setVisible(true);
     }
 
     public void insertarEntidadGrafica(EntidadGrafica eg) {
         if(eg != null) {
-            int eg_X = eg.getX();
-            int eg_Y = eg.getY();
-            eg.setLocation(eg_X, eg_Y); // Para la animacion poner donde va eg_Y el valor -50
             panel.add(eg);
-//            AnimadorCaida animadorCaida = new AnimadorCaida(eg, eg_X, eg_Y, 1);
-//            animadorCaida.start();
         }
     }
 

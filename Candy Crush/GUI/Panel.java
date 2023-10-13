@@ -33,11 +33,12 @@ public class Panel extends JPanel {
         setOpaque(false);
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
+                repaint();
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:{
                         int swapX = jugador.getX() - Utils.labelSpacing - Utils.labelWidth;
                         int swapY = jugador.getY();
-                        if (!bloquearIntercambios && posY - 1 >= 0) {
+                        if (posY - 1 >= 0) {
                             posY--;
                             juego.moverCursor(posX, posY);
                             jugador.setLocation(swapX, swapY);
@@ -45,7 +46,7 @@ public class Panel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_A:{
-                        if(posY - 1 >= 0) {
+                        if(!bloquearIntercambios && posY - 1 >= 0) {
                             juego.swap(posX, posY - 1);
                         }
                         break;
@@ -53,7 +54,7 @@ public class Panel extends JPanel {
                     case KeyEvent.VK_RIGHT:{
                         int swapX = jugador.getX() + Utils.labelSpacing + Utils.labelWidth;
                         int swapY = jugador.getY();
-                        if (!bloquearIntercambios && posY + 1 < Utils.dimension) {
+                        if (posY + 1 < Utils.dimension) {
                             posY++;
                             juego.moverCursor(posX, posY);
                             jugador.setLocation(swapX, swapY);
@@ -61,7 +62,7 @@ public class Panel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_D:{
-                        if(posY + 1 < Utils.dimension) {
+                        if(!bloquearIntercambios && posY + 1 < Utils.dimension) {
                             juego.swap(posX, posY + 1);
                         }
                         break;
@@ -69,7 +70,7 @@ public class Panel extends JPanel {
                     case KeyEvent.VK_UP:{
                         int swapX = jugador.getX();
                         int swapY = jugador.getY() - Utils.labelSpacing - Utils.labelHeight;
-                        if (!bloquearIntercambios && posX - 1 >= 0) {
+                        if (posX - 1 >= 0) {
                             posX--;
                             juego.moverCursor(posX, posY);
                             jugador.setLocation(swapX, swapY);
@@ -77,7 +78,7 @@ public class Panel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_W:{
-                        if(posX - 1 >= 0) {
+                        if(!bloquearIntercambios && posX - 1 >= 0) {
                             juego.swap(posX - 1, posY);
                         }
                         break;
@@ -85,7 +86,7 @@ public class Panel extends JPanel {
                     case KeyEvent.VK_DOWN:{
                         int swapX = jugador.getX();
                         int swapY = jugador.getY() + Utils.labelSpacing + Utils.labelHeight;
-                        if (!bloquearIntercambios && posX + 1 < Utils.dimension) {
+                        if (posX + 1 < Utils.dimension) {
                             posX++;
                             juego.moverCursor(posX, posY);
                             jugador.setLocation(swapX, swapY);
@@ -93,7 +94,7 @@ public class Panel extends JPanel {
                         break;
                     }
                     case KeyEvent.VK_S:{
-                        if(posX + 1 < Utils.dimension){
+                        if(!bloquearIntercambios && posX + 1 < Utils.dimension){
                             juego.swap(posX + 1, posY);
                         }
                         break;
@@ -104,25 +105,24 @@ public class Panel extends JPanel {
         setVisible(true);
     }
 
-    public void animarMovimiento(EntidadGrafica entidadGrafica, int toX, int toY) {
-        centralAnimaciones.animarCambioPosicion(entidadGrafica, toX, toY);
+    public void animarMovimiento(EntidadGrafica origen, EntidadGrafica destino) {
+        //centralAnimaciones.animarCambioPosicion(entidadGrafica, toX, toY);
+        centralAnimaciones.animarSwap(origen, destino);
     }
 
-    public void animarCambioEstado(EntidadGrafica entidadGrafica) {
-        centralAnimaciones.animarCambioEstado(entidadGrafica);
+//    public void animarCambioEstado(EntidadGrafica entidadGrafica) {
+//        //centralAnimaciones.animarCambioEstado(entidadGrafica);
+//    }
+
+    public void comenzoAnimacion() {
+        bloquearIntercambios = true;
     }
 
-    public void terminarAnimacion() {
-        synchronized(this){
-            animacionesPendientes--;
-            bloquearIntercambios = animacionesPendientes > 0;
-        }
+    public void terminoAnimacion() {
+        bloquearIntercambios = false;
     }
 
-    public void notificarAnimacion() {
-        synchronized(this){
-            animacionesPendientes++;
-            bloquearIntercambios = true;
-        }
+    public void animarCaida(EntidadGrafica entidadGrafica, int toX, int toY) {
+        centralAnimaciones.animarCaida(entidadGrafica, toX, toY);
     }
 }

@@ -27,36 +27,18 @@ public class Juego{
         GeneradorDeNivel.generarNivel(i,miNivel);
         //GeneradorDeNivel.generarGelatina(i, miTablero);
         //asociar_gelatinas_graficas();
-        GeneradorDeNivel.generarMerengue(i, miTablero);
+        //GeneradorDeNivel.generarMerengue(i, miTablero);
         GeneradorDeNivel.generarCaramelos(miTablero);
         // To Do funcion para dejar al tablero sin ningun match
-        miTablero.crushCandy();
+        //miTablero.crushCandy();
         asociar_entidades_logicas_graficas();
     }
     public boolean moverCursor(int x,int y){
-        boolean toReturn = miTablero.setPosJugadorX(x) && miTablero.setPosJugadorY(y);
-        return toReturn;
+        return miTablero.setPosJugadorX(x) & miTablero.setPosJugadorY(y);
     }
 
     public void swap(int x, int y) {
         boolean swap = miTablero.swap(x, y);
-        //crushCandy();
-    }
-    public boolean haySwapValido(int x, int y){
-        return true;
-    }
-
-    public void crushCandy() {
-        // miTablero.crushCandy();
-        /*for(int i=0;i< miTablero.getDimension();i++) {
-            for (int j = 0; j < miTablero.getDimension(); j++) {
-                if(miTablero.getEntidad(i,j).getColor() == null) {
-                    System.out.print("NULO - ");
-                } else System.out.print(miTablero.getEntidad(i,j).getColor().toString().substring(0,3) + " - ");
-            }
-            System.out.println('\n');
-        }
-        System.out.println("-------------------------------------");*/
     }
 
     public GUI getMiGUI() {

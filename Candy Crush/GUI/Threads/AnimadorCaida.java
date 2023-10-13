@@ -9,31 +9,21 @@ public class AnimadorCaida extends Thread implements Animador{
     protected int delay;
     private ManejadorAnimaciones manager;
 
-    public AnimadorCaida(ManejadorAnimaciones manager, int toX, int toY, EntidadGrafica entidadGrafica) {
-        this.entidadGrafica = entidadGrafica;
+    public AnimadorCaida(ManejadorAnimaciones manager, int toX, int toY, EntidadGrafica entidadGrafica, int delay) {
+        this.manager = manager;
         this.toX = toX;
         this.toY = toY;
-        this.manager = manager;
+        this.entidadGrafica = entidadGrafica;
+        this.delay = delay;
     }
 
     public void run() {
-        int posX = entidadGrafica.getX();
         int posY = entidadGrafica.getY();
-
-        boolean stopX = posX == toX;
         boolean stopY = posY == toY;
 
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        while(!stopX || !stopY) {
-            if(!stopX) posX += posX > toX ? -1 : 1;
-            if(!stopY) posY += posY > toY ? -1 : 1;
-            entidadGrafica.setLocation(posX, posY);
-            stopX = posX == toX;
+        while(!stopY) {
+            posY++;
+            entidadGrafica.setLocation(toX, posY);
             stopY = posY == toY;
             try {
                 sleep(delay);
@@ -42,7 +32,6 @@ public class AnimadorCaida extends Thread implements Animador{
             }
         }
         manager.terminoAnimacion(this);
-        entidadGrafica = null;
     }
 
     public EntidadGrafica getEntidadGrafica() {

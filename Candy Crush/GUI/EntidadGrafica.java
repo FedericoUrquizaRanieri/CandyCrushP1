@@ -3,6 +3,7 @@ package GUI;
 import Entidad.Entidad;
 import Entidad.Color;
 import GUI.Threads.AnimadorCaida;
+import utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,22 +11,21 @@ import java.awt.*;
 public class EntidadGrafica extends JLabel{
     private Entidad entidad;
     private Panel panel;
-    private final int labelWidth = 60;
-    private final int labelSpacing = 5;
-    private final int labelHeight = 60;
 
     public EntidadGrafica(int x, int y,Entidad e, Panel panel) {
         entidad=e;
         this.panel = panel;
         ImageIcon ico = new ImageIcon(entidad.getImage());
         Image img = ico.getImage();
-        Image new_img = img.getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
+        Image new_img = img.getScaledInstance(Utils.labelWidth, Utils.labelHeight, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(new_img));
-        setBounds(y * (labelSpacing + labelHeight) + labelSpacing,x * (labelSpacing + labelHeight) + labelSpacing, labelWidth, labelHeight);
+        setBounds(Utils.labelPositionX(y),Utils.labelPositionY(x), Utils.labelWidth, Utils.labelHeight);
         setOpaque(false);
     }
 
     public void destruirse() {
+        setIcon(null);
+        entidad = null;
         panel.remove(this);
     }
 
@@ -33,11 +33,14 @@ public class EntidadGrafica extends JLabel{
         return entidad;
     }
 
-    public void notificarCambio() {
-        panel.animarCambioEstado(this);
-    }
+//    public void notificarCambio() {
+//        panel.animarCambioEstado(this);
+//    }
 
-    public void notificarCambioPosicion(int toX, int toY) {
-        panel.animarMovimiento(this, toX, toY);
+    public void notificarCambioPosicion(EntidadGrafica entidadGrafica) {
+        panel.animarMovimiento(this, entidadGrafica);
+    }
+    public void notificarCaida(int toX, int toY) {
+        panel.animarCaida(this, toX, toY);
     }
 }

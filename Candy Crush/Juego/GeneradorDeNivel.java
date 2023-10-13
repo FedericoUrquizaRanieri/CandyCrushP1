@@ -14,7 +14,7 @@ public class GeneradorDeNivel {
     //leer los archivos anda pero tengan en cuenta el salto de linea
     public static void generarGelatina(int Nivel,Tablero t){
         try{
-            File f = new File("Juego/"+archivos[Nivel-1]);
+            File f = new File("Candy Crush/Juego/"+archivos[Nivel-1]);
             FileReader fr= new FileReader(f);
             char[] data=new char[1000];
             fr.read(data,0,1000);
@@ -26,7 +26,7 @@ public class GeneradorDeNivel {
     }
     public static void generarMerengue(int n,Tablero t){
         try{
-            File f = new File("Juego/"+archivos[n-1]);
+            File f = new File("Candy Crush/Juego/"+archivos[n-1]);
             FileReader fr= new FileReader(f);
             char[] data=new char[1000];
             fr.read(data,0,1000);
@@ -42,7 +42,7 @@ public class GeneradorDeNivel {
     }
     public static void generarNivel(int nivel, Nivel n){
         try{
-            File f = new File("Juego/"+archivos[nivel-1]);
+            File f = new File("Candy Crush/Juego/"+archivos[nivel-1]);
             FileReader fr= new FileReader(f);
             char[] data=new char[1000];
             fr.read(data,0,1000);
