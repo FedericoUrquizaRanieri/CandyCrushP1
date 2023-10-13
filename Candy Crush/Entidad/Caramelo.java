@@ -4,10 +4,8 @@ import GUI.EntidadGrafica;
 import Tablero.Tablero;
 
 public class Caramelo extends Entidad{
-    //Atributos
 
     public Caramelo(int f, int c, Color color){
-        //hacer case para enlazar el color del enum
         super(f,c,"Candy Crush/Imagenes/Caramelos/"+ color.toString().toLowerCase()+".png");
         this.color = color;
     }

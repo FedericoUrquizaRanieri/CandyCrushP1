@@ -33,10 +33,6 @@ public class EntidadGrafica extends JLabel{
         return entidad;
     }
 
-//    public void notificarCambio() {
-//        panel.animarCambioEstado(this);
-//    }
-
     public void notificarCambioPosicion(EntidadGrafica entidadGrafica) {
         panel.animarMovimiento(this, entidadGrafica);
     }

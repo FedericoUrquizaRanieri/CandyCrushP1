@@ -27,11 +27,6 @@ public abstract class Entidad implements Intercambiable, Destruible{
     public Color getColor() {
         return color;
     }
-//    public void cambiarPosicion(int fila, int columna) {
-//        this.fila = fila;
-//        this.columna = columna;
-//        eg.notificarCambioPosicion(Utils.labelPositionX(columna), Utils.labelPositionY(fila));
-//    }
     public void cambiarPosicion(Entidad entidad) {
         int fila = entidad.getFila();
         int columna = entidad.getColumna();
@@ -40,14 +35,9 @@ public abstract class Entidad implements Intercambiable, Destruible{
         this.fila = fila;
         this.columna = columna;
         eg.notificarCambioPosicion(entidad.getEntidadGrafica());
-//        int toX = eg.getX();
-//        int toY = eg.getY();
-//        eg.setLocation(entidad.getEntidadGrafica().getX(), entidad.getEntidadGrafica().getY());
-//        entidad.getEntidadGrafica().setLocation(toX, toY);
     }
     public void cambiarPosicion(int fila, int columna) {
         eg.notificarCaida(Utils.labelPositionX(columna), Utils.labelPositionY(fila));
-        //eg.setLocation(Utils.labelPositionX(columna), Utils.labelPositionY(fila));
         this.fila = fila;
         this.columna = columna;
     }

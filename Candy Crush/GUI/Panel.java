@@ -106,13 +106,8 @@ public class Panel extends JPanel {
     }
 
     public void animarMovimiento(EntidadGrafica origen, EntidadGrafica destino) {
-        //centralAnimaciones.animarCambioPosicion(entidadGrafica, toX, toY);
         centralAnimaciones.animarSwap(origen, destino);
     }
-
-//    public void animarCambioEstado(EntidadGrafica entidadGrafica) {
-//        //centralAnimaciones.animarCambioEstado(entidadGrafica);
-//    }
 
     public void comenzoAnimacion() {
         bloquearIntercambios = true;

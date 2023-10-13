@@ -86,7 +86,6 @@ public class Tablero{
     public void mostrarGrilla() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                //System.out.println(getEntidad(i,j).getClass().toString().substring(getEntidad(i,j).getClass().toString().lastIndexOf(".")+1));
                 if(getEntidad(i,j) != null)
                     System.out.print(getEntidad(i,j).getColor().toString().substring(0,3).toUpperCase() + " - ");
                 else
@@ -117,7 +116,6 @@ public class Tablero{
                 }
             }
             for (int i = idx; i >= 0; i--) {
-//                grilla[i][j] = null;
                 Entidad e = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
                 EntidadGrafica eg = new EntidadGrafica(i==0?-1:-i,j, e, miJuego.getMiGUI().getPanel());
                 e.setEntidadGrafica(eg);
@@ -127,28 +125,6 @@ public class Tablero{
             }
         }
     }
-
-
-//    public void ordenarColumnas() {
-//        int aux;
-//        for (int c = 0; c < getDimension(); c++) {
-//            for (int f = getDimension()- 1; f >= 0; f--) {
-//                if (grilla[f][c] == null) {
-//                    aux = f - 1;
-//                    while (aux >= 0 && grilla[aux][c] == null) {
-//                        aux--;
-//                    }
-//
-//                    if (aux >= 0) {
-//                        grilla[aux][c].cambiarPosicion(f,c);
-//                        grilla[f][c] = grilla[aux][c];
-//                        grilla[aux][c] = null;
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
 
     public Entidad getEntidad(int f, int c){
         Entidad toReturn = null;
@@ -164,10 +140,8 @@ public class Tablero{
                 if (grilla[i][j] == null) {
                     aux = (int) (Math.random() * 6);
                     grilla[i][j] = new Caramelo(i, j, colores[aux]);
-                    System.out.print((grilla[i][j]).getColor() + " - ");
                 }
             }
-            System.out.println('\n');
         }
     }
 
@@ -209,7 +183,7 @@ public class Tablero{
             }
             huboCambio = huboCambio || check3 || check4 || check5;
         }
-        //check3 = check4 = check5 = false;
+
         for (int j = 0; j < dimension - 2 && (!check3 && !check4 && !check5); j++) {
             e1 = grilla[j][y];
             e2 = grilla[j+1][y];
@@ -646,7 +620,6 @@ public class Tablero{
 //                }
 //        }
 //        return HuboMovimiento;
-
 //    }
 public void setGelatina(int x,int y){
     //llega un punto y llenar los que estan cerca como dijimos
