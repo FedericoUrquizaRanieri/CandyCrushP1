@@ -3,12 +3,11 @@ package Entidad;
 import Tablero.Tablero;
 
 public class Envuelto extends Caramelo{
-
+    boolean explotando;
     public Envuelto(int f, int c, Color color){
-        //hacer case para enlazar el color del enum
         super(f, c, color);
-        imagePath="Imagenes/Envueltos/"+ color.toString().toUpperCase()+".png";
-        //eg=new EntidadGrafica();
+        this.explotando = false;
+        imagePath="Candy Crush/Imagenes/Envueltos/"+ color.toString().toUpperCase()+".png";
     }
 
     public Color getColor() {
@@ -16,17 +15,21 @@ public class Envuelto extends Caramelo{
     }
     
     public void destruirse(Tablero t){
-        t.getEntidad(fila-1, columna-1).destruirse(t);
-        t.getEntidad(fila-1, columna).destruirse(t);
-        t.getEntidad(fila-1, columna+1).destruirse(t);
-        t.getEntidad(fila, columna-1).destruirse(t);
-        t.getEntidad(fila, columna+1).destruirse(t);
-        t.getEntidad(fila+1, columna-1).destruirse(t);
-        t.getEntidad(fila+1, columna).destruirse(t);
-        t.getEntidad(fila+1, columna+1).destruirse(t);
+        if(!explotando) {
+            explotando = true;
+            Entidad e = null;
+            for (int i = fila - 1; i <= fila + 1; i++) {
+                for (int j = columna - 1; j <= columna + 1; j++) {
+                    e = t.getEntidad(i, j);
+                    if (e != null && i >= 0 && i < 10 && j >= 0 && j < 10 && (i != fila || j != columna)) {
+                        e.destruirse(t);
+                    }
+                }
+            }
 
-        t.getGrilla()[fila][columna] = null;
-        //eg.metodo para notificar a la gui del cambio
+            t.getGrilla()[fila][columna] = null;
+            eg.destruirse();
+        }
     }
 
     public boolean es_posible_intercambiar(Entidad e) {

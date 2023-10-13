@@ -139,7 +139,9 @@ public class Tablero{
             for (int j = 0; j < dimension; j++) {
                 if (grilla[i][j] == null) {
                     aux = (int) (Math.random() * 6);
-                    grilla[i][j] = new Caramelo(i, j, colores[aux]);
+                    if((int) (Math.random() * 30) == 7)
+                        grilla[i][j] = new Envuelto(i, j, colores[aux]);
+                    else grilla[i][j] = new Caramelo(i, j, colores[aux]);
                 }
             }
         }
@@ -172,10 +174,17 @@ public class Tablero{
                 e2.destruirse(this);
                 e1.destruirse(this);
             } else if(check4) {
+                Entidad e = new RalladoH(x,y,e1.getColor());
+
                 grilla[x][j+3].destruirse(this);
                 e3.destruirse(this);
                 e2.destruirse(this);
                 e1.destruirse(this);
+
+                grilla[x][y] = e;
+                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                e.setEntidadGrafica(eg);
+                for (int i = 0; i < dimension && i != x+1; i++) if (i == x) miJuego.asociar_entidad_grafica(eg);
             } else if(check3) {
                 e3.destruirse(this);
                 e2.destruirse(this);

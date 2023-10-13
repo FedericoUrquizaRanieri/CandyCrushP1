@@ -7,6 +7,7 @@ import Tablero.Tablero;
 import Entidad.Entidad;
 import Entidad.Gelatina;
 import GUI.EntidadGrafica;
+import utils.Utils;
 
 public class Juego{
     //Atributos
@@ -28,7 +29,7 @@ public class Juego{
         //GeneradorDeNivel.generarGelatina(i, miTablero);
         //asociar_gelatinas_graficas();
         //GeneradorDeNivel.generarMerengue(i, miTablero);
-        GeneradorDeNivel.generarCaramelos(miTablero);
+        GeneradorDeNivel.generarCaramelos(miTablero); // Genero caramelos especiales para testear funcionamiento
         // To Do funcion para dejar al tablero sin ningun match
         //miTablero.crushCandy();
         asociar_entidades_logicas_graficas();
