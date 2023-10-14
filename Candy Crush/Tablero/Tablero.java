@@ -117,7 +117,7 @@ public class Tablero{
             }
             for (int i = idx; i >= 0; i--) {
                 Entidad e = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
-                EntidadGrafica eg = new EntidadGrafica(i==0?-1:-i,j, e, miJuego.getMiGUI().getPanel());
+                EntidadGrafica eg = new EntidadGrafica(-1,j, e, miJuego.getMiGUI().getPanel());
                 e.setEntidadGrafica(eg);
                 grilla[i][j] = e;
                 miJuego.asociar_entidad_grafica(eg);
@@ -139,9 +139,7 @@ public class Tablero{
             for (int j = 0; j < dimension; j++) {
                 if (grilla[i][j] == null) {
                     aux = (int) (Math.random() * 6);
-                    if((int) (Math.random() * 30) == 7)
-                        grilla[i][j] = new Envuelto(i, j, colores[aux]);
-                    else grilla[i][j] = new Caramelo(i, j, colores[aux]);
+                    grilla[i][j] = new Caramelo(i, j, colores[aux]);
                 }
             }
         }
@@ -168,11 +166,18 @@ public class Tablero{
                 }
             }
             if(check5){
+                Entidad e = new RalladoH(x,y,e1.getColor());
+
                 grilla[x][j+4].destruirse(this);
                 grilla[x][j+3].destruirse(this);
                 e3.destruirse(this);
                 e2.destruirse(this);
                 e1.destruirse(this);
+
+                grilla[x][y] = e;
+                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                e.setEntidadGrafica(eg);
+                for (int i = 0; i < dimension && i != x+1; i++) if (i == x) miJuego.asociar_entidad_grafica(eg);
             } else if(check4) {
                 Entidad e = new RalladoH(x,y,e1.getColor());
 
@@ -207,16 +212,30 @@ public class Tablero{
                 }
             }
             if(check5){
+                Entidad e = new RalladoV(x,y,e1.getColor());
+
                 grilla[j+4][y].destruirse(this);
                 grilla[j+3][y].destruirse(this);
                 e3.destruirse(this);
                 e2.destruirse(this);
                 e1.destruirse(this);
+
+                grilla[x][y] = e;
+                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                e.setEntidadGrafica(eg);
+                for (int i = 0; i < dimension && i != y+1; i++) if (i == y) miJuego.asociar_entidad_grafica(eg);
             } else if(check4) {
+                Entidad e = new RalladoV(x,y,e1.getColor());
+
                 grilla[j+3][y].destruirse(this);
                 e3.destruirse(this);
                 e2.destruirse(this);
                 e1.destruirse(this);
+
+                grilla[x][y] = e;
+                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                e.setEntidadGrafica(eg);
+                for (int i = 0; i < dimension && i != y+1; i++) if (i == y) miJuego.asociar_entidad_grafica(eg);
             } else if(check3) {
                 e3.destruirse(this);
                 e2.destruirse(this);
@@ -240,16 +259,30 @@ public class Tablero{
                     }
                 }
                 if(check5){
+                    Entidad e = new RalladoV(posJugadorX,posJugadorY,e1.getColor());
+
                     grilla[j+4][posJugadorY].destruirse(this);
                     grilla[j+3][posJugadorY].destruirse(this);
                     e3.destruirse(this);
                     e2.destruirse(this);
                     e1.destruirse(this);
+
+                    grilla[posJugadorX][posJugadorY] = e;
+                    EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                    e.setEntidadGrafica(eg);
+                    for (int i = 0; i < dimension && i != posJugadorY+1; i++) if (i == posJugadorY) miJuego.asociar_entidad_grafica(eg);
                 } else if(check4) {
+                    Entidad e = new RalladoV(posJugadorX,posJugadorY,e1.getColor());
+
                     grilla[j+3][posJugadorY].destruirse(this);
                     e3.destruirse(this);
                     e2.destruirse(this);
                     e1.destruirse(this);
+
+                    grilla[posJugadorX][posJugadorY] = e;
+                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
+                    e.setEntidadGrafica(eg);
+                    for (int i = 0; i < dimension && i != posJugadorY+1; i++) if (i == posJugadorY) miJuego.asociar_entidad_grafica(eg);
                 } else if(check3) {
                     e3.destruirse(this);
                     e2.destruirse(this);
@@ -272,16 +305,30 @@ public class Tablero{
                     }
                 }
                 if(check5){
+                    Entidad e = new RalladoH(posJugadorX,posJugadorY,e1.getColor());
+
                     grilla[posJugadorX][j+4].destruirse(this);
                     grilla[posJugadorX][j+3].destruirse(this);
                     e3.destruirse(this);
                     e2.destruirse(this);
                     e1.destruirse(this);
+
+                    grilla[posJugadorX][posJugadorY] = e;
+                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
+                    e.setEntidadGrafica(eg);
+                    for (int i = 0; i < dimension && i != posJugadorX+1; i++) if (i == posJugadorX) miJuego.asociar_entidad_grafica(eg);
                 } else if(check4) {
+                    Entidad e = new RalladoH(posJugadorX,posJugadorY,e1.getColor());
+
                     grilla[posJugadorX][j+3].destruirse(this);
                     e3.destruirse(this);
                     e2.destruirse(this);
                     e1.destruirse(this);
+
+                    grilla[posJugadorX][posJugadorY] = e;
+                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
+                    e.setEntidadGrafica(eg);
+                    for (int i = 0; i < dimension && i != posJugadorX+1; i++) if (i == posJugadorX) miJuego.asociar_entidad_grafica(eg);
                 } else if(check3) {
                     e3.destruirse(this);
                     e2.destruirse(this);

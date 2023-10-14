@@ -65,7 +65,6 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
 
     public void terminoAnimacion(Animador a) {
         animacionesActivas = false;
-        gui.terminoAnimacion();
         ejecutarAnimadores();
     }
 }
