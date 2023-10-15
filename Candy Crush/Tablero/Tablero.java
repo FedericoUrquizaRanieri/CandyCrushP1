@@ -68,7 +68,7 @@ public class Tablero{
             grilla[posJugadorX][posJugadorY] = e1;
             e1.cambiarPosicion(e2);
 
-            if(chequeoMovimiento(x,y)) {
+            if(chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY)) {
                 mostrarGrilla();
                 ordenarColumnas();
                 mostrarGrilla();
@@ -242,100 +242,6 @@ public class Tablero{
                 e1.destruirse(this);
             }
             huboCambio = huboCambio || check3 || check4 || check5;
-        }
-        check3 = check4 = check5 = false;
-        if(x == posJugadorX) {
-            for (int j = 0; j < dimension - 2 && (!check3 && !check4 && !check5); j++) {
-                e1 = grilla[j][posJugadorY];
-                e2 = grilla[j+1][posJugadorY];
-                e3 = grilla[j+2][posJugadorY];
-                if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
-                    check3 = true;
-                    if (j + 3 < dimension && grilla[j+3][posJugadorY]!=null && e3.getColor() == grilla[j + 3][posJugadorY].getColor()) {
-                        check4 = true;
-                        if (j + 4 < dimension && grilla[j+4][posJugadorY]!=null && e3.getColor() == grilla[j + 4][posJugadorY].getColor()) {
-                            check5 = true;
-                        }
-                    }
-                }
-                if(check5){
-                    Entidad e = new RalladoV(posJugadorX,posJugadorY,e1.getColor());
-
-                    grilla[j+4][posJugadorY].destruirse(this);
-                    grilla[j+3][posJugadorY].destruirse(this);
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-
-                    grilla[posJugadorX][posJugadorY] = e;
-                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
-                    e.setEntidadGrafica(eg);
-                    for (int i = 0; i < dimension && i != posJugadorY+1; i++) if (i == posJugadorY) miJuego.asociar_entidad_grafica(eg);
-                } else if(check4) {
-                    Entidad e = new RalladoV(posJugadorX,posJugadorY,e1.getColor());
-
-                    grilla[j+3][posJugadorY].destruirse(this);
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-
-                    grilla[posJugadorX][posJugadorY] = e;
-                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
-                    e.setEntidadGrafica(eg);
-                    for (int i = 0; i < dimension && i != posJugadorY+1; i++) if (i == posJugadorY) miJuego.asociar_entidad_grafica(eg);
-                } else if(check3) {
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-                }
-                huboCambio = huboCambio || check3 || check4 || check5;
-            }
-        } else {
-            for (int j = 0; j < dimension - 2 && (!check3 && !check4 && !check5); j++) {
-                e1 = grilla[posJugadorX][j];
-                e2 = grilla[posJugadorX][j+1];
-                e3 = grilla[posJugadorX][j+2];
-                if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
-                    check3 = true;
-                    if (j + 3 < dimension && grilla[posJugadorX][j+3]!=null && e3.getColor() == grilla[posJugadorX][j + 3].getColor()) {
-                        check4 = true;
-                        if (j + 4 < dimension && grilla[posJugadorX][j+4]!=null && e3.getColor() == grilla[posJugadorX][j + 4].getColor()) {
-                            check5 = true;
-                        }
-                    }
-                }
-                if(check5){
-                    Entidad e = new RalladoH(posJugadorX,posJugadorY,e1.getColor());
-
-                    grilla[posJugadorX][j+4].destruirse(this);
-                    grilla[posJugadorX][j+3].destruirse(this);
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-
-                    grilla[posJugadorX][posJugadorY] = e;
-                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
-                    e.setEntidadGrafica(eg);
-                    for (int i = 0; i < dimension && i != posJugadorX+1; i++) if (i == posJugadorX) miJuego.asociar_entidad_grafica(eg);
-                } else if(check4) {
-                    Entidad e = new RalladoH(posJugadorX,posJugadorY,e1.getColor());
-
-                    grilla[posJugadorX][j+3].destruirse(this);
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-
-                    grilla[posJugadorX][posJugadorY] = e;
-                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
-                    e.setEntidadGrafica(eg);
-                    for (int i = 0; i < dimension && i != posJugadorX+1; i++) if (i == posJugadorX) miJuego.asociar_entidad_grafica(eg);
-                } else if(check3) {
-                    e3.destruirse(this);
-                    e2.destruirse(this);
-                    e1.destruirse(this);
-                }
-                huboCambio = huboCambio || check3 || check4 || check5;
-            }
         }
         return huboCambio;
     }
