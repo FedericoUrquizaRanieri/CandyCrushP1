@@ -68,7 +68,7 @@ public class Tablero{
             grilla[posJugadorX][posJugadorY] = e1;
             e1.cambiarPosicion(e2);
 
-            if(chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX, posJugadorY)) {
+            if(chequeoMovimiento(x,y)) {
                 mostrarGrilla();
                 ordenarColumnas();
                 mostrarGrilla();
@@ -204,9 +204,9 @@ public class Tablero{
             e3 = grilla[j+2][y];
             if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
                 check3 = true;
-                if (j + 3 < dimension && grilla[x][j + 3]!=null && e3.getColor() == grilla[j + 3][x].getColor()) {
+                if (j + 3 < dimension && grilla[j+3][y]!=null && e3.getColor() == grilla[j + 3][y].getColor()) {
                     check4 = true;
-                    if (j + 4 < dimension && grilla[x][j + 4]!=null && e3.getColor() == grilla[j + 4][x].getColor()) {
+                    if (j + 4 < dimension && grilla[j+4][y]!=null && e3.getColor() == grilla[j + 4][y].getColor()) {
                         check5 = true;
                     }
                 }
@@ -251,9 +251,9 @@ public class Tablero{
                 e3 = grilla[j+2][posJugadorY];
                 if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
                     check3 = true;
-                    if (j + 3 < dimension && grilla[x][j + 3]!=null && e3.getColor() == grilla[j + 3][posJugadorY].getColor()) {
+                    if (j + 3 < dimension && grilla[j+3][posJugadorY]!=null && e3.getColor() == grilla[j + 3][posJugadorY].getColor()) {
                         check4 = true;
-                        if (j + 4 < dimension && grilla[x][j + 3]!=null && e3.getColor() == grilla[j + 4][posJugadorY].getColor()) {
+                        if (j + 4 < dimension && grilla[j+4][posJugadorY]!=null && e3.getColor() == grilla[j + 4][posJugadorY].getColor()) {
                             check5 = true;
                         }
                     }
@@ -268,7 +268,7 @@ public class Tablero{
                     e1.destruirse(this);
 
                     grilla[posJugadorX][posJugadorY] = e;
-                    EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
+                    EntidadGrafica eg = new EntidadGrafica(posJugadorX,posJugadorY,e,miJuego.getMiGUI().getPanel());
                     e.setEntidadGrafica(eg);
                     for (int i = 0; i < dimension && i != posJugadorY+1; i++) if (i == posJugadorY) miJuego.asociar_entidad_grafica(eg);
                 } else if(check4) {
@@ -297,9 +297,9 @@ public class Tablero{
                 e3 = grilla[posJugadorX][j+2];
                 if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
                     check3 = true;
-                    if (j + 3 < dimension && grilla[x][j + 3]!=null && e3.getColor() == grilla[posJugadorX][j + 3].getColor()) {
+                    if (j + 3 < dimension && grilla[posJugadorX][j+3]!=null && e3.getColor() == grilla[posJugadorX][j + 3].getColor()) {
                         check4 = true;
-                        if (j + 4 < dimension && grilla[x][j + 4]!=null && e3.getColor() == grilla[posJugadorX][j + 4].getColor()) {
+                        if (j + 4 < dimension && grilla[posJugadorX][j+4]!=null && e3.getColor() == grilla[posJugadorX][j + 4].getColor()) {
                             check5 = true;
                         }
                     }

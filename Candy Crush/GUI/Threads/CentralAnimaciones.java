@@ -3,9 +3,7 @@ package GUI.Threads;
 import GUI.EntidadGrafica;
 import GUI.Panel;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class CentralAnimaciones implements ManejadorAnimaciones{
@@ -31,7 +29,7 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
             animador.comenzarAnimacion();
         } else if(!destroyQueue.isEmpty()) {
             animacionesActivas = true;
-            Animador animador = fallingQueue.poll();
+            Animador animador = destroyQueue.poll();
 
             animador.comenzarAnimacion();
         } else if(!fallingQueue.isEmpty()) {
