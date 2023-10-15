@@ -5,6 +5,9 @@ import GUI.EntidadGrafica;
 import Juego.Juego;
 import utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Tablero{
     
     //Atributos
@@ -69,10 +72,10 @@ public class Tablero{
             e1.cambiarPosicion(e2);
 
             if(chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY)) {
-                mostrarGrilla();
-                ordenarColumnas();
-                mostrarGrilla();
-                return true;
+                    mostrarGrilla();
+                    ordenarColumnas();
+                    mostrarGrilla();
+                    return true;
             } else {
                 grilla[x][y] = e1;
                 grilla[posJugadorX][posJugadorY] = e2;
@@ -97,7 +100,7 @@ public class Tablero{
     }
 
     public boolean chequeoMovimiento(int fila, int columna){
-        return checkCambioPosible(fila, columna);
+        return checkCombinaciones(fila, columna);
         //return MovimientoValido3(fila, columna);
         //return MovimientoValido5(fila, columna) || MovimientoValido4(fila, columna) || MovimientoValido3(fila, columna);
         //return MovimientoValido5(fila, columna) || MovimientoValido4(fila, columna) || MovimientoValido3(fila, columna);
@@ -133,6 +136,62 @@ public class Tablero{
         }
         return toReturn;
     }
+
+    public boolean checkCombinaciones(int x, int y) {
+        if(grilla[x][y] == null) return false;
+        Color color = grilla[x][y].getColor();
+        Entidad e1,e2,e3,especialCreado=null;
+        boolean huboCambios = false;
+        List<Entidad> verticales = new ArrayList<>();
+        List<Entidad> horizontales = new ArrayList<>();
+
+        for (int i = 0; i < dimension-2; i++) {
+            e1 = grilla[x][i];
+            e2 = grilla[x][i+1];
+            e3 = grilla[x][i+2];
+            if(e1!=null && e2!=null && e3!=null && color == e1.getColor() && color == e2.getColor() && color == e3.getColor()) {
+                verticales.add(e1);
+                verticales.add(e2);
+                verticales.add(e3);
+            }
+            e1 = grilla[i][y];
+            e2 = grilla[i+1][y];
+            e3 = grilla[i+2][y];
+            if(e1!=null && e2!=null && e3!=null && color == e1.getColor() && color == e2.getColor() && color == e3.getColor()) {
+                horizontales.add(e1);
+                horizontales.add(e2);
+                horizontales.add(e3);
+            }
+        }
+
+        if(horizontales.isEmpty() ^ verticales.isEmpty()) {
+            for (Entidad e:horizontales)
+                e.destruirse(this);
+            for (Entidad e:verticales)
+                e.destruirse(this);
+            if(horizontales.size() > 3)
+                especialCreado = grilla[x][y] = new RalladoH(x,y,color);
+            else if(verticales.size() > 3)
+                especialCreado = grilla[x][y] = new RalladoV(x,y,color);
+            huboCambios = true;
+        } else if(!horizontales.isEmpty() && !verticales.isEmpty()) {
+            for (Entidad e : horizontales)
+                e.destruirse(this);
+            for (Entidad e : verticales)
+                e.destruirse(this);
+            for (int i = 0; i < horizontales.size(); i++)
+                if(verticales.contains(horizontales.get(i)))
+                    especialCreado = grilla[horizontales.get(i).getFila()][horizontales.get(i).getColumna()] = new Envuelto(x, y, color);
+            huboCambios = true;
+        }
+        if(especialCreado != null) {
+            EntidadGrafica eg = new EntidadGrafica(especialCreado.getFila(),especialCreado.getColumna(),especialCreado,miJuego.getMiGUI().getPanel());
+            especialCreado.setEntidadGrafica(eg);
+            miJuego.asociar_entidad_grafica(eg);
+        }
+        return huboCambios;
+    }
+
     public void setCaramelos(){
         int aux;
         for(int i=0;i<dimension;i++) {
@@ -145,468 +204,30 @@ public class Tablero{
         }
     }
 
-    public boolean checkCambioPosible(int x, int y) {
-        Entidad e1,e2,e3;
-        boolean huboCambio = false;
-        boolean check3 = false;
-        boolean check4 = false;
-        boolean check5 = false;
-        for (int j = 0; j < dimension - 2 && (!check3 && !check4 && !check5); j++) {
-            e1 = grilla[x][j];
-            e2 = grilla[x][j+1];
-            e3 = grilla[x][j+2];
-
-            if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
-                check3 = true;
-                if (j + 3 < dimension && grilla[x][j + 3]!=null && e3.getColor() == grilla[x][j + 3].getColor()) {
-                    check4 = true;
-                    if (j + 4 < dimension && grilla[x][j + 4]!=null && e3.getColor() == grilla[x][j + 4].getColor()) {
-                        check5 = true;
-                    }
-                }
+    public void setGelatina(int x,int y){
+        //llega un punto y llenar los que estan cerca como dijimos
+        grilla[x][y]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
+        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
+        int xn=x;
+        int yn=y;
+        while(cant!=0){
+            int temp = (Math.random() <= 0.5) ? 1 : -1;
+            int tempx = (Math.random() <= 0.5) ? 1 : -1;
+            int tempY = (Math.random() <= 0.5) ? 1 : -1;
+            if(temp==1){
+                if(xn+temp>=0 && xn+tempx<10)
+                    xn = xn + tempx;
             }
-            if(check5){
-                Entidad e = new RalladoH(x,y,e1.getColor());
-
-                grilla[x][j+4].destruirse(this);
-                grilla[x][j+3].destruirse(this);
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
-
-                grilla[x][y] = e;
-                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
-                e.setEntidadGrafica(eg);
-                for (int i = 0; i < dimension && i != x+1; i++) if (i == x) miJuego.asociar_entidad_grafica(eg);
-            } else if(check4) {
-                Entidad e = new RalladoH(x,y,e1.getColor());
-
-                grilla[x][j+3].destruirse(this);
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
-
-                grilla[x][y] = e;
-                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
-                e.setEntidadGrafica(eg);
-                for (int i = 0; i < dimension && i != x+1; i++) if (i == x) miJuego.asociar_entidad_grafica(eg);
-            } else if(check3) {
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
+            else{
+                if(yn+tempY>=0 && yn+tempY<10)
+                    yn = yn + tempY;
             }
-            huboCambio = huboCambio || check3 || check4 || check5;
-        }
-
-        for (int j = 0; j < dimension - 2 && (!check3 && !check4 && !check5); j++) {
-            e1 = grilla[j][y];
-            e2 = grilla[j+1][y];
-            e3 = grilla[j+2][y];
-            if (e1!=null && e2!=null && e3!=null && e1.getColor() == e2.getColor() && e2.getColor() == e3.getColor()) {
-                check3 = true;
-                if (j + 3 < dimension && grilla[j+3][y]!=null && e3.getColor() == grilla[j + 3][y].getColor()) {
-                    check4 = true;
-                    if (j + 4 < dimension && grilla[j+4][y]!=null && e3.getColor() == grilla[j + 4][y].getColor()) {
-                        check5 = true;
-                    }
-                }
+            if(grilla[xn][yn]==null){
+                grilla[xn][yn]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
+                cant--;
             }
-            if(check5){
-                Entidad e = new RalladoV(x,y,e1.getColor());
-
-                grilla[j+4][y].destruirse(this);
-                grilla[j+3][y].destruirse(this);
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
-
-                grilla[x][y] = e;
-                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
-                e.setEntidadGrafica(eg);
-                for (int i = 0; i < dimension && i != y+1; i++) if (i == y) miJuego.asociar_entidad_grafica(eg);
-            } else if(check4) {
-                Entidad e = new RalladoV(x,y,e1.getColor());
-
-                grilla[j+3][y].destruirse(this);
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
-
-                grilla[x][y] = e;
-                EntidadGrafica eg = new EntidadGrafica(x,y,e,miJuego.getMiGUI().getPanel());
-                e.setEntidadGrafica(eg);
-                for (int i = 0; i < dimension && i != y+1; i++) if (i == y) miJuego.asociar_entidad_grafica(eg);
-            } else if(check3) {
-                e3.destruirse(this);
-                e2.destruirse(this);
-                e1.destruirse(this);
-            }
-            huboCambio = huboCambio || check3 || check4 || check5;
-        }
-        return huboCambio;
-    }
-    //agregar metodos de intercambios de ale
-
-//    private boolean chequeoGeneral3(){
-//        boolean retorno=false;
-//        for(int f=0; f < getDimension();f++){
-//                for(int c=0; c < getDimension() - 2;c++){
-//                    Entidad caramelo1 = grilla[f][c];
-//                    Entidad caramelo2 = grilla[f][c+1];
-//                    Entidad caramelo3 = grilla[f][c+2];
-//                    if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
-//                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-//                            caramelo1.destruirse(this);
-//                            caramelo2.destruirse(this);
-//                            caramelo3.destruirse(this);
-//                            retorno=true;
-//                        }
-//                    }
-//                }
-//        }
-//
-//        for(int c=0; c<getDimension();c++){
-//            for(int f=0; f<getDimension()-2;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f+1][c];
-//                Entidad caramelo3 = grilla[f+2][c];
-//                if(caramelo1!=null && caramelo2!=null && caramelo3!=null){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        retorno=true;
-//                    }
-//                }
-//            }
-//        }
-//        return retorno;
-//    }
-//
-//    public void crushCandy(){
-//        boolean terminar=true;
-//        do{
-//            terminar=chequeoGeneral5() | chequeoGeneral4() | chequeoGeneral3();
-//            ordenarColumnas();
-//        }while(terminar);
-//    }
-//
-//    private boolean chequeoGeneral4(){
-//        boolean retorno=false;
-//        for(int f=0; f<getDimension();f++){
-//            for(int c=0; c<getDimension() -3;c++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f][c+1];
-//                Entidad caramelo3 = grilla[f][c+2];
-//                Entidad caramelo4 = grilla[f][c+3];
-//                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
-//                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                            caramelo1.destruirse(this);
-//                            caramelo2.destruirse(this);
-//                            caramelo3.destruirse(this);
-//                            caramelo4.destruirse(this);
-//                            retorno=true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        for(int c=0; c<getDimension();c++){
-//           for(int f=0; f<getDimension()-3;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f+1][c];
-//                Entidad caramelo3 = grilla[f+2][c];
-//                Entidad caramelo4 = grilla[f+3][c];
-//                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null){
-//                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                            caramelo1.destruirse(this);
-//                            caramelo2.destruirse(this);
-//                            caramelo3.destruirse(this);
-//                            caramelo4.destruirse(this);
-//                            retorno=true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return retorno;
-//    }
-//
-//    private boolean chequeoGeneral5(){
-//        boolean retorno=false;
-//        for(int f=0; f<getDimension(); f++){
-//            for(int c=0; c< getDimension()-4;c++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f][c+1];
-//                Entidad caramelo3 = grilla[f][c+2];
-//                Entidad caramelo4 = grilla[f][c+3];
-//                Entidad caramelo5 = grilla[f][c+4];
-//                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
-//                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
-//                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                            caramelo1.destruirse(this);
-//                            caramelo2.destruirse(this);
-//                            caramelo3.destruirse(this);
-//                            caramelo4.destruirse(this);
-//                            caramelo5.destruirse(this);
-//                            retorno=true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//
-//        for(int c=0; c<getDimension();c++){
-//           for(int f=0; f<getDimension()-4;f++){
-//                Entidad caramelo1 = grilla[f][c];
-//                Entidad caramelo2 = grilla[f+1][c];
-//                Entidad caramelo3 = grilla[f+2][c];
-//                Entidad caramelo4 = grilla[f+3][c];
-//                Entidad caramelo5 = grilla[f+4][c];
-//                if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null){
-//                    if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
-//                        if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                            caramelo1.destruirse(this);
-//                            caramelo2.destruirse(this);
-//                            caramelo3.destruirse(this);
-//                            caramelo4.destruirse(this);
-//                            caramelo5.destruirse(this);
-//                            retorno=true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return retorno;
-//    }
-//
-//    boolean MovimientoValido4(int fila, int columna){
-//        boolean HuboCambios = false;
-//	    if((fila >= 0 && columna >= 1) && (fila < getDimension() && columna < getDimension()-2)){ //chequeo todos los dos a la derecha HORIZONTAL
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila][columna-1];
-//            Entidad caramelo3 = grilla[fila][columna+1];
-//            Entidad caramelo4 = grilla[fila][columna+2];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        HuboCambios = true;
-//                    }
-//	            }
-//	    }
-//
-//	    if((fila >= 0 && columna >= 2) && (fila < getDimension() && columna < getDimension()-1)){ //chequeo todos los dos a la izquierda HORIZONTAL
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila][columna-1];
-//            Entidad caramelo3 = grilla[fila][columna+1];
-//            Entidad caramelo4 = grilla[fila][columna-2];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        HuboCambios = true;
-//                    }
-//                }
-//        }
-//
-//        if((fila >= 2 && columna >= 0) && (fila < getDimension()-1 && columna < getDimension())){
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila-1][columna];
-//            Entidad caramelo3 = grilla[fila-2][columna];
-//            Entidad caramelo4 = grilla[fila+1][columna];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        HuboCambios = true;
-//                    }
-//                }
-//        }
-//
-//        if((fila >= 1 && columna >= 0) && (fila < getDimension()-2 && columna < getDimension())){
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila-1][columna];
-//            Entidad caramelo3 = grilla[fila+2][columna];
-//            Entidad caramelo4 = grilla[fila+1][columna];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor()){
-//                        //caramelo1 = new RalladoH(fila,  columna, caramelo1.getColor());
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        HuboCambios = true;
-//                    }
-//                }
-//        }
-//        return HuboCambios;
-//    }
-//
-    boolean MovimientoValido3(int fila, int columna){
-        //CHEQUEO HORIZONTALES
-        if(columna >= 2 && columna < getDimension() && fila < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila][columna-1];
-            Entidad caramelo3 = grilla[fila][columna-2];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-        if(columna >= 0 && columna < getDimension() -2 && fila < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila][columna+1];
-            Entidad caramelo3 = grilla[fila][columna+2];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-
-        if(columna >= 1 && columna < getDimension() - 1 && fila < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila][columna-1];
-            Entidad caramelo3 = grilla[fila][columna+1];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-
-        //CHEQUEO VERTICALES
-        if(fila >= 2 && fila < getDimension() && columna < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila-1][columna];
-            Entidad caramelo3 = grilla[fila-2][columna];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-
-        if(fila >= 0 && fila < getDimension()-2 && columna < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila+1][columna];
-            Entidad caramelo3 = grilla[fila+2][columna];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-
-        if(fila >= 1 && fila < getDimension()-1 && columna < getDimension()){
-            Entidad caramelo1 = grilla[fila][columna];
-            Entidad caramelo2 = grilla[fila+1][columna];
-            Entidad caramelo3 = grilla[fila-1][columna];
-            if(caramelo1!=null && caramelo2!=null && caramelo3!=null)
-                if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor()){
-                    caramelo1.destruirse(this);
-                    caramelo2.destruirse(this);
-                    caramelo3.destruirse(this);
-                    return true;
-                }
-        }
-        return false;
-    }
-//
-//    boolean MovimientoValido5(int fila, int columna){
-//        //CHEQUEO HORIZONTALES
-//        boolean HuboMovimiento = false;
-//        if(columna >= 2 && columna < getDimension()-2 && fila < getDimension()){
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila][columna+1];
-//            Entidad caramelo3 = grilla[fila][columna+2];
-//            Entidad caramelo4 = grilla[fila][columna-1];
-//            Entidad caramelo5 = grilla[fila][columna-2];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        caramelo5.destruirse(this);
-//                        return true;
-//                    }
-//                }
-//        }
-//
-//        if(fila >= 2 && fila < getDimension() -2 && columna < getDimension()){
-//            Entidad caramelo1 = grilla[fila][columna];
-//            Entidad caramelo2 = grilla[fila+1][columna];
-//            Entidad caramelo3 = grilla[fila+2][columna];
-//            Entidad caramelo4 = grilla[fila-1][columna];
-//            Entidad caramelo5 = grilla[fila-2][columna];
-//            if(caramelo1!=null && caramelo2!=null && caramelo3!=null && caramelo4!=null && caramelo5!=null)
-//                if(caramelo1.es_posible_intercambiar(caramelo2) && caramelo2.es_posible_intercambiar(caramelo3) && caramelo3.es_posible_intercambiar(caramelo4) && caramelo4.es_posible_intercambiar(caramelo5)){
-//                    if(caramelo1.getColor() == caramelo2.getColor() && caramelo2.getColor() == caramelo3.getColor() && caramelo3.getColor() == caramelo4.getColor() && caramelo4.getColor() == caramelo5.getColor()){
-//                        caramelo1.destruirse(this);
-//                        caramelo2.destruirse(this);
-//                        caramelo3.destruirse(this);
-//                        caramelo4.destruirse(this);
-//                        caramelo5.destruirse(this);
-//                        return true;
-//                    }
-//                }
-//        }
-//        return HuboMovimiento;
-//    }
-public void setGelatina(int x,int y){
-    //llega un punto y llenar los que estan cerca como dijimos
-    grilla[x][y]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
-    int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
-    int xn=x;
-    int yn=y;
-    while(cant!=0){
-        int temp = (Math.random() <= 0.5) ? 1 : -1;
-        int tempx = (Math.random() <= 0.5) ? 1 : -1;
-        int tempY = (Math.random() <= 0.5) ? 1 : -1;
-        if(temp==1){
-            if(xn+temp>=0 && xn+tempx<10)
-                xn = xn + tempx;
-        }
-        else{
-            if(yn+tempY>=0 && yn+tempY<10)
-                yn = yn + tempY;
-        }
-        if(grilla[xn][yn]==null){
-            grilla[xn][yn]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
-            cant--;
         }
     }
-}
     public void setGlaseado(int n){
         //estoy llenando aleatoriamente una cantidad x
         int cont=n;
