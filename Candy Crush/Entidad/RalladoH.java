@@ -4,16 +4,11 @@ import Tablero.Tablero;
 
 public class RalladoH extends Caramelo{
     boolean explotando;
-    //Constructor
     public RalladoH(int f, int c, Color color){
-        //hacer case para enlazar el color del enum
         super(f, c, color);
         this.explotando = false;
         imagePath="Candy Crush/Imagenes/Rallados/RalladosH/"+ color.toString().toUpperCase()+".png";
-        //eg=new EntidadGrafica();
     }
-
-    //Metodos
     public void destruirse(Tablero t){
         if(!explotando) {
             explotando = true;
@@ -25,7 +20,19 @@ public class RalladoH extends Caramelo{
             t.getGrilla()[fila][columna] = null;
             eg.destruirse();
         }
-        //eg.metodo para notificar a la gui del cambio
+    }
+
+    public boolean se_destruye_con(Entidad entidad) {
+        return entidad.se_destruyen(this);
+    }
+    public boolean se_destruyen(RalladoH ralladoH) {
+        return true;
+    }
+    public boolean se_destruyen(RalladoV ralladoV) {
+        return true;
+    }
+    public boolean se_destruyen(Envuelto envuelto) {
+        return true;
     }
 
     public boolean es_posible_intercambiar(Entidad e) {

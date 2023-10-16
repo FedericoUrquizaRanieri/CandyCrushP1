@@ -7,12 +7,29 @@ public class Glaseado extends Entidad{
         super(f,c,"Imagenes/Extras/Merengue.png");
     }
     public void destruirse(Tablero t){
-        
+        t.getGrilla()[fila][columna] = null;
+        eg.destruirse();
+        eg = null;
     }
-
+    public boolean se_destruye_con(Entidad entidad) {
+        return entidad.se_destruyen(this);
+    }
+    public boolean se_destruyen(Caramelo caramelo) {
+        return false;
+    }
+    public boolean se_destruyen(RalladoH ralladoH) {
+        return false;
+    }
+    public boolean se_destruyen(RalladoV ralladoV) {
+        return false;
+    }
+    public boolean se_destruyen(Envuelto envuelto) {
+        return false;
+    }
     public boolean es_posible_intercambiar(Entidad e) {
         return false;
     };
+
     public boolean puede_recibir(Caramelo c) {
         return false;
     }
@@ -26,6 +43,30 @@ public class Glaseado extends Entidad{
         return false;
     }
     public boolean puede_recibir(RalladoV rv) {
+        return false;
+    }
+
+    public boolean match(Entidad entidad) {
+        return false;
+    }
+
+    public boolean match_with(Caramelo caramelo) {
+        return false;
+    }
+
+    public boolean match_with(RalladoH ralladoH) {
+        return false;
+    }
+
+    public boolean match_with(RalladoV ralladoV) {
+        return false;
+    }
+
+    public boolean match_with(Envuelto envuelto) {
+        return false;
+    }
+
+    public boolean match_with(Glaseado glaseado) {
         return false;
     }
 }

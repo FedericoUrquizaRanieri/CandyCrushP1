@@ -14,15 +14,31 @@ public class Caramelo extends Entidad{
         this.eg = eg;
     }
 
-    public void destruirse(Tablero t){
-        t.getGrilla()[fila][columna] = null;
-        eg.destruirse();
-        //eg = null;
-    }
-
     public Color getColor() {
         return color;
     }
+
+    public void destruirse(Tablero t){
+        t.getGrilla()[fila][columna] = null;
+        eg.destruirse();
+    }
+
+    public boolean se_destruye_con(Entidad entidad) {
+        return entidad.se_destruyen(this);
+    }
+    public boolean se_destruyen(Caramelo caramelo) {
+        return false;
+    }
+    public boolean se_destruyen(RalladoH ralladoH) {
+        return false;
+    }
+    public boolean se_destruyen(RalladoV ralladoV) {
+        return false;
+    }
+    public boolean se_destruyen(Envuelto envuelto) {
+        return false;
+    }
+
     public boolean es_posible_intercambiar(Entidad e) {
         return e.puede_recibir(this);
     };
@@ -40,5 +56,24 @@ public class Caramelo extends Entidad{
     }
     public boolean puede_recibir(RalladoV rv) {
         return true;
+    }
+
+    public boolean match(Entidad entidad) {
+        return entidad.match_with(this);
+    }
+    public boolean match_with(Caramelo caramelo) {
+        return this.color == caramelo.getColor();
+    }
+    public boolean match_with(RalladoH ralladoH) {
+        return this.color == ralladoH.getColor();
+    }
+    public boolean match_with(RalladoV ralladoV) {
+        return this.color == ralladoV.getColor();
+    }
+    public boolean match_with(Envuelto envuelto) {
+        return this.color == envuelto.getColor();
+    }
+    public boolean match_with(Glaseado glaseado) {
+        return false;
     }
 }

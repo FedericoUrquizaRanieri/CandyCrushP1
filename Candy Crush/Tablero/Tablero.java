@@ -67,15 +67,19 @@ public class Tablero{
         Entidad e1 = grilla[x][y];
         Entidad e2 = grilla[posJugadorX][posJugadorY];
         if(e2.es_posible_intercambiar(e1)) {
-            grilla[x][y] = e2;
             grilla[posJugadorX][posJugadorY] = e1;
+            grilla[x][y] = e2;
             e1.cambiarPosicion(e2);
 
-            if(chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY)) {
-                    mostrarGrilla();
-                    ordenarColumnas();
-                    mostrarGrilla();
-                    return true;
+            if(e1.se_destruye_con(e2)) {
+                e1.destruirse(this);
+                e2.destruirse(this);
+                ordenarColumnas();
+                mostrarGrilla();
+            } else if((chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY))) {
+                ordenarColumnas();
+                mostrarGrilla();
+                return true;
             } else {
                 grilla[x][y] = e1;
                 grilla[posJugadorX][posJugadorY] = e2;
@@ -139,7 +143,8 @@ public class Tablero{
 
     public boolean checkCombinaciones(int x, int y) {
         if(grilla[x][y] == null) return false;
-        Color color = grilla[x][y].getColor();
+        Entidad e = grilla[x][y];
+        Color color = e.getColor();
         Entidad e1,e2,e3,especialCreado=null;
         boolean huboCambios = false;
         List<Entidad> verticales = new ArrayList<>();
@@ -149,7 +154,7 @@ public class Tablero{
             e1 = grilla[x][i];
             e2 = grilla[x][i+1];
             e3 = grilla[x][i+2];
-            if(e1!=null && e2!=null && e3!=null && color == e1.getColor() && color == e2.getColor() && color == e3.getColor()) {
+            if(e1!=null && e2!=null && e3!=null && e.match(e1) && e.match(e2) && e.match(e3)) {
                 verticales.add(e1);
                 verticales.add(e2);
                 verticales.add(e3);
@@ -157,7 +162,7 @@ public class Tablero{
             e1 = grilla[i][y];
             e2 = grilla[i+1][y];
             e3 = grilla[i+2][y];
-            if(e1!=null && e2!=null && e3!=null && color == e1.getColor() && color == e2.getColor() && color == e3.getColor()) {
+            if(e1!=null && e2!=null && e3!=null && e.match(e1) && e.match(e2) && e.match(e3)) {
                 horizontales.add(e1);
                 horizontales.add(e2);
                 horizontales.add(e3);
@@ -165,20 +170,20 @@ public class Tablero{
         }
 
         if(horizontales.isEmpty() ^ verticales.isEmpty()) {
-            for (Entidad e:horizontales)
-                e.destruirse(this);
-            for (Entidad e:verticales)
-                e.destruirse(this);
+            for (Entidad entidad:horizontales)
+                entidad.destruirse(this);
+            for (Entidad entidad:verticales)
+                entidad.destruirse(this);
             if(horizontales.size() > 3)
                 especialCreado = grilla[x][y] = new RalladoH(x,y,color);
             else if(verticales.size() > 3)
                 especialCreado = grilla[x][y] = new RalladoV(x,y,color);
             huboCambios = true;
         } else if(!horizontales.isEmpty() && !verticales.isEmpty()) {
-            for (Entidad e : horizontales)
-                e.destruirse(this);
-            for (Entidad e : verticales)
-                e.destruirse(this);
+            for (Entidad entidad : horizontales)
+                entidad.destruirse(this);
+            for (Entidad entidad : verticales)
+                entidad.destruirse(this);
             for (int i = 0; i < horizontales.size(); i++)
                 if(verticales.contains(horizontales.get(i)))
                     especialCreado = grilla[horizontales.get(i).getFila()][horizontales.get(i).getColumna()] = new Envuelto(x, y, color);
