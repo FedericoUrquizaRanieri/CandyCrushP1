@@ -33,8 +33,8 @@ public class Caramelo extends Entidad{
             t.getEntidad(fila,columna-1).destruirse(t);
         }
         t.getGrilla()[fila][columna] = null;
-        eg.destruirse();
         t.notificarDestruccion(this.color);
+        eg.destruirse();
     }
 
     public boolean se_destruye_con(Entidad entidad) {
@@ -51,6 +51,26 @@ public class Caramelo extends Entidad{
     }
     public boolean se_destruyen(Envuelto envuelto) {
         return false;
+    }
+
+    public void cambiarPosicionCon(Entidad entidad, Tablero tablero) {
+        entidad.cambiarPosicion(this, tablero);
+    }
+    public void cambiarPosicion(Caramelo caramelo, Tablero tablero) {
+        int fila = caramelo.getFila();
+        int columna = caramelo.getColumna();
+        caramelo.setFila(this.fila);
+        caramelo.setColumna(this.columna);
+        this.fila = fila;
+        this.columna = columna;
+
+        tablero.getGrilla()[caramelo.getFila()][caramelo.getColumna()] = caramelo;
+        tablero.getGrilla()[this.fila][this.columna] = this;
+
+        eg.notificarCambioPosicion(caramelo.getEntidadGrafica());
+    }
+    public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {
+        gelatina.cambiarPosicion(this,tablero);
     }
 
     public boolean es_posible_intercambiar(Entidad e) {

@@ -27,7 +27,7 @@ public class AnimadorCaida extends Thread implements Animador{
             entidadGrafica.setLocation(toX, posY);
             stopY = posY == toY;
             try {
-                if(posY%4 == 0)
+                if(posY%7 == 0)
                     sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();

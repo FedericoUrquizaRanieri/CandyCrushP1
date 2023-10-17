@@ -27,12 +27,12 @@ public class GUI extends JFrame{
         panel = new Panel(juego, jugador);
         panel.add(jugador);
 
-        JLabel labelInfo = new JLabel();
-        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-        labelInfo.setOpaque(true);
-        labelInfo.setBackground(Color.BLACK);
+        JLabel objetivos = new JLabel();
+        objetivos.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+        objetivos.setOpaque(true);
+        objetivos.setBackground(Color.BLACK);
 
-        getContentPane().add(labelInfo, BorderLayout.EAST);
+        getContentPane().add(objetivos, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
         pack();
         getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));

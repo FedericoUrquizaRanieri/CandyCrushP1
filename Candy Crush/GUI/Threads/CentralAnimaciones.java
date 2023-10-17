@@ -61,6 +61,14 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
         }
     }
 
+    public void animarDestruccion(EntidadGrafica entidadGrafica) {
+        Animador animador = new AnimadorDestruccion(entidadGrafica, this);
+        gui.comenzoAnimacion();
+        destroyQueue.offer(animador);
+        if(!animacionesActivas)
+            ejecutarAnimadores();
+    }
+
     public void terminoAnimacion(Animador a) {
         animacionesActivas = false;
         ejecutarAnimadores();

@@ -12,6 +12,10 @@ public class Gelatina extends Entidad{
         caramelo = new Caramelo(f,c, color);
     }
 
+    public Color getColor() {
+        return this.caramelo.getColor();
+    }
+
     public void setCaramelo(Caramelo caramelo){
         this.caramelo = caramelo;
     }
@@ -20,8 +24,38 @@ public class Gelatina extends Entidad{
         caramelo.cambiarPosicion(fila,columna);
     }
 
-    public void cambiarPosicion(Entidad entidad) {
-        caramelo.cambiarPosicion(entidad);
+    public void cambiarPosicionCon(Entidad entidad, Tablero tablero) {
+        entidad.cambiarPosicion(this, tablero);
+    }
+    public void cambiarPosicion(Caramelo caramelo, Tablero tablero) {
+        int auxFila = caramelo.getFila();
+        int auxColumna = caramelo.getColumna();
+        caramelo.setFila(this.fila);
+        caramelo.setColumna(this.columna);
+        this.caramelo.fila = auxFila;
+        this.caramelo.columna = auxColumna;
+        this.color = caramelo.getColor();
+
+        tablero.getGrilla()[this.caramelo.getFila()][this.caramelo.getColumna()] = this.caramelo;
+        this.caramelo = caramelo;
+
+        this.caramelo.getEntidadGrafica().notificarCambioPosicion(caramelo.getEntidadGrafica());
+    }
+
+    public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {
+        int auxFila = gelatina.getFila();
+        int auxColumna = gelatina.getColumna();
+        gelatina.getCaramelo().setFila(this.fila);
+        gelatina.getCaramelo().setColumna(this.columna);
+        this.caramelo.fila = auxFila;
+        this.caramelo.columna = auxColumna;
+
+        Caramelo aux = gelatina.getCaramelo();
+        this.color = caramelo.getColor();
+        gelatina.setCaramelo(this.caramelo);
+        this.caramelo = aux;
+
+        this.caramelo.getEntidadGrafica().notificarCambioPosicion(aux.getEntidadGrafica());
     }
 
     public Caramelo getCaramelo(){
@@ -29,10 +63,10 @@ public class Gelatina extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        t.getGrilla()[fila][columna] = null;
         eg.destruirse();
         caramelo.destruirse(t);
-        caramelo = null;
+        t.getGrilla()[fila][columna] = null;
+        t.notificarDestruccion(color);
     }
     public boolean se_destruye_con(Entidad entidad) {
         return entidad.se_destruyen(caramelo);

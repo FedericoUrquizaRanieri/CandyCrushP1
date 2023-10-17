@@ -11,6 +11,7 @@ public class Glaseado extends Entidad{
         t.getGrilla()[fila][columna] = null;
         eg.destruirse();
         eg = null;
+        t.notificarDestruccion(this.color);
     }
     public boolean se_destruye_con(Entidad entidad) {
         return entidad.se_destruyen(this);
@@ -27,10 +28,20 @@ public class Glaseado extends Entidad{
     public boolean se_destruyen(Envuelto envuelto) {
         return false;
     }
+
+    public void cambiarPosicionCon(Entidad entidad, Tablero tablero) {
+
+    }
+    public void cambiarPosicion(Caramelo caramelo, Tablero tablero) {
+
+    }
+    public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {
+
+    }
+
     public boolean es_posible_intercambiar(Entidad e) {
         return false;
     };
-
     public boolean puede_recibir(Caramelo c) {
         return false;
     }

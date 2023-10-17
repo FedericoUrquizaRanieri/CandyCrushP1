@@ -67,21 +67,19 @@ public class Tablero{
         Entidad e1 = grilla[x][y];
         Entidad e2 = grilla[posJugadorX][posJugadorY];
         if(e2.es_posible_intercambiar(e1)) {
-            grilla[posJugadorX][posJugadorY] = e1;
-            grilla[x][y] = e2;
-            e1.cambiarPosicion(e2);
-
+            e1.cambiarPosicionCon(e2,this);
+            mostrarGrilla();
             if(e1.se_destruye_con(e2)) {
                 e1.destruirse(this);
                 e2.destruirse(this);
                 ordenarColumnas();
+                mostrarGrilla();
             } else if((chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY))) {
                 ordenarColumnas();
+                mostrarGrilla();
                 return true;
             } else {
-                grilla[x][y] = e1;
-                grilla[posJugadorX][posJugadorY] = e2;
-                e1.cambiarPosicion(e2);
+                e1.cambiarPosicionCon(e2,this);
             }
         }
         return false;
@@ -217,9 +215,9 @@ public class Tablero{
         EntidadGrafica eg = new EntidadGrafica(x, y, g.getCaramelo(), miJuego.getMiGUI().getPanel());
         g.getCaramelo().setEntidadGrafica(eg);
         miJuego.getMiGUI().insertarEntidadGrafica(eg);
-        eg = new EntidadGrafica(x, y, g, miJuego.getMiGUI().getPanel());
-        g.setEntidadGrafica(eg);
-        miJuego.getMiGUI().insertarEntidadGrafica(eg);
+        EntidadGrafica eg1 = new EntidadGrafica(x, y, g, miJuego.getMiGUI().getPanel());
+        g.setEntidadGrafica(eg1);
+        miJuego.getMiGUI().insertarEntidadGrafica(eg1);
     }
     public void ponerGlaseado(int x, int y){
         Glaseado e=new Glaseado(x,y);

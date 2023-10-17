@@ -62,13 +62,11 @@ public class GeneradorDeNivel {
                     t.ponerCaramelo(i,y,retColroes(obj.charAt(j)));
                     y++;
                     System.out.print("C-");
-                }
-                if(obj.charAt(j)-64>0 && obj.charAt(j)-64<7){
+                } else if(obj.charAt(j)-64>0 && obj.charAt(j)-64<7){
                     t.ponerGelatina(i, y, retColroes(obj.charAt(j)-16));
                     y++;
                     System.out.print(obj.charAt(j)+"-");
-                }
-                if(obj.charAt(j)-48==7){
+                } else if(obj.charAt(j)-48==7){
                     t.ponerGlaseado(i,y);
                     y++;
                     System.out.print("G-");

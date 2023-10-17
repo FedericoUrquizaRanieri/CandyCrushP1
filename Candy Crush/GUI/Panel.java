@@ -109,15 +109,19 @@ public class Panel extends JPanel {
         centralAnimaciones.animarSwap(origen, destino);
     }
 
+    public void animarCaida(EntidadGrafica entidadGrafica, int toX, int toY) {
+        centralAnimaciones.animarCaida(entidadGrafica, toX, toY);
+    }
+
+    public void animarDestruccion(EntidadGrafica entidadGrafica) {
+        centralAnimaciones.animarDestruccion(entidadGrafica);
+    }
+
     public void comenzoAnimacion() {
         bloquearIntercambios = true;
     }
 
     public void terminoAnimacion() {
         bloquearIntercambios = false;
-    }
-
-    public void animarCaida(EntidadGrafica entidadGrafica, int toX, int toY) {
-        centralAnimaciones.animarCaida(entidadGrafica, toX, toY);
     }
 }

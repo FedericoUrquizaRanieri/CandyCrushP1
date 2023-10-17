@@ -1,6 +1,7 @@
 package Entidad;
 
 import GUI.EntidadGrafica;
+import Tablero.Tablero;
 import utils.Utils;
 
 public abstract class Entidad implements Intercambiable, Destruible, Matcheable{
@@ -28,15 +29,6 @@ public abstract class Entidad implements Intercambiable, Destruible, Matcheable{
         return color;
     }
 
-    public void cambiarPosicion(Entidad entidad) {
-        int fila = entidad.getFila();
-        int columna = entidad.getColumna();
-        entidad.setFila(this.fila);
-        entidad.setColumna(this.columna);
-        this.fila = fila;
-        this.columna = columna;
-        eg.notificarCambioPosicion(entidad.getEntidadGrafica());
-    }
     public void cambiarPosicion(int fila, int columna) {
         eg.notificarCaida(Utils.labelPositionX(columna), Utils.labelPositionY(fila));
         this.fila = fila;
