@@ -3,70 +3,113 @@ package Juego;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import Entidad.Color;
 import Nivel.Nivel;
 import Tablero.Tablero;
 
 public class GeneradorDeNivel {
     //Atributos
+    private List<List<String>> objetivos;
     private static String archivos[]=new String[]{"Archivo1.txt","Archivo2.txt","Archivo3.txt","Archivo4.txt","Archivo5.txt"};
+    //Constructor
+    public GeneradorDeNivel() {
+        objetivos = new ArrayList<>();
+        try {
+            for (int i = 0; i < archivos.length; i++) {
+                File f = new File("Candy Crush/Juego/"+archivos[i]);
+                FileReader fr= new FileReader(f);
+                char[] data=new char[1000];
+                fr.read(data,0,1000);
+                ArrayList<String> strings = new ArrayList<>();
+                StringBuilder str = new StringBuilder();
+
+                for (char c : data) {
+                    if (c == '\n') {
+                        strings.add(str.toString().trim());
+                        str = new StringBuilder();
+                    } else {
+                        str.append(c);
+                    }
+                }
+                if (str.length() > 0) {
+                    strings.add(str.toString().trim());
+                }
+
+                objetivos.add(strings);
+                fr.close();
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(objetivos.toString());
+    }
     //Metodos
-    //leer los archivos anda pero tengan en cuenta el salto de linea
-    public static void generarGelatina(int Nivel,Tablero t){
-        try{
-            File f = new File("Candy Crush/Juego/"+archivos[Nivel-1]);
-            FileReader fr= new FileReader(f);
-            char[] data=new char[1000];
-            fr.read(data,0,1000);
-            t.setGelatina(data[47]-48,data[49]-48);
-            fr.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void parseLvl(int nivel, Tablero t, Nivel n){
+        generarCaramelos(nivel, t);
+        generarNivel(nivel, n);
+    }
+    private void generarCaramelos(int n,Tablero t){
+        String obj=null;
+        int y;
+        for(int i=0;i<10;i++){
+            obj=objetivos.get(n-1).get(i+10);
+            y=0;
+            for(int j=0;j<obj.length();j++){
+                if(obj.charAt(j)-48>0 && obj.charAt(j)-48<7){
+                    t.ponerCaramelo(i,y,retColroes(obj.charAt(j)));
+                    y++;
+                    System.out.print("C-");
+                }
+                if(obj.charAt(j)-64>0 && obj.charAt(j)-64<7){
+                    t.ponerGelatina(i, y, retColroes(obj.charAt(j)-16));
+                    y++;
+                    System.out.print(obj.charAt(j)+"-");
+                }
+                if(obj.charAt(j)-48==7){
+                    t.ponerGlaseado(i,y);
+                    y++;
+                    System.out.print("G-");
+                }
+            }
+            System.out.println();
         }
     }
-    public static void generarMerengue(int n,Tablero t){
-        try{
-            File f = new File("Candy Crush/Juego/"+archivos[n-1]);
-            FileReader fr= new FileReader(f);
-            char[] data=new char[1000];
-            fr.read(data,0,1000);
-            t.setGlaseado(data[63]-48);
-            fr.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    private Color retColroes(int c){
+        switch(c-48){
+            case 1:
+                return Color.VERDE;
+            case 2:
+                return Color.AMARILLO;
+            case 3:
+                return Color.ROSA;
+            case 4:
+                return Color.NARANJA;
+            case 5:
+                return Color.ROJO;
+            case 6:
+                return Color.AZUL;
         }
-            
+        return Color.NARANJA;
     }
-    public static void generarCaramelos(Tablero t){
-        t.setCaramelos();
-    }
-    public static void generarNivel(int nivel, Nivel n){
-        try{
-            File f = new File("Candy Crush/Juego/"+archivos[nivel-1]);
-            FileReader fr= new FileReader(f);
-            char[] data=new char[1000];
-            fr.read(data,0,1000);
-            //arranco a hacer el lvl
-            n.setMov(((data[12]-48)*10+data[13]-48));
-            n.setObjetivoGlaseado((data[159]-48)*10+data[160]-48);
-            n.setObjetivoGelOEnv((data[180]-48)*10+data[181]-48);
-            n.setTiempo(data[23]-48);
-            //revisar esto con tino
-            if((data[85]-48)*10+data[86]-48!=0)
-                n.setObjetivoCaramelo((data[85]-48)*10+data[86]-48,1);
-            if((data[99]-48)*10+data[100]-48!=0)
-                n.setObjetivoCaramelo((data[99]-48)*10+data[100]-48,2);
-            if((data[111]-48)*10+data[112]-48!=0)
-                n.setObjetivoCaramelo((data[111]-48)*10+data[112]-48,3);
-            if((data[124]-48)*10+data[125]-48!=0)
-                n.setObjetivoCaramelo((data[124]-48)*10+data[125]-48,4);
-            if((data[134]-48)*10+data[135]-48!=0)
-                n.setObjetivoCaramelo((data[134]-48)*10+data[135]-48,5);
-            if((data[145]-48)*10+data[146]-48!=0)
-                n.setObjetivoCaramelo((data[145]-48)*10+data[146]-48,6);
-            fr.close();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+    private void generarNivel(int x, Nivel n){
+        n.setMov(Integer.parseInt(objetivos.get(x-1).get(0)));
+        n.setTiempo(objetivos.get(x-1).get(1));
+        if(Integer.parseInt(objetivos.get(x-1).get(2))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(2)),Color.VERDE);
+        if(Integer.parseInt(objetivos.get(x-1).get(3))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(3)),Color.AMARILLO);
+        if(Integer.parseInt(objetivos.get(x-1).get(4))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(4)),Color.ROSA);
+        if(Integer.parseInt(objetivos.get(x-1).get(5))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(5)),Color.NARANJA);
+        if(Integer.parseInt(objetivos.get(x-1).get(6))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(6)),Color.ROJO);
+        if(Integer.parseInt(objetivos.get(x-1).get(7))!=0)
+            n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(7)),Color.AZUL);
+        n.setObjetivoGlaseado(Integer.parseInt(objetivos.get(x-1).get(8)));
+        n.setObjetivoGelOEnv(Integer.parseInt(objetivos.get(x-1).get(9)));
     }
 }

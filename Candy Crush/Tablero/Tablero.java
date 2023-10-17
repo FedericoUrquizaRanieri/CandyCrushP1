@@ -75,19 +75,20 @@ public class Tablero{
                 e1.destruirse(this);
                 e2.destruirse(this);
                 ordenarColumnas();
-                mostrarGrilla();
             } else if((chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY))) {
                 ordenarColumnas();
-                mostrarGrilla();
                 return true;
             } else {
                 grilla[x][y] = e1;
                 grilla[posJugadorX][posJugadorY] = e2;
                 e1.cambiarPosicion(e2);
-                mostrarGrilla();
             }
         }
         return false;
+    }
+
+    public void notificarDestruccion(Color color) {
+        miJuego.notificarDestruccion(color);
     }
 
     public void mostrarGrilla() {
@@ -105,9 +106,6 @@ public class Tablero{
 
     public boolean chequeoMovimiento(int fila, int columna){
         return checkCombinaciones(fila, columna);
-        //return MovimientoValido3(fila, columna);
-        //return MovimientoValido5(fila, columna) || MovimientoValido4(fila, columna) || MovimientoValido3(fila, columna);
-        //return MovimientoValido5(fila, columna) || MovimientoValido4(fila, columna) || MovimientoValido3(fila, columna);
     }
 
     public void ordenarColumnas() {
@@ -129,6 +127,15 @@ public class Tablero{
                 grilla[i][j] = e;
                 miJuego.asociar_entidad_grafica(eg);
                 eg.notificarCaida(Utils.labelPositionX(j),Utils.labelPositionY(i));
+            }
+        }
+    }
+
+    public void vaciarTablero() {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (grilla[i][j] != null)
+                    grilla[i][j].destruirse(this);
             }
         }
     }
@@ -197,52 +204,28 @@ public class Tablero{
         return huboCambios;
     }
 
-    public void setCaramelos(){
-        int aux;
-        for(int i=0;i<dimension;i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (grilla[i][j] == null) {
-                    aux = (int) (Math.random() * 6);
-                    grilla[i][j] = new Caramelo(i, j, colores[aux]);
-                }
-            }
-        }
+    public void ponerCaramelo(int x, int y, Color c){
+        Caramelo e=new Caramelo(x,y,c);
+        grilla[x][y] = e;
+        EntidadGrafica eg = new EntidadGrafica(x, y, e, miJuego.getMiGUI().getPanel());
+        e.setEntidadGrafica(eg);
+        miJuego.getMiGUI().insertarEntidadGrafica(eg);
     }
-
-    public void setGelatina(int x,int y){
-        //llega un punto y llenar los que estan cerca como dijimos
-        grilla[x][y]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
-        int cant=(int)(Math.random() * ((8 - 3) + 1)) + 3;
-        int xn=x;
-        int yn=y;
-        while(cant!=0){
-            int temp = (Math.random() <= 0.5) ? 1 : -1;
-            int tempx = (Math.random() <= 0.5) ? 1 : -1;
-            int tempY = (Math.random() <= 0.5) ? 1 : -1;
-            if(temp==1){
-                if(xn+temp>=0 && xn+tempx<10)
-                    xn = xn + tempx;
-            }
-            else{
-                if(yn+tempY>=0 && yn+tempY<10)
-                    yn = yn + tempY;
-            }
-            if(grilla[xn][yn]==null){
-                grilla[xn][yn]=new Gelatina(x,y, colores[(int) (Math.random() * 6)]);
-                cant--;
-            }
-        }
+    public void ponerGelatina(int x, int y,Color c){
+        Gelatina g= new Gelatina(x,y,c);
+        grilla[x][y]=g;
+        EntidadGrafica eg = new EntidadGrafica(x, y, g.getCaramelo(), miJuego.getMiGUI().getPanel());
+        g.getCaramelo().setEntidadGrafica(eg);
+        miJuego.getMiGUI().insertarEntidadGrafica(eg);
+        eg = new EntidadGrafica(x, y, g, miJuego.getMiGUI().getPanel());
+        g.setEntidadGrafica(eg);
+        miJuego.getMiGUI().insertarEntidadGrafica(eg);
     }
-    public void setGlaseado(int n){
-        //estoy llenando aleatoriamente una cantidad x
-        int cont=n;
-        while(cont!=0){
-            int x=(int)(Math.random() * ((9 - 0) + 1)) + 0;
-            int y=(int)(Math.random() * ((9 - 0) + 1)) + 0;
-            if(grilla[x][y]==null){
-                grilla[x][y]=new Glaseado(x,y);
-                cont--;
-            }
-        }
+    public void ponerGlaseado(int x, int y){
+        Glaseado e=new Glaseado(x,y);
+        grilla[x][y] = e;
+        EntidadGrafica eg = new EntidadGrafica(x, y, e, miJuego.getMiGUI().getPanel());
+        e.setEntidadGrafica(eg);
+        miJuego.getMiGUI().insertarEntidadGrafica(eg);
     }
 }

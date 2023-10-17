@@ -20,13 +20,15 @@ public class AnimadorCaida extends Thread implements Animador{
     public void run() {
         int posY = entidadGrafica.getY();
         boolean stopY = posY == toY;
+        int step = 3;
 
         while(!stopY) {
             posY++;
             entidadGrafica.setLocation(toX, posY);
             stopY = posY == toY;
             try {
-                sleep(delay);
+                if(posY%4 == 0)
+                    sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

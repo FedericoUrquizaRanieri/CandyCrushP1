@@ -1,29 +1,28 @@
 package Nivel;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Entidad.Color;
 import Juego.Juego;
 
 public class Nivel{
     //Atributos
     protected Juego miJuego;
+    protected int nivel;
     protected int vidas=3;
     protected int tiempo;
     protected int movimientos;
     protected int objetivoCaramelo;
-    //revisar esto con el enum
-    protected int tipoCaramelo;
+    protected Color tipoCaramelo;
     protected int objetivoGlaseado;
     protected int objetivoGelOEnv;
 
-    /*class contadorTiempo {
+    class contadorTiempo {
         Timer t;
-        //cambiar el 2 por el tiempo del archivo
         public contadorTiempo() {
             t = new Timer();
-            t.schedule(new contador(), 0,1000);
+            t.scheduleAtFixedRate(new contador(), 0,1000);
         }
         class contador extends TimerTask {
             public void run() {
@@ -31,34 +30,32 @@ public class Nivel{
                     tiempo--;
                 }
                 else {
-                    try {
-                        restarVida();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    restarVida();
+                    t.cancel();
                 }
             }
         }
-    }*/
-    
+    }
+
     //Constructor
-    public Nivel(Juego j){
+    public Nivel(Juego j,int nivel){
         miJuego=j;
+        this.nivel=nivel;
     }
-    public void restarVida() throws IOException{
+    public void restarVida(){
         vidas--;
-        if(vidas==0)
+        miJuego.regenerar(nivel);
+        if(vidas==0){
             miJuego.regenerar(1);
-    }
-    public void setVidas(int v){
-        vidas=v;
+            vidas=3;
+        }
     }
     public int getVidas(){
         return vidas;
     }
-    public void setTiempo(int t){
-        tiempo=t;
-        //new contadorTiempo();
+    public void setTiempo(String t){
+        tiempo=(((t.charAt(0)-48)*10+t.charAt(1)-48)*60+((t.charAt(3)-48)*10+t.charAt(4)-48));
+        new contadorTiempo();
     }
     public void setMov(int m){
         movimientos=m;
@@ -69,10 +66,12 @@ public class Nivel{
     public int getObjetivoCaramelo(){
         return objetivoCaramelo;
     }
-    public void setObjetivoCaramelo(int o, int c){
+    public Color getColorObjetivo(){
+        return tipoCaramelo;
+    }
+    public void setObjetivoCaramelo(int o, Color c){
         objetivoCaramelo=o;
         tipoCaramelo=c;
-        //que caramelo es no se
     }
     public int getObjetivoGlaseado(){
         return objetivoGlaseado;
@@ -85,5 +84,27 @@ public class Nivel{
     }
     public void setObjetivoGelOEnv(int o){
         objetivoGelOEnv=o;
+    }
+    public void restarCaramelo(Color c){
+        if(c==tipoCaramelo){
+            objetivoCaramelo--;
+            if(objetivoCaramelo==0)
+                miJuego.regenerar(++nivel);
+        }
+    }
+    public void restarGlaseado(){
+        objetivoGlaseado--;
+        if(objetivoGlaseado==0)
+            miJuego.regenerar(++nivel);
+    }
+    public void restarGelOEnv(){
+        objetivoGelOEnv--;
+        if(objetivoGelOEnv==0)
+            miJuego.regenerar(++nivel);
+    }
+    public void restarMov(){
+        movimientos--;
+        if(movimientos==0)
+            vidas--;
     }
 }
