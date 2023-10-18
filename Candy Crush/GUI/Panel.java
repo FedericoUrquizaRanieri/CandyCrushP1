@@ -12,17 +12,16 @@ import java.awt.event.KeyEvent;
 public class Panel extends JPanel {
     protected JLabel jugador;
     protected Juego juego;
-    private int posX;
-    private int posY;
-    private int animacionesPendientes;
-    private boolean bloquearIntercambios;
-    private CentralAnimaciones centralAnimaciones;
+    protected int posX;
+    protected int posY;
+    protected int animacionesPendientes;
+    protected boolean bloquearIntercambios;
+    protected CentralAnimaciones centralAnimaciones;
 
     public Panel(Juego juego, JLabel jugador) {
         this.jugador = jugador;
         this.juego = juego;
         this.centralAnimaciones = new CentralAnimaciones(this);
-        animacionesPendientes = 0;
         bloquearIntercambios = false;
         posX = 0; // Ubiacion del jugador en el tablero
         posY = 0; // Ubiacion del jugador en el tablero
@@ -123,5 +122,9 @@ public class Panel extends JPanel {
 
     public void terminoAnimacion() {
         bloquearIntercambios = false;
+    }
+
+    public boolean getAnimacionesPendientes(){
+        return centralAnimaciones.AnimacionesActivas();
     }
 }

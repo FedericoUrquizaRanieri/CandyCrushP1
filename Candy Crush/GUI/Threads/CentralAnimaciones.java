@@ -73,4 +73,8 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
         animacionesActivas = false;
         ejecutarAnimadores();
     }
+
+    public boolean AnimacionesActivas(){
+        return (swapQueue.isEmpty() && destroyQueue.isEmpty() && fallingQueue.isEmpty());
+    }
 }

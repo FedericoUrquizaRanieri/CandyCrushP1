@@ -52,4 +52,6 @@ public abstract class Entidad implements Intercambiable, Destruible, Matcheable{
     public void setColumna(int columna) {
         this.columna = columna;
     }
+
+    
 }

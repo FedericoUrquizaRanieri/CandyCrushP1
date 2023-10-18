@@ -107,4 +107,6 @@ public class Nivel{
         if(movimientos==0)
             vidas--;
     }
+
+
 }

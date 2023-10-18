@@ -2,6 +2,7 @@ package Juego;
 import java.awt.EventQueue;
 
 import GUI.GUI;
+import GUI.Threads.CentralAnimaciones;
 import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Entidad;
@@ -31,8 +32,14 @@ public class Juego{
 
     //Metodos
     public void regenerar(int nivel){
-        miGenerador.parseLvl(nivel,miTablero,miNivel);
+        while(!miGUI.getPanel().getAnimacionesPendientes()){
+
+        }
+            miTablero.vaciarTablero();
+
+            miGenerador.parseLvl(nivel,miTablero,miNivel);
     }
+
     public boolean moverCursor(int x,int y){
         return miTablero.setPosJugadorX(x) & miTablero.setPosJugadorY(y);
     }
@@ -60,4 +67,8 @@ public class Juego{
             }
         });
 	}
+
+    public Nivel getNivel(){
+        return miNivel;
+    }
 }
