@@ -17,6 +17,7 @@ public class Nivel{
     protected Color tipoCaramelo;
     protected int objetivoGlaseado;
     protected int objetivoGelOEnv;
+    protected contadorTiempo time;
 
     class contadorTiempo {
         Timer t;
@@ -42,6 +43,8 @@ public class Nivel{
     public Nivel(Juego j,int nivel){
         miJuego=j;
         this.nivel=nivel;
+        tiempo = 300000;
+        time = new contadorTiempo();
     }
     public void restarVida(){
         vidas--;
@@ -56,7 +59,7 @@ public class Nivel{
     }
     public void setTiempo(String t){
         tiempo=(((t.charAt(0)-48)*10+t.charAt(1)-48)*60+((t.charAt(3)-48)*10+t.charAt(4)-48));
-        new contadorTiempo();
+        //new contadorTiempo();
     }
     public void setMov(int m){
         movimientos=m;
@@ -86,30 +89,35 @@ public class Nivel{
     public void setObjetivoGelOEnv(int o){
         objetivoGelOEnv=o;
     }
-    public void restarCaramelo(Color c){
+    public boolean restarCaramelo(Color c){
         if(c==tipoCaramelo){
             objetivoCaramelo--;
             miJuego.getMiGUI().notificarMovimiento();
-            if(objetivoCaramelo==0){
-                miJuego.regenerar(++nivel);
-            }
         }
-    }
-    public void restarGlaseado(){
+            if(objetivoCaramelo==0)
+                return true;
+            else
+                return false;
+        }
+
+    public boolean restarGlaseado(){
         objetivoGlaseado--;
         miJuego.getMiGUI().notificarMovimiento();
-        if(objetivoGlaseado==0){
-
-            miJuego.regenerar(++nivel);
-        }
+        if(objetivoGlaseado==0)
+            return true;
+        else
+            return false;
     }
-    public void restarGelOEnv(){
+
+    public boolean restarGelOEnv(){
         objetivoGelOEnv--;
         miJuego.getMiGUI().notificarMovimiento();
-        if(objetivoGelOEnv==0){
-            miJuego.regenerar(++nivel);
-        }
+        if(objetivoGelOEnv==0)
+            return true;
+        else
+            return false;
     }
+
     public void restarMov(){
         movimientos--;
         miJuego.getMiGUI().notificarMovimiento();
@@ -122,6 +130,11 @@ public class Nivel{
         return nivel;
     }
 
-
-
+    public boolean objetivosTerminados(){
+        return (objetivoCaramelo<=0 && objetivoGelOEnv<=0 && objetivoGlaseado<=0);
+    }
+    
+    public void setNivel(int numero){
+        nivel = numero;
+    }
 }

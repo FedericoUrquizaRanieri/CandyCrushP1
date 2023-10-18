@@ -70,11 +70,11 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
     }
 
     public void terminoAnimacion(Animador a) {
-        animacionesActivas = false;
         ejecutarAnimadores();
     }
 
-    public boolean AnimacionesActivas(){
-        return (swapQueue.isEmpty() && destroyQueue.isEmpty() && fallingQueue.isEmpty());
+    public void AnimacionesActivas(){
+        if(swapQueue.isEmpty() && destroyQueue.isEmpty() && fallingQueue.isEmpty())
+            gui.notificar_Animaciones_terminadas();
     }
 }

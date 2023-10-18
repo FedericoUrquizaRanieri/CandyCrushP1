@@ -122,13 +122,15 @@ public class Panel extends JPanel {
 
     public void terminoAnimacion() {
         bloquearIntercambios = false;
+        juego.animacionesTerminadas();
+        repaint();
     }
 
     /*public static boolean getBloquearIntercambios(){
         return bloquearIntercambios;
     }*/
 
-    public boolean getAnimacionesPendientes(){
-        return centralAnimaciones.AnimacionesActivas();
+    public void notificar_Animaciones_terminadas(){
+        juego.animacionesTerminadas();
     }
 }
