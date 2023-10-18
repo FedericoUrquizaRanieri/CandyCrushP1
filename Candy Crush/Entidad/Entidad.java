@@ -1,7 +1,6 @@
 package Entidad;
 
 import GUI.EntidadGrafica;
-import Tablero.Tablero;
 import utils.Utils;
 
 public abstract class Entidad implements Intercambiable, Destruible, Matcheable{

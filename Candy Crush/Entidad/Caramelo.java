@@ -19,7 +19,6 @@ public class Caramelo extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        Entidad[][] g=t.getGrilla();
         if(t.getEntidad(fila-1,columna) != null && t.getEntidad(fila-1,columna).getColor() == Color.NEGRO){
             t.getEntidad(fila-1,columna).destruirse(t);
         }

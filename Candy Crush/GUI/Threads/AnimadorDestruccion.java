@@ -1,12 +1,6 @@
 package GUI.Threads;
 
-import Entidad.Entidad;
 import GUI.EntidadGrafica;
-import utils.Utils;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
 
 public class AnimadorDestruccion extends Thread implements Animador{
     protected EntidadGrafica entidadGrafica;

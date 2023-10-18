@@ -28,6 +28,7 @@ public class Nivel{
             public void run() {
                 if (tiempo > 0) {
                     tiempo--;
+                    miJuego.getMiGUI().notificarTiempo(tiempo);
                 }
                 else {
                     restarVida();
@@ -88,24 +89,32 @@ public class Nivel{
     public void restarCaramelo(Color c){
         if(c==tipoCaramelo){
             objetivoCaramelo--;
-            if(objetivoCaramelo==0)
+            if(objetivoCaramelo==0){
                 miJuego.regenerar(++nivel);
+                miJuego.getMiGUI().notificarMovimiento();
+            }
         }
     }
     public void restarGlaseado(){
         objetivoGlaseado--;
-        if(objetivoGlaseado==0)
+        if(objetivoGlaseado==0){
             miJuego.regenerar(++nivel);
+            miJuego.getMiGUI().notificarMovimiento();
+        }
     }
     public void restarGelOEnv(){
         objetivoGelOEnv--;
-        if(objetivoGelOEnv==0)
+        if(objetivoGelOEnv==0){
             miJuego.regenerar(++nivel);
+            miJuego.getMiGUI().notificarMovimiento();
+        }
     }
     public void restarMov(){
         movimientos--;
-        if(movimientos==0)
+        if(movimientos==0){
             vidas--;
+            miJuego.getMiGUI().notificarMovimiento();
+        }
     }
 
     public int getNivel(){

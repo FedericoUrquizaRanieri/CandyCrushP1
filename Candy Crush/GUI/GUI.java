@@ -10,9 +10,10 @@ import java.awt.*;
 
 public class GUI extends JFrame{
     protected Panel panel;
-    protected JPanel labelInfo;
+    protected JLabel labelInfo;
     protected JLabel jugador;
     protected Juego juego;
+    protected JLabel NivelActual;
     protected JLabel tiempo;
     protected JLabel vidas;
     protected JLabel objetivoC;
@@ -38,23 +39,19 @@ public class GUI extends JFrame{
         panel.add(jugador);
   
 
-        labelInfo = new JPanel();
-        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-        labelInfo.add(new JLabel(new ImageIcon("Candy Crush/Imagenes/Tierra.png")));
-        //labelInfo.setOpaque(false);
-        //labelInfo.setBackground(Color.BLACK);
+        labelInfo = new JLabel();
         labelInfo.setLayout(null);
+        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+        labelInfo.setOpaque(false);
+        ImageIcon fondoInfo = new ImageIcon("Candy Crush/Imagenes/Tierra.png");
+        labelInfo.setIcon(new ImageIcon(fondoInfo.getImage().getScaledInstance(1308, Utils.panelHeight(), Image.SCALE_SMOOTH)));
+        
 
-
-
-        JLabel NivelActual = new JLabel();
+        NivelActual = new JLabel();
         NivelActual.setText(String.valueOf(n.getNivel()));
         NivelActual.setBounds(250, 0, 80, 80);
         NivelActual.setHorizontalAlignment(SwingConstants.CENTER);
-        NivelActual.setForeground(Color.black);
-        NivelActual.setOpaque(false);
         NivelActual.setFont(new Font("TimesRoman", Font.BOLD, 65));
-        //NivelActual.setBackground(Color.BLACK);
         labelInfo.add(NivelActual);
 
 
@@ -63,8 +60,6 @@ public class GUI extends JFrame{
         JLabel vidas = new JLabel();
         vidas.setBounds(35, 200, 80, 80);
         vidas.setIcon(new ImageIcon(imagenVida.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
-        vidas.setOpaque(false);
-        //vidas.setBackground(Color.black);
         labelInfo.add(vidas);
 
         JLabel textoVidas = new JLabel();
@@ -108,7 +103,7 @@ public class GUI extends JFrame{
         textoMovimientos.setFont(new Font("TimesRoman", Font.BOLD, 40));
         //textoMovimientos.setBackground(Color.BLACK);
         labelInfo.add(textoMovimientos);
-
+        
 
         getContentPane().add(labelInfo, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
@@ -216,7 +211,7 @@ public class GUI extends JFrame{
     }
 
     public void notificarMovimiento(){
-        Nivel n = juego.getNivel();
+        /*Nivel n = juego.getNivel();
         movimientos.setText("Movimientos Restantes: "+String.valueOf(n.getMov()));
         vidas.setText("Vidas: "+String.valueOf(n.getVidas()));
 
@@ -230,14 +225,13 @@ public class GUI extends JFrame{
         obj.setIcon(new ImageIcon(new_img));
         objetivoC.setText("Caramelos: "+String.valueOf(n.getObjetivoCaramelo()));
         labelInfo.add(obj);
+        */
     }
 
     public void notificarTiempo(int t){
+        /*
         tiempo.setText(String.valueOf(t/60)+":"+String.valueOf(t%60));
         tiempo.setHorizontalTextPosition(SwingConstants.CENTER);
+        */
     }
-
-    //public void actualizar(){
-
-    //}
 }

@@ -1,8 +1,6 @@
 package GUI;
 
 import Entidad.Entidad;
-import Entidad.Color;
-import GUI.Threads.AnimadorCaida;
 import utils.Utils;
 
 import javax.swing.*;

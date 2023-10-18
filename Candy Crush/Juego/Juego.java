@@ -2,12 +2,9 @@ package Juego;
 import java.awt.EventQueue;
 
 import GUI.GUI;
-import GUI.Threads.CentralAnimaciones;
 import Nivel.Nivel;
 import Tablero.Tablero;
-import Entidad.Entidad;
 import Entidad.Color;
-import Entidad.Gelatina;
 import GUI.EntidadGrafica;
 
 public class Juego{
@@ -38,6 +35,7 @@ public class Juego{
             miTablero.vaciarTablero();
 
             miGenerador.parseLvl(nivel,miTablero,miNivel);
+            miGUI.notificarMovimiento();
     }
 
     public boolean moverCursor(int x,int y){
