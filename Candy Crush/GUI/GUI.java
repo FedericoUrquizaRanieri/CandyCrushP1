@@ -9,60 +9,21 @@ import utils.Utils;
 import java.awt.*;
 
 public class GUI extends JFrame{
-    private Panel panel;
-    private JPanel labelInfo;
-    private JLabel jugador;
-    private Juego juego;
-    private JLabel tiempo;
-    private JLabel vidas;
-    private JLabel objetivoC;
-    private JLabel movimientos;
-    private JLabel objetivoG;
-    private JLabel objetivoEyG;
+    protected Panel panel;
+    protected JPanel labelInfo;
+    protected JLabel jugador;
+    protected Juego juego;
+    protected JLabel tiempo;
+    protected JLabel vidas;
+    protected JLabel objetivoC;
+    protected JLabel movimientos;
+    protected JLabel objetivoG;
+    protected JLabel objetivoEyG;
 
     public GUI(Juego juego) {
-            this.juego = juego;
-    
-            setResizable(false);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLayout(new BorderLayout());
-    
-            jugador = new JLabel();
-            jugador.setOpaque(false);
-            jugador.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED,8));
-            jugador.setBounds(Utils.labelSpacing, Utils.labelSpacing, Utils.labelWidth, Utils.labelHeight);
-    
-            panel = new Panel(juego, jugador);
-            panel.add(jugador);
-    
-            labelInfo = new JPanel();
-            labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-            labelInfo.setOpaque(true);
-            labelInfo.setBackground(Color.BLACK);
-            tiempo=new JLabel();
-            tiempo.setSize(labelInfo.getWidth(), HEIGHT);
-            tiempo.setOpaque(true);
-            tiempo.setBackground(Color.CYAN);
-            labelInfo.add(tiempo,BorderLayout.PAGE_START);
-            vidas=new JLabel();
-            labelInfo.add(vidas);
-            movimientos=new JLabel();
-            labelInfo.add(movimientos);
-            objetivoEyG=new JLabel();
-            labelInfo.add(objetivoEyG);
-            objetivoG=new JLabel();
-            labelInfo.add(objetivoG);
-            objetivoC=new JLabel();
-            labelInfo.add(objetivoC);
-    
-            getContentPane().add(labelInfo, BorderLayout.EAST);
-            getContentPane().add(panel, BorderLayout.CENTER);
-            pack();
-            getContentPane().add(new JLabel(new ImageIcon("Imagenes/Fondos/fondo1.png")));
-            setVisible(true);
-    }
-        
-        /*this.juego = juego;
+
+        Nivel n = juego.getNivel();
+        this.juego = juego;
 
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -75,19 +36,170 @@ public class GUI extends JFrame{
 
         panel = new Panel(juego, jugador);
         panel.add(jugador);
+  
 
+        labelInfo = new JPanel();
+        labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+        labelInfo.add(new JLabel(new ImageIcon("Candy Crush/Imagenes/Tierra.png")));
+        //labelInfo.setOpaque(false);
+        //labelInfo.setBackground(Color.BLACK);
+        labelInfo.setLayout(null);
+
+
+
+        JLabel NivelActual = new JLabel();
+        NivelActual.setText(String.valueOf(n.getNivel()));
+        NivelActual.setBounds(250, 0, 80, 80);
+        NivelActual.setHorizontalAlignment(SwingConstants.CENTER);
+        NivelActual.setForeground(Color.black);
+        NivelActual.setOpaque(false);
+        NivelActual.setFont(new Font("TimesRoman", Font.BOLD, 65));
+        //NivelActual.setBackground(Color.BLACK);
+        labelInfo.add(NivelActual);
+
+
+
+        ImageIcon imagenVida = new ImageIcon("Candy Crush/Imagenes/Extras/Vidas.png");
+        JLabel vidas = new JLabel();
+        vidas.setBounds(35, 200, 80, 80);
+        vidas.setIcon(new ImageIcon(imagenVida.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+        vidas.setOpaque(false);
+        //vidas.setBackground(Color.black);
+        labelInfo.add(vidas);
+
+        JLabel textoVidas = new JLabel();
+        textoVidas.setText(String.valueOf(n.getVidas()));
+        textoVidas.setBounds(150, 190, 80, 80);
+        textoVidas.setHorizontalAlignment(SwingConstants.CENTER);
+        textoVidas.setForeground(Color.black);
+        textoVidas.setOpaque(false);
+        textoVidas.setFont(new Font("TimesRoman", Font.BOLD, 65));
+        //textoVidas.setBackground(Color.BLACK);
+        labelInfo.add(textoVidas);
+
+
+
+        ImageIcon imagenCaramelo = new ImageIcon("Candy Crush/Imagenes/Rayados/RayadosH/AMARILLO.png");
         JLabel objetivos = new JLabel();
-        objetivos.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-        objetivos.setOpaque(true);
-        objetivos.setBackground(Color.BLACK);
+        objetivos.setBounds(35, 333, 80, 80);
+        objetivos.setIcon(new ImageIcon(imagenCaramelo.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+        objetivos.setOpaque(false);
+        //objetivos.setBackground(Color.black);
+        labelInfo.add(objetivos);
 
-        getContentPane().add(objetivos, BorderLayout.EAST);
+        JLabel textoObjetivos = new JLabel();
+        if(n.getObjetivoCaramelo()!=3){
+            textoObjetivos.setText(String.valueOf(n.getObjetivoCaramelo()));
+            textoObjetivos.setBounds(150, 328, 80, 80);
+            textoObjetivos.setHorizontalAlignment(SwingConstants.CENTER);
+            textoObjetivos.setForeground(Color.black);
+            textoObjetivos.setOpaque(false);
+            textoObjetivos.setFont(new Font("TimesRoman", Font.BOLD, 65));
+            //textoObjetivos.setBackground(Color.BLACK);
+            labelInfo.add(textoObjetivos);
+        }
+
+        JLabel textoMovimientos = new JLabel();
+        textoMovimientos.setText("Mov:");
+        textoMovimientos.setBounds(30, 430, 120, 120);
+        textoMovimientos.setHorizontalAlignment(SwingConstants.CENTER);
+        textoMovimientos.setForeground(Color.black);
+        textoMovimientos.setOpaque(false);
+        textoMovimientos.setFont(new Font("TimesRoman", Font.BOLD, 40));
+        //textoMovimientos.setBackground(Color.BLACK);
+        labelInfo.add(textoMovimientos);
+
+
+        getContentPane().add(labelInfo, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
         pack();
         getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
         setVisible(true);
-    }*/
 
+
+
+    
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*this.juego = juego;
+    
+            setResizable(false);
+            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setLayout(new BorderLayout());
+    
+            jugador = new JLabel();
+            jugador.setOpaque(false);
+            jugador.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED,8));
+            jugador.setBounds(Utils.labelSpacing, Utils.labelSpacing, Utils.labelWidth, Utils.labelHeight);
+
+            panel = new Panel(juego, jugador);
+            panel.add(jugador);
+
+            JLabel objetivos = new JLabel();
+            objetivos.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+            objetivos.setOpaque(true);
+            objetivos.setBackground(Color.PINK);
+
+            labelInfo = new JPanel();
+            labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
+            labelInfo.setOpaque(true);
+            tiempo=new JLabel();
+            tiempo.setSize(labelInfo.getWidth(), HEIGHT);
+            tiempo.setOpaque(true);
+
+            tiempo.setBackground(Color.BLACK);
+            labelInfo.add(tiempo,BorderLayout.PAGE_START);
+
+            vidas=new JLabel();
+            labelInfo.add(vidas);
+            setVisible(true);
+
+            movimientos=new JLabel();
+            labelInfo.add(movimientos);
+            setVisible(true);
+
+            objetivoEyG=new JLabel();
+            labelInfo.add(objetivoEyG);
+            setVisible(true);
+
+            objetivoG=new JLabel();
+            labelInfo.add(objetivoG);
+            setVisible(true);
+
+            objetivoC=new JLabel();
+            labelInfo.add(objetivoC);
+            setVisible(true);
+
+            getContentPane().add(objetivos, BorderLayout.EAST);
+            getContentPane().add(panel, BorderLayout.CENTER);
+            pack();
+            getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
+            setVisible(true);
+    }*/
+    }
     public void insertarEntidadGrafica(EntidadGrafica eg) {
         if(eg != null) {
             int eg_X = eg.getX();
@@ -108,22 +220,24 @@ public class GUI extends JFrame{
         movimientos.setText("Movimientos Restantes: "+String.valueOf(n.getMov()));
         vidas.setText("Vidas: "+String.valueOf(n.getVidas()));
 
-        
-
-        objetivoEyG.setText("Gelatinas/Envueltos: "+String.valueOf(n.getObjetivoGelOEnv()));
+        objetivoEyG.setText("Candy Crush/Gelatinas/Envueltos: "+String.valueOf(n.getObjetivoGelOEnv()));
         objetivoG.setText("Glaseados: "+String.valueOf(n.getObjetivoGlaseado()));
 
         JLabel obj = new JLabel();
-        ImageIcon ico = new ImageIcon("Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
+        ImageIcon ico = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
         Image img = ico.getImage();
         Image new_img = img.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
         obj.setIcon(new ImageIcon(new_img));
         objetivoC.setText("Caramelos: "+String.valueOf(n.getObjetivoCaramelo()));
         labelInfo.add(obj);
     }
-    
+
     public void notificarTiempo(int t){
         tiempo.setText(String.valueOf(t/60)+":"+String.valueOf(t%60));
         tiempo.setHorizontalTextPosition(SwingConstants.CENTER);
     }
+
+    //public void actualizar(){
+
+    //}
 }

@@ -71,4 +71,12 @@ public class Juego{
     public Nivel getNivel(){
         return miNivel;
     }
+
+    public int NivelActual(){
+        return miNivel.getNivel();
+    }
+
+    //public void actualizarPantalla(){
+        //GUI.actualizar();
+    //}
 }

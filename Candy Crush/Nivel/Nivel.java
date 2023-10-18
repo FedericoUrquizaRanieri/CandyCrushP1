@@ -10,7 +10,7 @@ public class Nivel{
     //Atributos
     protected Juego miJuego;
     protected int nivel;
-    protected int vidas=3;
+    protected int vidas = 3;
     protected int tiempo;
     protected int movimientos;
     protected int objetivoCaramelo;
@@ -106,6 +106,10 @@ public class Nivel{
         movimientos--;
         if(movimientos==0)
             vidas--;
+    }
+
+    public int getNivel(){
+        return nivel;
     }
 
 
