@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.*;
 
 import Entidad.Entidad;
+import GUI.Threads.AnimadorCaida;
 import Juego.Juego;
 import Nivel.Nivel;
 import utils.Utils;
@@ -51,6 +52,10 @@ public class GUI extends JFrame{
         NivelActual.setForeground(Color.WHITE);
         NivelActual.setHorizontalAlignment(SwingConstants.CENTER);
         NivelActual.setFont(new Font("TimesRoman", Font.BOLD, 65));
+        labelInfo.add(NivelActual);
+
+        
+        NivelActual.setText(String.valueOf(n.getNivel()));
         labelInfo.add(NivelActual);
 
         tiempo = new JLabel();
@@ -131,8 +136,8 @@ public class GUI extends JFrame{
             int eg_Y = eg.getY();
             eg.setLocation(eg_X, eg_Y); // Para la animacion poner donde va eg_Y el valor -50
             panel.add(eg);
-//            AnimadorCaida animadorCaida = new AnimadorCaida(eg, eg_X, eg_Y, 1);
-//            animadorCaida.start();
+            //AnimadorCaida animadorCaida = new AnimadorCaida(eg, eg_X, eg_Y, 1);
+            //animadorCaida.start();
         }
     }
 
@@ -150,6 +155,9 @@ public class GUI extends JFrame{
         Image img = ico.getImage();
         Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         FotoObjetivo.setIcon(new ImageIcon(new_img));
+
+        NivelActual.setText(String.valueOf(n.getNivel()));
+        labelInfo.add(NivelActual);
 
         if(n.getObjetivoCaramelo()>0){
             ImageIcon iconoCaramelo = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");

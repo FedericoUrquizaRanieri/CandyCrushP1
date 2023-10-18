@@ -2,6 +2,7 @@ package Juego;
 import java.awt.EventQueue;
 
 import GUI.GUI;
+import GUI.Panel;
 import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Color;
@@ -29,21 +30,19 @@ public class Juego{
 
     //Metodos
     public void regenerar(int nivel){
-        while(!miGUI.getPanel().getAnimacionesPendientes()){
-
-        }
-            miTablero.vaciarTablero();
-
-            miGenerador.parseLvl(nivel,miTablero,miNivel);
-            miGUI.notificarMovimiento();
+        miTablero.vaciarTablero();
+        miGenerador.parseLvl(nivel,miTablero,miNivel);
+        miGUI.notificarMovimiento();
+        
     }
-
+        
     public boolean moverCursor(int x,int y){
         return miTablero.setPosJugadorX(x) & miTablero.setPosJugadorY(y);
     }
 
     public void swap(int x, int y) {
         miTablero.swap(x, y);
+        miNivel.restarMov();
     }
 
     public GUI getMiGUI() {

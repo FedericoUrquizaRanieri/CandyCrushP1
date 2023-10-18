@@ -133,7 +133,7 @@ public class Tablero{
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
                 if (grilla[i][j] != null)
-                    grilla[i][j].destruirse(this); 
+                   grilla[i][j].destruirse(this); 
             }
         }
     }

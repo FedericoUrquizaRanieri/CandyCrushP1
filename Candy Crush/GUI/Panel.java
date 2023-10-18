@@ -15,7 +15,7 @@ public class Panel extends JPanel {
     protected int posX;
     protected int posY;
     protected int animacionesPendientes;
-    protected boolean bloquearIntercambios;
+    protected static boolean bloquearIntercambios;
     protected CentralAnimaciones centralAnimaciones;
 
     public Panel(Juego juego, JLabel jugador) {
@@ -123,6 +123,10 @@ public class Panel extends JPanel {
     public void terminoAnimacion() {
         bloquearIntercambios = false;
     }
+
+    /*public static boolean getBloquearIntercambios(){
+        return bloquearIntercambios;
+    }*/
 
     public boolean getAnimacionesPendientes(){
         return centralAnimaciones.AnimacionesActivas();

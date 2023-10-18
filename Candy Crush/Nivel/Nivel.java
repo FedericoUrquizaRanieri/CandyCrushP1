@@ -99,6 +99,7 @@ public class Nivel{
         objetivoGlaseado--;
         miJuego.getMiGUI().notificarMovimiento();
         if(objetivoGlaseado==0){
+
             miJuego.regenerar(++nivel);
         }
     }
@@ -113,8 +114,7 @@ public class Nivel{
         movimientos--;
         miJuego.getMiGUI().notificarMovimiento();
         if(movimientos==0){
-            vidas--;
-;
+            restarVida();
         }
     }
 
