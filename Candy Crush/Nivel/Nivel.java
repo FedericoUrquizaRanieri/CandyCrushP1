@@ -89,37 +89,39 @@ public class Nivel{
     public void restarCaramelo(Color c){
         if(c==tipoCaramelo){
             objetivoCaramelo--;
+            miJuego.getMiGUI().notificarMovimiento();
             if(objetivoCaramelo==0){
                 miJuego.regenerar(++nivel);
-                miJuego.getMiGUI().notificarMovimiento();
             }
         }
     }
     public void restarGlaseado(){
         objetivoGlaseado--;
+        miJuego.getMiGUI().notificarMovimiento();
         if(objetivoGlaseado==0){
             miJuego.regenerar(++nivel);
-            miJuego.getMiGUI().notificarMovimiento();
         }
     }
     public void restarGelOEnv(){
         objetivoGelOEnv--;
+        miJuego.getMiGUI().notificarMovimiento();
         if(objetivoGelOEnv==0){
             miJuego.regenerar(++nivel);
-            miJuego.getMiGUI().notificarMovimiento();
         }
     }
     public void restarMov(){
         movimientos--;
+        miJuego.getMiGUI().notificarMovimiento();
         if(movimientos==0){
             vidas--;
-            miJuego.getMiGUI().notificarMovimiento();
+;
         }
     }
 
     public int getNivel(){
         return nivel;
     }
+
 
 
 }

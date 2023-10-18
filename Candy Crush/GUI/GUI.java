@@ -2,10 +2,10 @@ package GUI;
 
 import javax.swing.*;
 
+import Entidad.Entidad;
 import Juego.Juego;
 import Nivel.Nivel;
 import utils.Utils;
-
 import java.awt.*;
 
 public class GUI extends JFrame{
@@ -16,10 +16,9 @@ public class GUI extends JFrame{
     protected JLabel NivelActual;
     protected JLabel tiempo;
     protected JLabel vidas;
-    protected JLabel objetivoC;
+    protected JLabel objetivo;
     protected JLabel movimientos;
-    protected JLabel objetivoG;
-    protected JLabel objetivoEyG;
+    protected JLabel FotoObjetivo;
 
     public GUI(Juego juego) {
 
@@ -38,7 +37,6 @@ public class GUI extends JFrame{
         panel = new Panel(juego, jugador);
         panel.add(jugador);
   
-
         labelInfo = new JLabel();
         labelInfo.setLayout(null);
         labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
@@ -50,60 +48,57 @@ public class GUI extends JFrame{
         NivelActual = new JLabel();
         NivelActual.setText(String.valueOf(n.getNivel()));
         NivelActual.setBounds(250, 0, 80, 80);
+        NivelActual.setForeground(Color.WHITE);
         NivelActual.setHorizontalAlignment(SwingConstants.CENTER);
         NivelActual.setFont(new Font("TimesRoman", Font.BOLD, 65));
         labelInfo.add(NivelActual);
 
+        tiempo = new JLabel();
+        tiempo.setText("00:00");
+        tiempo.setBounds(47, 0, 250, 250);
+        tiempo.setHorizontalAlignment(SwingConstants.CENTER);
+        tiempo.setForeground(Color.WHITE);
+        tiempo.setOpaque(false);
+        tiempo.setFont(new Font("TimesRoman", Font.BOLD, 85));
+        labelInfo.add(tiempo);
 
 
         ImageIcon imagenVida = new ImageIcon("Candy Crush/Imagenes/Extras/Vidas.png");
-        JLabel vidas = new JLabel();
-        vidas.setBounds(35, 200, 80, 80);
-        vidas.setIcon(new ImageIcon(imagenVida.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+        JLabel fotoVidas = new JLabel();
+        fotoVidas.setBounds(35, 200, 80, 80);
+        fotoVidas.setIcon(new ImageIcon(imagenVida.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+        labelInfo.add(fotoVidas);
+
+        vidas = new JLabel();
+        vidas.setText(String.valueOf(n.getVidas()));
+        vidas.setBounds(150, 190, 80, 80);
+        vidas.setHorizontalAlignment(SwingConstants.CENTER);
+        vidas.setForeground(Color.WHITE);
+        vidas.setOpaque(false);
+        vidas.setFont(new Font("TimesRoman", Font.BOLD, 65));
         labelInfo.add(vidas);
-
-        JLabel textoVidas = new JLabel();
-        textoVidas.setText(String.valueOf(n.getVidas()));
-        textoVidas.setBounds(150, 190, 80, 80);
-        textoVidas.setHorizontalAlignment(SwingConstants.CENTER);
-        textoVidas.setForeground(Color.black);
-        textoVidas.setOpaque(false);
-        textoVidas.setFont(new Font("TimesRoman", Font.BOLD, 65));
-        //textoVidas.setBackground(Color.BLACK);
-        labelInfo.add(textoVidas);
-
-
-
-        ImageIcon imagenCaramelo = new ImageIcon("Candy Crush/Imagenes/Rayados/RayadosH/AMARILLO.png");
-        JLabel objetivos = new JLabel();
-        objetivos.setBounds(35, 333, 80, 80);
-        objetivos.setIcon(new ImageIcon(imagenCaramelo.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
-        objetivos.setOpaque(false);
-        //objetivos.setBackground(Color.black);
-        labelInfo.add(objetivos);
-
-        JLabel textoObjetivos = new JLabel();
-        if(n.getObjetivoCaramelo()!=3){
-            textoObjetivos.setText(String.valueOf(n.getObjetivoCaramelo()));
-            textoObjetivos.setBounds(150, 328, 80, 80);
-            textoObjetivos.setHorizontalAlignment(SwingConstants.CENTER);
-            textoObjetivos.setForeground(Color.black);
-            textoObjetivos.setOpaque(false);
-            textoObjetivos.setFont(new Font("TimesRoman", Font.BOLD, 65));
-            //textoObjetivos.setBackground(Color.BLACK);
-            labelInfo.add(textoObjetivos);
-        }
-
+        
+     
         JLabel textoMovimientos = new JLabel();
         textoMovimientos.setText("Mov:");
         textoMovimientos.setBounds(30, 430, 120, 120);
         textoMovimientos.setHorizontalAlignment(SwingConstants.CENTER);
-        textoMovimientos.setForeground(Color.black);
+        textoMovimientos.setForeground(Color.white);
         textoMovimientos.setOpaque(false);
         textoMovimientos.setFont(new Font("TimesRoman", Font.BOLD, 40));
-        //textoMovimientos.setBackground(Color.BLACK);
         labelInfo.add(textoMovimientos);
+
+        movimientos = new JLabel();
+        movimientos.setText("7");
+        movimientos.setBounds(150, 430, 120, 120);
+        movimientos.setHorizontalAlignment(SwingConstants.CENTER);
+        movimientos.setForeground(Color.white);
+        movimientos.setOpaque(false);
+        movimientos.setFont(new Font("TimesRoman", Font.BOLD, 40));
+        labelInfo.add(movimientos);
         
+       
+
 
         getContentPane().add(labelInfo, BorderLayout.EAST);
         getContentPane().add(panel, BorderLayout.CENTER);
@@ -112,89 +107,24 @@ public class GUI extends JFrame{
         setVisible(true);
 
 
+        ImageIcon imagenCaramelo = new ImageIcon("Candy Crush/Imagenes/Caramelos/amarillo.png");
+        FotoObjetivo = new JLabel();
+        FotoObjetivo.setBounds(35, 333, 80, 80);
+        FotoObjetivo.setIcon(new ImageIcon(imagenCaramelo.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH)));
+        FotoObjetivo.setOpaque(false);
+        labelInfo.add(FotoObjetivo);
 
+        objetivo = new JLabel();
+        objetivo.setText(String.valueOf(2));
+        objetivo.setBounds(150, 328, 80, 80);
+        objetivo.setHorizontalAlignment(SwingConstants.CENTER);
+        objetivo.setForeground(Color.WHITE);
+        objetivo.setOpaque(false);
+        objetivo.setFont(new Font("TimesRoman", Font.BOLD, 65));
+        labelInfo.add(objetivo);
     
-    
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /*this.juego = juego;
-    
-            setResizable(false);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
-            setLayout(new BorderLayout());
-    
-            jugador = new JLabel();
-            jugador.setOpaque(false);
-            jugador.setBorder(BorderFactory.createLineBorder(java.awt.Color.RED,8));
-            jugador.setBounds(Utils.labelSpacing, Utils.labelSpacing, Utils.labelWidth, Utils.labelHeight);
-
-            panel = new Panel(juego, jugador);
-            panel.add(jugador);
-
-            JLabel objetivos = new JLabel();
-            objetivos.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-            objetivos.setOpaque(true);
-            objetivos.setBackground(Color.PINK);
-
-            labelInfo = new JPanel();
-            labelInfo.setPreferredSize(new Dimension(Utils.panelWidth()/2, Utils.panelHeight()));
-            labelInfo.setOpaque(true);
-            tiempo=new JLabel();
-            tiempo.setSize(labelInfo.getWidth(), HEIGHT);
-            tiempo.setOpaque(true);
-
-            tiempo.setBackground(Color.BLACK);
-            labelInfo.add(tiempo,BorderLayout.PAGE_START);
-
-            vidas=new JLabel();
-            labelInfo.add(vidas);
-            setVisible(true);
-
-            movimientos=new JLabel();
-            labelInfo.add(movimientos);
-            setVisible(true);
-
-            objetivoEyG=new JLabel();
-            labelInfo.add(objetivoEyG);
-            setVisible(true);
-
-            objetivoG=new JLabel();
-            labelInfo.add(objetivoG);
-            setVisible(true);
-
-            objetivoC=new JLabel();
-            labelInfo.add(objetivoC);
-            setVisible(true);
-
-            getContentPane().add(objetivos, BorderLayout.EAST);
-            getContentPane().add(panel, BorderLayout.CENTER);
-            pack();
-            getContentPane().add(new JLabel(new ImageIcon("Candy Crush/Imagenes/fondo.png")));
-            setVisible(true);
-    }*/
     }
+    
     public void insertarEntidadGrafica(EntidadGrafica eg) {
         if(eg != null) {
             int eg_X = eg.getX();
@@ -210,28 +140,44 @@ public class GUI extends JFrame{
         return panel;
     }
 
+    Nivel n;
     public void notificarMovimiento(){
-        /*Nivel n = juego.getNivel();
-        movimientos.setText("Movimientos Restantes: "+String.valueOf(n.getMov()));
-        vidas.setText("Vidas: "+String.valueOf(n.getVidas()));
+        n = juego.getNivel();
+        movimientos.setText(String.valueOf(n.getMov()));
+        vidas.setText(String.valueOf(n.getVidas()));
 
-        objetivoEyG.setText("Candy Crush/Gelatinas/Envueltos: "+String.valueOf(n.getObjetivoGelOEnv()));
-        objetivoG.setText("Glaseados: "+String.valueOf(n.getObjetivoGlaseado()));
-
-        JLabel obj = new JLabel();
         ImageIcon ico = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
         Image img = ico.getImage();
-        Image new_img = img.getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        obj.setIcon(new ImageIcon(new_img));
-        objetivoC.setText("Caramelos: "+String.valueOf(n.getObjetivoCaramelo()));
-        labelInfo.add(obj);
-        */
+        Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        FotoObjetivo.setIcon(new ImageIcon(new_img));
+
+        if(n.getObjetivoCaramelo()>0){
+            ImageIcon iconoCaramelo = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
+            Image imgagenCaramlo = ico.getImage();
+            Image new_imgCaramelo = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+            FotoObjetivo.setIcon(new ImageIcon(new_img));
+            objetivo.setText(String.valueOf(n.getObjetivoCaramelo()));
+        }
+        else{
+            if(n.getObjetivoGelOEnv()>0){
+                ImageIcon iconoCaramelo = new ImageIcon("Candy Crush/Imagenes/Extras/Gelatina.png");
+                Image imgagenCaramlo = ico.getImage();
+                Image new_imgCaramelo = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                FotoObjetivo.setIcon(new ImageIcon(new_img));
+                objetivo.setText(String.valueOf(n.getObjetivoGelOEnv()));
+            }
+            else{
+                ImageIcon iconoCaramelo = new ImageIcon("Candy Crush/Imagenes/Extras/Merengue.png");
+                Image imgagenCaramlo = ico.getImage();
+                Image new_imgCaramelo = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+                FotoObjetivo.setIcon(new ImageIcon(new_img));
+                objetivo.setText(String.valueOf(n.getObjetivoGlaseado()));
+            }
+        }        
     }
 
     public void notificarTiempo(int t){
-        /*
         tiempo.setText(String.valueOf(t/60)+":"+String.valueOf(t%60));
         tiempo.setHorizontalTextPosition(SwingConstants.CENTER);
-        */
     }
 }
