@@ -16,6 +16,9 @@ public class Glaseado extends Entidad{
     public boolean se_destruye_con(Entidad entidad) {
         return entidad.se_destruyen(this);
     }
+    public void chequeoDestruccion(Tablero tablero){
+        destruirse(tablero);
+    }
     public boolean se_destruyen(Caramelo caramelo) {
         return false;
     }

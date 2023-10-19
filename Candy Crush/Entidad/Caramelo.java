@@ -19,17 +19,17 @@ public class Caramelo extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        if(t.getEntidad(fila-1,columna) != null && t.getEntidad(fila-1,columna).getColor() == Color.NEGRO){
-            t.getEntidad(fila-1,columna).destruirse(t);
+        if(t.getEntidad(fila-1,columna) != null){
+            t.getEntidad(fila-1,columna).chequeoDestruccion(t);
         }
-        if(t.getEntidad(fila+1,columna) != null && t.getEntidad(fila+1,columna).getColor() == Color.NEGRO){
-            t.getEntidad(fila+1,columna).destruirse(t);
+        if(t.getEntidad(fila+1,columna) != null){
+            t.getEntidad(fila+1,columna).chequeoDestruccion(t);
         }
-        if(t.getEntidad(fila,columna+1) != null && t.getEntidad(fila,columna+1).getColor() == Color.NEGRO){
-            t.getEntidad(fila,columna+1).destruirse(t);
+        if(t.getEntidad(fila,columna+1) != null){
+            t.getEntidad(fila,columna+1).chequeoDestruccion(t);
         }
-        if(t.getEntidad(fila,columna-1) != null && t.getEntidad(fila,columna-1).getColor() == Color.NEGRO){
-            t.getEntidad(fila,columna-1).destruirse(t);
+        if(t.getEntidad(fila,columna-1) != null){
+            t.getEntidad(fila,columna-1).chequeoDestruccion(t);
         }
         t.getGrilla()[fila][columna] = null;
         t.notificarDestruccion(this.color);
