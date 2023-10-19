@@ -141,42 +141,46 @@ public class GUI extends JFrame{
         Nivel n = juego.getNivel();
         movimientos.setText(String.valueOf(n.getMov()));
         vidas.setText(String.valueOf(n.getVidas()));
-
-        ImageIcon ico = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
-        Image img = ico.getImage();
-        Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-        FotoObjetivo.setIcon(new ImageIcon(new_img));
-
+ 
         NivelActual.setText(String.valueOf("Nivel "+n.getNivel()));
-      
 
+        ImageIcon ico = new ImageIcon();
+      
         if(n.getObjetivoCaramelo()>0){
             ico = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
-            img = ico.getImage();
-            new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-            FotoObjetivo.setIcon(new ImageIcon(new_img));
             objetivo.setText(String.valueOf(n.getObjetivoCaramelo()));
-           
-
         }
         else{
             if(n.getObjetivoGelOEnv()>0){
                 ico = new ImageIcon("Candy Crush/Imagenes/Extras/Gelatina.png");
-                img = ico.getImage();
-                new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-                FotoObjetivo.setIcon(new ImageIcon(new_img));
                 objetivo.setText(String.valueOf(n.getObjetivoGelOEnv()));
-               
             }
             else{
                 ico = new ImageIcon("Candy Crush/Imagenes/Extras/Merengue.png");
-                img = ico.getImage();
-                new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-                FotoObjetivo.setIcon(new ImageIcon(new_img));
                 objetivo.setText(String.valueOf(n.getObjetivoGlaseado()));
-
             }
-        }        
+            }
+        
+        Image img = ico.getImage();
+        Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        FotoObjetivo.setIcon(new ImageIcon(new_img)); 
+    }
+          
+   
+    
+
+    public void notificarObjetivoCaramelo(){
+        Nivel n = juego.getNivel();
+        objetivo.setText(String.valueOf(n.getObjetivoCaramelo()));
+    }
+
+    public void notificarObjetivoGelOEnv(){
+         Nivel n = juego.getNivel();
+        objetivo.setText(String.valueOf(n.getObjetivoGelOEnv()));
+    }
+    public void notificarObjetivoGlaseado(){
+        Nivel n = juego.getNivel();
+        objetivo.setText(String.valueOf(n.getObjetivoGlaseado()));
     }
 
     public void notificarTiempo(int t){
