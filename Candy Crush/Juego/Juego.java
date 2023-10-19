@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import GUI.GUI;
-import GUI.Panel;
 import Nivel.Nivel;
 import Tablero.Tablero;
 import Entidad.Color;
@@ -28,7 +27,10 @@ public class Juego{
     }
 
     public void notificarDestruccion(Color color) {
-        miNivel.restarCaramelo(color);
+        if(color==Color.NEGRO)
+            miNivel.restarGlaseado();
+        else
+            miNivel.restarCaramelo(color);
     }
 
     //Metodos
@@ -86,6 +88,6 @@ public class Juego{
             JOptionPane.showMessageDialog(null, "Has pasado de nivel", "Felicidades!", JOptionPane.INFORMATION_MESSAGE, icon);
             miNivel.setNivel(NivelActual()+1);
             regenerar(NivelActual());
-        }
+        } 
     }
 }

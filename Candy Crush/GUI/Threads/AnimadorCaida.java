@@ -20,7 +20,6 @@ public class AnimadorCaida extends Thread implements Animador{
     public void run() {
         int posY = entidadGrafica.getY();
         boolean stopY = posY == toY;
-        int step = 3;
 
         while(!stopY) {
             posY++;

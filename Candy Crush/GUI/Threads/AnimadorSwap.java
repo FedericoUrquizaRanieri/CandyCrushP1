@@ -2,8 +2,6 @@ package GUI.Threads;
 
 import GUI.EntidadGrafica;
 
-import static java.lang.Thread.sleep;
-
 public class AnimadorSwap extends Thread implements Animador{
 
     protected EntidadGrafica entidadGrafica1;

@@ -1,9 +1,6 @@
 package GUI;
 
 import javax.swing.*;
-
-import Entidad.Entidad;
-import GUI.Threads.AnimadorCaida;
 import Juego.Juego;
 import Nivel.Nivel;
 import utils.Utils;
