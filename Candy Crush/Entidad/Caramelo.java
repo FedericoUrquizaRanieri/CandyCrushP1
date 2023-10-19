@@ -33,7 +33,7 @@ public class Caramelo extends Entidad{
         }
         t.getGrilla()[fila][columna] = null;
         t.notificarDestruccion(this.color);
-        eg.destruirse();
+        eg.notificarDestruccion();
     }
 
     public boolean se_destruye_con(Entidad entidad) {

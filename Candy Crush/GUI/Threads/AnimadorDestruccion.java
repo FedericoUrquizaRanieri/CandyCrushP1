@@ -1,5 +1,7 @@
 package GUI.Threads;
 
+import javax.swing.ImageIcon;
+
 import GUI.EntidadGrafica;
 
 public class AnimadorDestruccion extends Thread implements Animador{
@@ -12,11 +14,14 @@ public class AnimadorDestruccion extends Thread implements Animador{
     }
 
     public void run() {
+        entidadGrafica.setIcon(new ImageIcon("Candy Crush/Imagenes/Extras/Explosion.gif"));
+        entidadGrafica.repaint();
         try {
-            sleep(10);
+            sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        entidadGrafica.destruirse();
         manager.terminoAnimacion(this);
     }
 

@@ -63,7 +63,7 @@ public class Gelatina extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        eg.destruirse();
+        eg.notificarDestruccion();
         caramelo.destruirse(t);
         t.getGrilla()[fila][columna] = null;
         t.notificarDestruccion(color);

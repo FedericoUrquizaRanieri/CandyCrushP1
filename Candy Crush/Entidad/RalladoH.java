@@ -18,7 +18,7 @@ public class RalladoH extends Caramelo{
                 }
             }
             t.getGrilla()[fila][columna] = null;
-            eg.destruirse();
+            eg.notificarDestruccion();
         }
     }
 

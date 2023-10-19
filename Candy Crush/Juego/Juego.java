@@ -84,6 +84,8 @@ public class Juego{
 
     public void animacionesTerminadas(){
         if(miNivel.objetivosTerminados()){
+            ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
+            JOptionPane.showMessageDialog(null, "Pasaste de nivel","Felicidades!", JOptionPane.PLAIN_MESSAGE, icono);
             miNivel.setNivel(NivelActual()+1);
             regenerar(NivelActual());
         } 

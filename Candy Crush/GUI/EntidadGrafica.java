@@ -37,5 +37,7 @@ public class EntidadGrafica extends JLabel{
     public void notificarCaida(int toX, int toY) {
         panel.animarCaida(this, toX, toY);
     }
-
+    public void notificarDestruccion(){
+        panel.animarDestruccion(this);
+    }
 }

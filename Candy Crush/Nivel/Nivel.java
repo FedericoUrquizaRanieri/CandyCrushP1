@@ -39,7 +39,7 @@ public class Nivel{
                 if (tiempo > 0) {
                     tiempo--;
                     if(miJuego.getMiGUI()!=null)
-                    miJuego.getMiGUI().notificarTiempo(tiempo);
+                        miJuego.getMiGUI().notificarTiempo(tiempo);
                 }
                 else {
                     restarVida();
@@ -50,10 +50,12 @@ public class Nivel{
     public void restarVida(){
         vidas--;
         if(vidas==0){
+            nivel=1;
             miJuego.regenerar(1);
             vidas=3;
         }
-        miJuego.regenerar(nivel);
+        else
+            miJuego.regenerar(nivel);
     }
     public int getVidas(){
         return vidas;

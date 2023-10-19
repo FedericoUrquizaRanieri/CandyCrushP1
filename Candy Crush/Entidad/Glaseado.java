@@ -9,7 +9,7 @@ public class Glaseado extends Entidad{
     }
     public void destruirse(Tablero t){
         t.getGrilla()[fila][columna] = null;
-        eg.destruirse();
+        eg.notificarDestruccion();
         eg = null;
         t.notificarDestruccion(this.color);
     }
