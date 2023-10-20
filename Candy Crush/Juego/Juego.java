@@ -27,10 +27,15 @@ public class Juego{
     }
 
     public void notificarDestruccion(Color color) {
-        if(color==Color.NEGRO)
-            miNivel.restarGlaseado();
-        else
-            miNivel.restarCaramelo(color);
+        miNivel.restarCaramelo(color);
+    }
+
+    public void notificarDestruccionGeloEnv() {
+        miNivel.restarGelOEnv();
+    }
+
+    public void notificarDestruccionGlaseado() {
+        miNivel.restarGlaseado();
     }
 
     //Metodos
@@ -71,11 +76,11 @@ public class Juego{
             miNivel.setNivel(NivelActual()+1);
             if(miNivel.getNivel() != 6){
                 ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
-                JOptionPane.showMessageDialog(null, "Finalizaste pasaste de nivel", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null, "Pasaste de nivel", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
                 regenerar(NivelActual());
             }
             else{
-                ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
+                ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/Rana.gif");
                 JOptionPane.showMessageDialog(null, "Finalizaste el juego", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
                 miGUI.setVisible(false);
                 miGUI.dispatchEvent(new WindowEvent(miGUI, WindowEvent.WINDOW_CLOSING));

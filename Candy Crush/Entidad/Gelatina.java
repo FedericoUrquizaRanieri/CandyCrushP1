@@ -66,6 +66,7 @@ public class Gelatina extends Entidad{
         }
         eg.destruirse();
         caramelo.destruirse(t);
+        t.notificarDestruccionGeloEnv();
         destruida = true;
     }
     public boolean se_destruye_con(Entidad entidad) {

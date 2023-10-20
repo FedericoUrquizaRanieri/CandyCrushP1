@@ -10,7 +10,7 @@ public class Glaseado extends Entidad{
     public void destruirse(Tablero t){
         destruida = true;
         eg.destruirse();
-        t.notificarDestruccion(this.color);
+        t.notificarDestruccionGlaseado();
     }
     public boolean se_destruye_con(Entidad entidad) {
         return entidad.se_destruyen(this);

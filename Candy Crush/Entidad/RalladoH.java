@@ -18,6 +18,7 @@ public class RalladoH extends Caramelo{
                 }
             }
             destruida = true;
+            t.notificarDestruccion(this.color);
             eg.destruirse();
         }
     }

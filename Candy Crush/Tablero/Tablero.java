@@ -92,6 +92,17 @@ public class Tablero{
 
     public void notificarDestruccion(Color color) {
         miJuego.notificarDestruccion(color);
+        System.out.println("Rompi un caramelo");
+    }
+
+    public void notificarDestruccionGeloEnv() {
+        miJuego.notificarDestruccionGeloEnv();
+        System.out.println("Rompi una gelatina o envuelto");
+    }
+
+    public void notificarDestruccionGlaseado() {
+        miJuego.notificarDestruccionGlaseado();
+        System.out.println("Rompi un glaseado");
     }
 
     public void mostrarGrilla() {
@@ -217,10 +228,10 @@ public class Tablero{
         Gelatina g= new Gelatina(x,y,c);
         grilla[x][y]=g;
         EntidadGrafica eg = new EntidadGrafica(x, y, g.getCaramelo(), miJuego.getMiGUI().getPanel());
-        g.getCaramelo().setEntidadGrafica(eg);
         miJuego.getMiGUI().insertarEntidadGrafica(eg);
         EntidadGrafica eg1 = new EntidadGrafica(x, y, g, miJuego.getMiGUI().getPanel());
         g.setEntidadGrafica(eg1);
+        g.getCaramelo().setEntidadGrafica(eg);
         miJuego.getMiGUI().insertarEntidadGrafica(eg1);
     }
     public void ponerGlaseado(int x, int y){
@@ -229,6 +240,5 @@ public class Tablero{
         EntidadGrafica eg = new EntidadGrafica(x, y, e, miJuego.getMiGUI().getPanel());
         e.setEntidadGrafica(eg);
         miJuego.getMiGUI().insertarEntidadGrafica(eg);
-    }
-  
+    } 
 }
