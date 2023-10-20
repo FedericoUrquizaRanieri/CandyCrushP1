@@ -21,10 +21,8 @@ public class EntidadGrafica extends JLabel{
     }
 
     public void destruirse() {
-        //panel.animarDestruccion(this);
+        panel.animarDestruccion(this);
         entidad = null;
-        panel.remove(this);
-        panel.repaint();
     }
 
     public Entidad getEntidad() {

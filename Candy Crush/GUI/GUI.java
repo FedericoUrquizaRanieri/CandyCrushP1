@@ -127,8 +127,6 @@ public class GUI extends JFrame{
             int eg_Y = eg.getY();
             eg.setLocation(eg_X, eg_Y); // Para la animacion poner donde va eg_Y el valor -50
             panel.add(eg);
-            //AnimadorCaida animadorCaida = new AnimadorCaida(eg, eg_X, eg_Y, 1);
-            //animadorCaida.start();
         }
     }
 
