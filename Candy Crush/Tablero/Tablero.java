@@ -81,7 +81,6 @@ public class Tablero{
                 ordenarColumnas();
                 mostrarGrilla();
             } else if ((chequeoMovimiento(x, y) | chequeoMovimiento(posJugadorX, posJugadorY))) {
-                ordenarColumnas();
                 mostrarGrilla();
             } else {
                 e1.cambiarPosicionCon(e2, this);
@@ -214,6 +213,7 @@ public class Tablero{
             especialCreado.setEntidadGrafica(eg);
             miJuego.asociar_entidad_grafica(eg);
         }
+        ordenarColumnas();
         return huboCambios;
     }
 

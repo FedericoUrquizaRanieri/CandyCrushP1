@@ -43,7 +43,6 @@ public class Juego{
         miTablero.vaciarTablero();
         miGenerador.parseLvl(nivel,miTablero,miNivel);
         miGUI.notificarMovimiento();
-
     }
 
     public boolean moverCursor(int x,int y){
@@ -75,15 +74,22 @@ public class Juego{
         if(miNivel.objetivosTerminados()){
             miNivel.setNivel(NivelActual()+1);
             if(miNivel.getNivel() != 6){
+                regenerar(NivelActual());
                 ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
                 JOptionPane.showMessageDialog(null, "Pasaste de nivel", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
-                regenerar(NivelActual());
             }
             else{
                 ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/Rana.gif");
                 JOptionPane.showMessageDialog(null, "Finalizaste el juego", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
                 miGUI.setVisible(false);
                 miGUI.dispatchEvent(new WindowEvent(miGUI, WindowEvent.WINDOW_CLOSING));
+            }
+        } else {
+            boolean stop = false;
+            for (int i = 0; i < miTablero.getDimension() && !stop; i++) {
+                for (int j = 0; j < miTablero.getDimension() && !stop; j++) {
+                    stop = miTablero.chequeoMovimiento(i,j);
+                }
             }
         }
     }

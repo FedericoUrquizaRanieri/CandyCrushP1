@@ -44,7 +44,7 @@ public class AnimadorSwap extends Thread implements Animador{
             stopX = cursorX1 == eg1_toX;
             stopY = cursorY1 == eg1_toY;
             try {
-                sleep(3);
+                sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
