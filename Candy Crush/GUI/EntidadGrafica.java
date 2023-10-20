@@ -18,13 +18,13 @@ public class EntidadGrafica extends JLabel{
         Image new_img = img.getScaledInstance(Utils.labelWidth, Utils.labelHeight, Image.SCALE_SMOOTH);
         setIcon(new ImageIcon(new_img));
         setBounds(Utils.labelPositionX(y),Utils.labelPositionY(x), Utils.labelWidth, Utils.labelHeight);
-        setOpaque(false);
     }
 
     public void destruirse() {
-        setIcon(null);
+        //panel.animarDestruccion(this);
         entidad = null;
         panel.remove(this);
+        panel.repaint();
     }
 
     public Entidad getEntidad() {

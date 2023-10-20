@@ -17,7 +17,7 @@ public class AnimadorDestruccion extends Thread implements Animador{
         entidadGrafica.setIcon(new ImageIcon("Candy Crush/Imagenes/Extras/Explosion.gif"));
         entidadGrafica.repaint();
         try {
-            sleep(100);
+            sleep(20);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

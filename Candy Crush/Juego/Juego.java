@@ -1,8 +1,8 @@
 package Juego;
 import java.awt.EventQueue;
+import java.awt.event.WindowEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import GUI.GUI;
 import Nivel.Nivel;
@@ -38,9 +38,9 @@ public class Juego{
         miTablero.vaciarTablero();
         miGenerador.parseLvl(nivel,miTablero,miNivel);
         miGUI.notificarMovimiento();
-        
+
     }
-        
+
     public boolean moverCursor(int x,int y){
         return miTablero.setPosJugadorX(x) & miTablero.setPosJugadorY(y);
     }
@@ -58,18 +58,6 @@ public class Juego{
         miGUI.insertarEntidadGrafica(entidadGrafica);
     }
 
-    public static void main(String [] args) {
-		EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                	new Juego();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-	}
-
     public Nivel getNivel(){
         return miNivel;
     }
@@ -78,16 +66,32 @@ public class Juego{
         return miNivel.getNivel();
     }
 
-    //public void actualizarPantalla(){
-        //GUI.actualizar();
-    //}
-
     public void animacionesTerminadas(){
         if(miNivel.objetivosTerminados()){
-            ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
-            JOptionPane.showMessageDialog(null, "Pasaste de nivel","Felicidades!", JOptionPane.PLAIN_MESSAGE, icono);
             miNivel.setNivel(NivelActual()+1);
-            regenerar(NivelActual());
-        } 
+            if(miNivel.getNivel() != 2){
+                ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
+                JOptionPane.showMessageDialog(null, "Finalizaste pasaste de nivel", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
+                regenerar(NivelActual());
+            }
+            else{
+                ImageIcon icono = new ImageIcon("Candy Crush/Imagenes/Extras/creeper.gif");
+                JOptionPane.showMessageDialog(null, "Finalizaste el juego", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
+                miGUI.setVisible(false);
+                miGUI.dispatchEvent(new WindowEvent(miGUI, WindowEvent.WINDOW_CLOSING));
+            }
+        }
+    }
+
+    public static void main(String [] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new Juego();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

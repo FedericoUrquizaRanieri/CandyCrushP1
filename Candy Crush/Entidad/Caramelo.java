@@ -31,9 +31,9 @@ public class Caramelo extends Entidad{
         if(t.getEntidad(fila,columna-1) != null){
             t.getEntidad(fila,columna-1).chequeoDestruccion(t);
         }
-        t.getGrilla()[fila][columna] = null;
+        destruida = true;
         t.notificarDestruccion(this.color);
-        eg.notificarDestruccion();
+        eg.destruirse();
     }
 
     public boolean se_destruye_con(Entidad entidad) {
@@ -108,5 +108,22 @@ public class Caramelo extends Entidad{
     }
     public boolean match_with(Glaseado glaseado) {
         return false;
+    }
+
+    public void caer(int f, int c, Tablero t){
+        cambiarPosicion(f, c);
+        t.getGrilla()[f][c].recibir(f, c, this, t);
+    }
+
+    public void recibir(int f, int c, Caramelo e, Tablero t){
+        t.getGrilla()[f][c] = e;
+    }
+
+    public void recibir(int f, int c, Gelatina g, Tablero t){
+        t.getGrilla()[f][c] = g.getCaramelo();
+    }
+
+    public void recibir(int f, int c, Glaseado gla, Tablero t){
+        t.getGrilla()[f][c] = gla;
     }
 }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Tablero{
-    
+
     //Atributos
     protected int posJugadorX;
     protected int posJugadorY;
@@ -39,6 +39,10 @@ public class Tablero{
         return grilla;
     }
 
+    public Juego getJuego() {
+        return miJuego;
+    }
+
     public boolean setPosJugadorX(int n){
         if(n >= 0 && n < dimension) {
             posJugadorX = n;
@@ -63,26 +67,27 @@ public class Tablero{
         return posJugadorY;
     }
 
-    public boolean swap(int x, int y) {
+    public void swap(int x, int y) {
         Entidad e1 = grilla[x][y];
         Entidad e2 = grilla[posJugadorX][posJugadorY];
         if(e2.es_posible_intercambiar(e1)) {
-            e1.cambiarPosicionCon(e2,this);
+            e1.cambiarPosicionCon(e2, this);
+            e1 = grilla[x][y];
+            e2 = grilla[posJugadorX][posJugadorY];
             mostrarGrilla();
-            if(e1.se_destruye_con(e2)) {
+            if (e1.se_destruye_con(e2)) {
                 e1.destruirse(this);
                 e2.destruirse(this);
                 ordenarColumnas();
                 mostrarGrilla();
-            } else if((chequeoMovimiento(x,y) | chequeoMovimiento(posJugadorX,posJugadorY))) {
+            } else if ((chequeoMovimiento(x, y) | chequeoMovimiento(posJugadorX, posJugadorY))) {
                 ordenarColumnas();
                 mostrarGrilla();
-                return true;
             } else {
-                e1.cambiarPosicionCon(e2,this);
+                e1.cambiarPosicionCon(e2, this);
+                mostrarGrilla();
             }
         }
-        return false;
     }
 
     public void notificarDestruccion(Color color) {
@@ -110,10 +115,9 @@ public class Tablero{
         for(int j = 0; j < dimension; j++) {
             int idx = dimension - 1;
             for(int i = dimension - 1; i >= 0; i--) {
-                if(grilla[i][j] != null) {
+                if(!grilla[i][j].estaDestruida()) {
                     if(idx != i) {
-                        grilla[i][j].cambiarPosicion(idx,j);
-                        grilla[idx][j] = grilla[i][j];
+                        grilla[i][j].caer(idx,j,this);
                     }
                     idx--;
                 }
@@ -122,7 +126,7 @@ public class Tablero{
                 Entidad e = new Caramelo(i, j, colores[(int) (Math.random() * 6)]);
                 EntidadGrafica eg = new EntidadGrafica(-1,j, e, miJuego.getMiGUI().getPanel());
                 e.setEntidadGrafica(eg);
-                grilla[i][j] = e;
+                e.caer(i,j,this);
                 miJuego.asociar_entidad_grafica(eg);
                 eg.notificarCaida(Utils.labelPositionX(j),Utils.labelPositionY(i));
             }

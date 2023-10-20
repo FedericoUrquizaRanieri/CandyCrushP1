@@ -17,8 +17,8 @@ public class RalladoV extends Caramelo{
                     t.getEntidad(i, columna).destruirse(t);
                 }
             }
-            t.getGrilla()[fila][columna] = null;
-            eg.notificarDestruccion();
+            destruida = true;
+            eg.destruirse();
         }
     }
 

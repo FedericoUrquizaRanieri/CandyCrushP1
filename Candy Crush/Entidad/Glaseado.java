@@ -8,9 +8,8 @@ public class Glaseado extends Entidad{
         this.color = Color.NEGRO;
     }
     public void destruirse(Tablero t){
-        t.getGrilla()[fila][columna] = null;
-        eg.notificarDestruccion();
-        eg = null;
+        destruida = true;
+        eg.destruirse();
         t.notificarDestruccion(this.color);
     }
     public boolean se_destruye_con(Entidad entidad) {
@@ -32,15 +31,9 @@ public class Glaseado extends Entidad{
         return false;
     }
 
-    public void cambiarPosicionCon(Entidad entidad, Tablero tablero) {
-
-    }
-    public void cambiarPosicion(Caramelo caramelo, Tablero tablero) {
-
-    }
-    public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {
-
-    }
+    public void cambiarPosicionCon(Entidad entidad, Tablero tablero) {}
+    public void cambiarPosicion(Caramelo caramelo, Tablero tablero) {}
+    public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {}
 
     public boolean es_posible_intercambiar(Entidad e) {
         return false;
@@ -83,5 +76,18 @@ public class Glaseado extends Entidad{
 
     public boolean match_with(Glaseado glaseado) {
         return false;
+    }
+
+    public void caer(int f, int c, Tablero t){
+        cambiarPosicion(f, c);
+        t.getGrilla()[f][c].recibir(f, c, this, t);
+    }
+
+    public void recibir(int f, int c, Caramelo e, Tablero t){
+        t.getGrilla()[f][c] = e;
+    }
+
+    public void recibir(int f, int c, Glaseado gla, Tablero t){
+        t.getGrilla()[f][c] = gla;
     }
 }

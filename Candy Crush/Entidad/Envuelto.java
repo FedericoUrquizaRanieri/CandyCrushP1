@@ -26,9 +26,8 @@ public class Envuelto extends Caramelo{
                     }
                 }
             }
-
-            t.getGrilla()[fila][columna] = null;
-            eg.notificarDestruccion();
+            destruida = true;
+            eg.destruirse();
         }
     }
 

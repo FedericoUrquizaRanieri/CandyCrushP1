@@ -8,12 +8,11 @@ public class Gelatina extends Entidad{
 
     public Gelatina(int f, int c, Color color){
         super(f,c,"Candy Crush/Imagenes/Extras/Gelatina.png");
-        this.color = Color.GRIS;
         caramelo = new Caramelo(f,c, color);
     }
 
     public Color getColor() {
-        return this.caramelo.getColor();
+        return caramelo.getColor();
     }
 
     public void setCaramelo(Caramelo caramelo){
@@ -34,12 +33,12 @@ public class Gelatina extends Entidad{
         caramelo.setColumna(this.columna);
         this.caramelo.fila = auxFila;
         this.caramelo.columna = auxColumna;
-        this.color = caramelo.getColor();
 
         tablero.getGrilla()[this.caramelo.getFila()][this.caramelo.getColumna()] = this.caramelo;
+        this.caramelo.getEntidadGrafica().notificarCambioPosicion(caramelo.getEntidadGrafica());
         this.caramelo = caramelo;
 
-        this.caramelo.getEntidadGrafica().notificarCambioPosicion(caramelo.getEntidadGrafica());
+
     }
 
     public void cambiarPosicion(Gelatina gelatina, Tablero tablero) {
@@ -51,11 +50,10 @@ public class Gelatina extends Entidad{
         this.caramelo.columna = auxColumna;
 
         Caramelo aux = gelatina.getCaramelo();
-        this.color = caramelo.getColor();
         gelatina.setCaramelo(this.caramelo);
         this.caramelo = aux;
 
-        this.caramelo.getEntidadGrafica().notificarCambioPosicion(aux.getEntidadGrafica());
+        this.caramelo.getEntidadGrafica().notificarCambioPosicion(gelatina.getCaramelo().getEntidadGrafica());
     }
 
     public Caramelo getCaramelo(){
@@ -63,10 +61,12 @@ public class Gelatina extends Entidad{
     }
 
     public void destruirse(Tablero t){
-        eg.notificarDestruccion();
+        if(!destruida){
+            t.getJuego().getNivel().restarGelOEnv();
+        }
+        eg.destruirse();
         caramelo.destruirse(t);
-        t.getGrilla()[fila][columna] = null;
-        t.notificarDestruccion(color);
+        destruida = true;
     }
     public boolean se_destruye_con(Entidad entidad) {
         return entidad.se_destruyen(caramelo);
@@ -121,4 +121,22 @@ public class Gelatina extends Entidad{
     public boolean match_with(Glaseado glaseado) {
         return false;
     }
+
+    public void caer(int f, int c, Tablero t){
+        cambiarPosicion(f, c);
+        t.getGrilla()[f][c].recibir(f, c, caramelo, t); ;
+    }
+
+    public void recibir(int f, int c, Caramelo e, Tablero t) {
+        if (destruida) {
+            t.getGrilla()[f][c] = e;
+        } else {
+            setCaramelo(e);
+        }
+    }
+
+    public void recibir(int f, int c, Glaseado gla, Tablero t){
+        t.getGrilla()[f][c] = gla;
+    }
+
 }
