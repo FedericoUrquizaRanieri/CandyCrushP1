@@ -169,9 +169,10 @@ public class GUI extends JFrame{
         Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         FotoObjetivo.setIcon(new ImageIcon(new_img)); 
     }
-          
-   
-    
+
+    public void limpiarPanel() {
+        panel.limpiar();
+    }
 
     public void notificarObjetivoCaramelo(){
         Nivel n = juego.getNivel();

@@ -147,15 +147,6 @@ public class Tablero{
         }
     }
 
-    public void vaciarTablero() {
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (grilla[i][j] != null)
-                   grilla[i][j].destruirse(this); 
-            }
-        }
-    }
-
     public Entidad getEntidad(int f, int c){
         Entidad toReturn = null;
         if(f >= 0 && f<dimension && c >= 0 && c < dimension){

@@ -3,6 +3,9 @@ package GUI.Threads;
 import javax.swing.ImageIcon;
 
 import GUI.EntidadGrafica;
+import utils.Utils;
+
+import java.awt.*;
 
 public class AnimadorDestruccion extends Thread implements Animador{
     protected EntidadGrafica entidadGrafica;
@@ -14,7 +17,10 @@ public class AnimadorDestruccion extends Thread implements Animador{
     }
 
     public void run() {
-        entidadGrafica.setIcon(new ImageIcon("Candy Crush/Imagenes/Extras/Explosion.gif"));
+        ImageIcon ico = new ImageIcon("Candy Crush/Imagenes/Extras/Explosion.png");
+        Image img = ico.getImage();
+        Image new_img = img.getScaledInstance(Utils.labelWidth, Utils.labelHeight, Image.SCALE_SMOOTH);
+        entidadGrafica.setIcon(new ImageIcon(new_img));
         entidadGrafica.repaint();
         try {
             sleep(100);

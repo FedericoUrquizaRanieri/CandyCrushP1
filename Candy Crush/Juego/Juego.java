@@ -44,7 +44,7 @@ public class Juego{
 
     //Metodos
     public void regenerar(int nivel){
-        miTablero.vaciarTablero();
+        miGUI.limpiarPanel();
         miGenerador.parseLvl(nivel,miTablero,miNivel);
         miGUI.notificarMovimiento();
     }

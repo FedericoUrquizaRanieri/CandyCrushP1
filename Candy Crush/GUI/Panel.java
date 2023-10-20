@@ -126,9 +126,10 @@ public class Panel extends JLayeredPane {
         repaint();
     }
 
-    /*public static boolean getBloquearIntercambios(){
-        return bloquearIntercambios;
-    }*/
+    public void limpiar() {
+        this.removeAll();
+        this.add(jugador);
+    }
 
     public void notificar_Animaciones_terminadas(){
         juego.animacionesTerminadas();
