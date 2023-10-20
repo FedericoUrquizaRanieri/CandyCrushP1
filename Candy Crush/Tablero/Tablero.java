@@ -233,6 +233,8 @@ public class Tablero{
         g.setEntidadGrafica(eg1);
         g.getCaramelo().setEntidadGrafica(eg);
         miJuego.getMiGUI().insertarEntidadGrafica(eg1);
+        miJuego.getMiGUI().getPanel().setLayer(eg1, -1);
+        
     }
     public void ponerGlaseado(int x, int y){
         Glaseado e=new Glaseado(x,y);

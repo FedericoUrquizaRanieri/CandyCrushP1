@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class Panel extends JPanel {
+public class Panel extends JLayeredPane {
     protected JLabel jugador;
     protected Juego juego;
     protected int posX;
