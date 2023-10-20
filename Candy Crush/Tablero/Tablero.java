@@ -94,9 +94,13 @@ public class Tablero{
         System.out.println("Rompi un caramelo");
     }
 
-    public void notificarDestruccionGeloEnv() {
-        miJuego.notificarDestruccionGeloEnv();
-        System.out.println("Rompi una gelatina o envuelto");
+    public void notificarDestruccionGelatina() {
+        miJuego.notificarDestruccionGelatina();
+        System.out.println("Rompi una gelatina");
+    }
+    public void notificarDestruccionEnvuelto() {
+        miJuego.notificarDestruccionEnvuelto();
+        System.out.println("Rompi un envuelto");
     }
 
     public void notificarDestruccionGlaseado() {

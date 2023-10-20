@@ -30,8 +30,12 @@ public class Juego{
         miNivel.restarCaramelo(color);
     }
 
-    public void notificarDestruccionGeloEnv() {
-        miNivel.restarGelOEnv();
+    public void notificarDestruccionGelatina() {
+        miNivel.restarGelatina();
+    }
+
+    public void notificarDestruccionEnvuelto() {
+        miNivel.restarEnvuelto();
     }
 
     public void notificarDestruccionGlaseado() {

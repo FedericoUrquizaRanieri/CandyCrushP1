@@ -55,7 +55,7 @@ public class GeneradorDeNivel {
         String obj=null;
         int y;
         for(int i=0;i<10;i++){
-            obj=objetivos.get(n-1).get(i+10);
+            obj=objetivos.get(n-1).get(i+11);
             y=0;
             for(int j=0;j<obj.length();j++){
                 if(obj.charAt(j)-48>0 && obj.charAt(j)-48<7){
@@ -108,6 +108,7 @@ public class GeneradorDeNivel {
         if(Integer.parseInt(objetivos.get(x-1).get(7))!=0)
             n.setObjetivoCaramelo(Integer.parseInt(objetivos.get(x-1).get(7)),Color.AZUL);
         n.setObjetivoGlaseado(Integer.parseInt(objetivos.get(x-1).get(8)));
-        n.setObjetivoGelOEnv(Integer.parseInt(objetivos.get(x-1).get(9)));
+        n.setObjetivoGelatina(Integer.parseInt(objetivos.get(x-1).get(9)));
+        n.setObjetivoEnvuelto(Integer.parseInt(objetivos.get(x-1).get(10)));
     }
 }

@@ -62,7 +62,7 @@ public class Gelatina extends Entidad{
 
     public void destruirse(Tablero t){
         if(!destruida){
-            t.notificarDestruccionGeloEnv();
+            t.notificarDestruccionGelatina();
         }
         eg.destruirse();
         caramelo.destruirse(t);

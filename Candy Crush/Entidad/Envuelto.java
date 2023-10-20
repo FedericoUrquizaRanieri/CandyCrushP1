@@ -28,7 +28,7 @@ public class Envuelto extends Caramelo{
             }
             destruida = true;
             t.notificarDestruccion(this.color);
-            t.notificarDestruccionGeloEnv();
+            t.notificarDestruccionEnvuelto();
             eg.destruirse();
         }
     }

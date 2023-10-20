@@ -143,22 +143,28 @@ public class GUI extends JFrame{
         NivelActual.setText(String.valueOf("Nivel "+n.getNivel()));
 
         ImageIcon ico = new ImageIcon();
-      
+
         if(n.getObjetivoCaramelo()>0){
             ico = new ImageIcon("Candy Crush/Imagenes/Caramelos/"+ n.getColorObjetivo().toString().toLowerCase()+".png");
             objetivo.setText(String.valueOf(n.getObjetivoCaramelo()));
         }
         else{
-            if(n.getObjetivoGelOEnv()>0){
+            if(n.getObjetivoGelatina()>0){
                 ico = new ImageIcon("Candy Crush/Imagenes/Extras/Gelatina.png");
-                objetivo.setText(String.valueOf(n.getObjetivoGelOEnv()));
+                objetivo.setText(String.valueOf(n.getObjetivoGelatina()));
             }
             else{
-                ico = new ImageIcon("Candy Crush/Imagenes/Extras/Merengue.png");
-                objetivo.setText(String.valueOf(n.getObjetivoGlaseado()));
+                if(n.getObjetivoGlaseado()>0){
+                    ico = new ImageIcon("Candy Crush/Imagenes/Extras/Merengue.png");
+                    objetivo.setText(String.valueOf(n.getObjetivoGlaseado()));
+                }
+                else{
+                    ico = new ImageIcon("Candy Crush/Imagenes/Extras/EnvueltoObjetivo.png");
+                    objetivo.setText(String.valueOf(n.getObjetivoEnvuelto()));
+                }
             }
             }
-        
+
         Image img = ico.getImage();
         Image new_img = img.getScaledInstance(80, 80, Image.SCALE_SMOOTH);
         FotoObjetivo.setIcon(new ImageIcon(new_img)); 
@@ -172,9 +178,13 @@ public class GUI extends JFrame{
         objetivo.setText(String.valueOf(n.getObjetivoCaramelo()));
     }
 
-    public void notificarObjetivoGelOEnv(){
+    public void notificarObjetivoGelatina(){
          Nivel n = juego.getNivel();
-        objetivo.setText(String.valueOf(n.getObjetivoGelOEnv()));
+        objetivo.setText(String.valueOf(n.getObjetivoGelatina()));
+    }
+    public void notificarObjetivoEnvuelto(){
+         Nivel n = juego.getNivel();
+        objetivo.setText(String.valueOf(n.getObjetivoEnvuelto()));
     }
     public void notificarObjetivoGlaseado(){
         Nivel n = juego.getNivel();

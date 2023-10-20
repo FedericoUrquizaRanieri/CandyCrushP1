@@ -3,6 +3,9 @@ package Nivel;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import Entidad.Color;
 import Juego.Juego;
 
@@ -16,7 +19,8 @@ public class Nivel{
     protected int objetivoCaramelo;
     protected Color tipoCaramelo;
     protected int objetivoGlaseado;
-    protected int objetivoGelOEnv;
+    protected int objetivoGelatina;
+    protected int objetivoEnvuelto;
     protected contadorTiempo time;
 
 
@@ -49,13 +53,17 @@ public class Nivel{
     }
     public void restarVida(){
         vidas--;
+        ImageIcon icono;
         if(vidas==0){
             nivel=1;
             miJuego.regenerar(1);
             vidas=3;
         }
-        else
+        else{
+            icono = new ImageIcon("Candy Crush/Imagenes/Extras/NivelPerdido.png");
+            JOptionPane.showMessageDialog(null, "Perdiste el nivel", "Felicidades", JOptionPane.PLAIN_MESSAGE, icono);
             miJuego.regenerar(nivel);
+        }
     }
     public int getVidas(){
         return vidas;
@@ -85,11 +93,17 @@ public class Nivel{
     public void setObjetivoGlaseado(int o){
         objetivoGlaseado=o;
     }
-    public int getObjetivoGelOEnv(){
-        return objetivoGelOEnv;
+    public int getObjetivoGelatina(){
+        return objetivoGelatina;
     }
-    public void setObjetivoGelOEnv(int o){
-        objetivoGelOEnv=o;
+    public void setObjetivoGelatina(int o){
+        objetivoGelatina=o;
+    }
+    public int getObjetivoEnvuelto(){
+        return objetivoEnvuelto;
+    }
+    public void setObjetivoEnvuelto(int o){
+        objetivoEnvuelto=o;
     }
     public void restarCaramelo(Color c){
         if(objetivoCaramelo>0){
@@ -107,10 +121,16 @@ public class Nivel{
         }
     }
 
-    public void restarGelOEnv(){
-        if(objetivoGelOEnv>0){
-            objetivoGelOEnv--;
-            miJuego.getMiGUI().notificarObjetivoGelOEnv();
+    public void restarGelatina(){
+        if(objetivoGelatina>0){
+            objetivoGelatina--;
+            miJuego.getMiGUI().notificarObjetivoGelatina();
+        }
+    }
+    public void restarEnvuelto(){
+        if(objetivoEnvuelto>0){
+            objetivoEnvuelto--;
+            miJuego.getMiGUI().notificarObjetivoEnvuelto();
         }
     }
 
@@ -129,7 +149,7 @@ public class Nivel{
     }
 
     public boolean objetivosTerminados(){
-        return (objetivoCaramelo<=0 && objetivoGelOEnv<=0 && objetivoGlaseado<=0);
+        return (objetivoCaramelo<=0 && objetivoGelatina<=0 && objetivoGlaseado<=0 && objetivoEnvuelto<=0);
     }
     
     public void setNivel(int numero){

@@ -7,7 +7,8 @@ ObjetivosNaranjas
 ObjetivosRojos
 ObjetivosAzules
 ObjetivosMerengues
-ObjetivosGelatinaEnvuelto
+ObjetivosGelatina
+ObjetivoEnvuelto
 CaramelosEnGrilla:
 Caramelo Verde=1
 Caramelo Amarillo=2
