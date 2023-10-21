@@ -4,11 +4,13 @@ import GUI.EntidadGrafica;
 
 public class AnimadorSwap extends Thread implements Animador{
 
+    //Atributos
     protected EntidadGrafica entidadGrafica1;
     protected EntidadGrafica entidadGrafica2;
     protected int delay;
     private ManejadorAnimaciones manager;
 
+    //Constructor
     public AnimadorSwap(ManejadorAnimaciones manager, EntidadGrafica entidadGrafica1, EntidadGrafica entidadGrafica2,int delay) {
         this.manager = manager;
         this.entidadGrafica1 = entidadGrafica1;

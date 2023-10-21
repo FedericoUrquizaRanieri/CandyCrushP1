@@ -7,6 +7,7 @@ import utils.Utils;
 import java.awt.*;
 
 public class GUI extends JFrame{
+    //Atributos
     protected Panel panel;
     protected JLabel labelInfo;
     protected JLabel jugador;
@@ -19,6 +20,7 @@ public class GUI extends JFrame{
     protected JLabel FotoObjetivo;
     protected JLabel FotoMovimiento;
 
+    //Constructor
     public GUI(Juego juego) {
 
         Nivel n = juego.getNivel();
@@ -119,7 +121,7 @@ public class GUI extends JFrame{
         setVisible(true);
     }
 
-    
+    //Metodos
     
     public void insertarEntidadGrafica(EntidadGrafica eg) {
         if(eg != null) {

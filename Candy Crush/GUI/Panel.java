@@ -10,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class Panel extends JLayeredPane {
+    //Atributos
     protected JLabel jugador;
     protected Juego juego;
     protected int posX;
@@ -18,6 +19,7 @@ public class Panel extends JLayeredPane {
     protected static boolean bloquearIntercambios;
     protected CentralAnimaciones centralAnimaciones;
 
+    //constructor
     public Panel(Juego juego, JLabel jugador) {
         this.jugador = jugador;
         this.juego = juego;
@@ -104,6 +106,7 @@ public class Panel extends JLayeredPane {
         setVisible(true);
     }
 
+    //Metodos
     public void animarMovimiento(EntidadGrafica origen, EntidadGrafica destino) {
         centralAnimaciones.animarSwap(origen, destino);
     }

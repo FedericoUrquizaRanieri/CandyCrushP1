@@ -44,6 +44,7 @@ public class GeneradorDeNivel {
         } catch(IOException e) {
             e.printStackTrace();
         }
+        //Imprime todo para verlo
         System.out.println(objetivos.toString());
     }
     //Metodos
@@ -51,6 +52,7 @@ public class GeneradorDeNivel {
         generarCaramelos(nivel, t);
         generarNivel(nivel, n);
     }
+    //Imprime la grilla inicial ademas de generarlos
     private void generarCaramelos(int n,Tablero t){
         String obj=null;
         int y;

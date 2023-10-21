@@ -8,9 +8,11 @@ import utils.Utils;
 import java.awt.*;
 
 public class AnimadorDestruccion extends Thread implements Animador{
+    //Atributos
     protected EntidadGrafica entidadGrafica;
     private ManejadorAnimaciones manager;
 
+    //Constructor
     public AnimadorDestruccion(EntidadGrafica entidadGrafica, ManejadorAnimaciones manager) {
         this.entidadGrafica = entidadGrafica;
         this.manager = manager;

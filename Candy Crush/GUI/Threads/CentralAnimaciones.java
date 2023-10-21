@@ -8,11 +8,12 @@ import java.util.Queue;
 
 public class CentralAnimaciones implements ManejadorAnimaciones{
 
+    //Atributos
     protected Panel gui;
     protected Queue<Animador> swapQueue, destroyQueue, fallingQueue;
     protected boolean animacionesActivas;
 
-
+    //Constructor
     public CentralAnimaciones(Panel panel) {
         this.animacionesActivas = false;
         this.gui = panel;
@@ -21,6 +22,7 @@ public class CentralAnimaciones implements ManejadorAnimaciones{
         this.fallingQueue = new LinkedList<>();
     }
 
+    //Metodos
     public void ejecutarAnimadores() {
         if(!swapQueue.isEmpty()) {
             animacionesActivas = true;

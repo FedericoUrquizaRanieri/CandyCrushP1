@@ -7,9 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EntidadGrafica extends JLabel{
+    //Atributos
     private Entidad entidad;
     private Panel panel;
 
+    //Constructor
     public EntidadGrafica(int x, int y,Entidad e, Panel panel) {
         entidad=e;
         this.panel = panel;
@@ -20,6 +22,7 @@ public class EntidadGrafica extends JLabel{
         setBounds(Utils.labelPositionX(y),Utils.labelPositionY(x), Utils.labelWidth, Utils.labelHeight);
     }
 
+    //Metodos
     public void destruirse() {
         panel.animarDestruccion(this);
         entidad = null;

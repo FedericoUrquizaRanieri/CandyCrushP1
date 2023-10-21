@@ -32,6 +32,7 @@ public class Nivel{
         tiempo = 300000;
         time = new contadorTiempo();
     }
+    //Clase del tiempo
         class contadorTiempo {
         Timer t;
         public contadorTiempo() {
@@ -51,6 +52,7 @@ public class Nivel{
             }
         }
     }
+    //Metodos
     public void restarVida(){
         vidas--;
         ImageIcon icono;

@@ -3,12 +3,14 @@ package GUI.Threads;
 import GUI.EntidadGrafica;
 
 public class AnimadorCaida extends Thread implements Animador{
+    //Atributos
     protected EntidadGrafica entidadGrafica;
     protected int toX;
     protected int toY;
     protected int delay;
     private ManejadorAnimaciones manager;
 
+    //Construcor
     public AnimadorCaida(ManejadorAnimaciones manager, int toX, int toY, EntidadGrafica entidadGrafica, int delay) {
         this.manager = manager;
         this.toX = toX;

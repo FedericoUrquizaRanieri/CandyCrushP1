@@ -88,7 +88,7 @@ public class Tablero{
             }
         }
     }
-
+    //Estos metodos tienen el sout agregado para ver cuando y que rompes
     public void notificarDestruccion(Color color) {
         miJuego.notificarDestruccion(color);
         System.out.println("Rompi un caramelo");
@@ -108,6 +108,7 @@ public class Tablero{
         System.out.println("Rompi un glaseado");
     }
 
+    //Metodo para imprimir logica por consola(test)
     public void mostrarGrilla() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {

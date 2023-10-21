@@ -26,6 +26,7 @@ public class Juego{
         regenerar(1);
     }
 
+    //Metodos
     public void notificarDestruccion(Color color) {
         miNivel.restarCaramelo(color);
     }
@@ -42,7 +43,6 @@ public class Juego{
         miNivel.restarGlaseado();
     }
 
-    //Metodos
     public void regenerar(int nivel){
         miGUI.limpiarPanel();
         miGenerador.parseLvl(nivel,miTablero,miNivel);
